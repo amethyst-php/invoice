@@ -2,8 +2,8 @@
 
 namespace Railken\LaraOre\InvoiceNumberManagers;
 
-use Railken\LaraOre\Invoice\InvoiceManager;
 use Illuminate\Support\Facades\DB;
+use Railken\LaraOre\Invoice\InvoiceManager;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 
 class IncrementalWithYearManager implements ManagerContract
@@ -30,7 +30,7 @@ class IncrementalWithYearManager implements ManagerContract
     }
 
     /**
-     * Validate number
+     * Validate number.
      *
      * @param EntityContract $entity
      * @param string
@@ -43,7 +43,7 @@ class IncrementalWithYearManager implements ManagerContract
     }
 
     /**
-     * Calculate next free number
+     * Calculate next free number.
      *
      * @return string
      */
@@ -58,18 +58,18 @@ class IncrementalWithYearManager implements ManagerContract
             ->orderBy(DB::raw("CAST(REPLACE(number, '/{$year}', '') AS DECIMAL(10,2))"), 'desc')
             ->first();
 
-        $number = $result ? intval(str_replace("/{$year}", "", $result->number))+1 : 1;
+        $number = $result ? intval(str_replace("/{$year}", '', $result->number)) + 1 : 1;
 
-        return $number."/".$year;
+        return $number.'/'.$year;
     }
 
     /**
-     * Parse key
+     * Parse key.
      *
      * @return DB
      */
     public function parseKey()
     {
-        return DB::raw("LPAD(number, 10, 0)");
+        return DB::raw('LPAD(number, 10, 0)');
     }
 }

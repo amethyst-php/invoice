@@ -16,5 +16,5 @@ class InvoiceNotUniqueException extends InvoiceException
      *
      * @var string
      */
-    protected $message = "Not unique";
+    protected $message = 'Not unique';
 }

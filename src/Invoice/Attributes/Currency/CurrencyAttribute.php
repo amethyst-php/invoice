@@ -2,11 +2,10 @@
 
 namespace Railken\LaraOre\Invoice\Attributes\Currency;
 
+use Illuminate\Support\Collection;
 use Railken\Laravel\Manager\Attributes\BaseAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\Tokens;
-use Respect\Validation\Validator as v;
-use Illuminate\Support\Collection;
 
 class CurrencyAttribute extends BaseAttribute
 {
@@ -66,7 +65,6 @@ class CurrencyAttribute extends BaseAttribute
             $country = (new \League\ISO3166\ISO3166())->alpha2($entity->country_iso);
 
             return Collection::make($country['currency'])->contains($value);
-
 
             return true;
         } catch (\Exception $e) {

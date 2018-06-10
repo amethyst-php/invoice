@@ -2,11 +2,11 @@
 
 namespace Railken\LaraOre\Invoice;
 
+use Illuminate\Support\Facades\Config;
+use Railken\LaraOre\Vocabulary\VocabularyManager;
 use Railken\Laravel\Manager\Contracts\AgentContract;
 use Railken\Laravel\Manager\ModelManager;
 use Railken\Laravel\Manager\Tokens;
-use Illuminate\Support\Facades\Config;
-use Railken\LaraOre\Vocabulary\VocabularyManager;
 
 class InvoiceManager extends ModelManager
 {
@@ -21,7 +21,7 @@ class InvoiceManager extends ModelManager
      * @var array
      */
     protected $unique = [
-        'sender_number' => ['sender_id', 'number']
+        'sender_number' => ['sender_id', 'number'],
     ];
 
     /**
@@ -52,7 +52,7 @@ class InvoiceManager extends ModelManager
      */
     protected $exceptions = [
         Tokens::NOT_AUTHORIZED => Exceptions\InvoiceNotAuthorizedException::class,
-        Tokens::NOT_UNIQUE => Exceptions\InvoiceNotUniqueException::class,
+        Tokens::NOT_UNIQUE     => Exceptions\InvoiceNotUniqueException::class,
     ];
 
     /**
@@ -73,6 +73,7 @@ class InvoiceManager extends ModelManager
     public function getNumberManager()
     {
         $class = Config::get('ore.invoice.number_manager');
+
         return new $class($this);
     }
 

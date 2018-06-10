@@ -5,9 +5,9 @@ namespace Railken\LaraOre\Tests\Invoice;
 use Illuminate\Support\Facades\File;
 use Railken\Bag;
 use Railken\LaraOre\Address\AddressManager;
+use Railken\LaraOre\Invoice\InvoiceManager;
 use Railken\LaraOre\LegalEntity\LegalEntityManager;
 use Railken\LaraOre\Taxonomy\TaxonomyManager;
-use Railken\LaraOre\Invoice\InvoiceManager;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
