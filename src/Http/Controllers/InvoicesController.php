@@ -54,4 +54,13 @@ class InvoicesController extends RestController
     {
         return $this->manager->repository->getQuery();
     }
+
+    public function parseKey($key)
+    {
+        if ($key === 'number') {
+            return $this->getManager()->getNumberManager()->parseKey();
+        }
+
+        return parent::parseKey($key);
+    }
 }

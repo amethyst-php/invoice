@@ -61,6 +61,6 @@ class NumberAttribute extends BaseAttribute
      */
     public function valid(EntityContract $entity, $value)
     {
-        return v::length(1, 255)->validate($value);
+        return $this->getManager()->getNumberManager()->validate($entity, $value);
     }
 }

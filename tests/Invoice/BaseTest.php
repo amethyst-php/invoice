@@ -66,7 +66,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     public function getParameters()
     {
         $bag = new Bag();
-        $bag->set('number', '2-2018');
+        $bag->set('number', '2/2018');
         $bag->set('name', 'a common name');
         $bag->set('recipient_id', $this->newLegalEntity()->id);
         $bag->set('sender_id', $this->newLegalEntity()->id);

@@ -5,6 +5,7 @@ namespace Railken\LaraOre\Invoice;
 use Railken\Laravel\Manager\Contracts\AgentContract;
 use Railken\Laravel\Manager\ModelManager;
 use Railken\Laravel\Manager\Tokens;
+use Illuminate\Support\Facades\Config;
 
 class InvoiceManager extends ModelManager
 {
@@ -63,5 +64,11 @@ class InvoiceManager extends ModelManager
         $this->setAuthorizer(new InvoiceAuthorizer($this));
 
         parent::__construct($agent);
+    }
+
+    public function getNumberManager()
+    {
+        $class = Config::get('ore.invoice.number_manager');
+        return new $class($this);
     }
 }
