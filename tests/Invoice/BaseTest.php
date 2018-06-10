@@ -4,9 +4,8 @@ namespace Railken\LaraOre\Tests\Invoice;
 
 use Illuminate\Support\Facades\File;
 use Railken\Bag;
-use Railken\LaraOre\LegalEntity\LegalEntityManager;
-use Railken\LaraOre\Taxonomy\TaxonomyManager;
 use Railken\LaraOre\Address\AddressManager;
+use Railken\LaraOre\LegalEntity\LegalEntityManager;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
@@ -18,7 +17,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * New LegalEntity
+     * New LegalEntity.
      *
      * @return \Railken\LaraOre\LegalEntity\LegalEntity
      */
@@ -34,8 +33,9 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('code_it_rea', '123');
         $bag->set('code_it_sia', '123');
         $bag->set('registered_office_address_id', $this->newAddress()->id);
-        
+
         $lem = new LegalEntityManager();
+
         return $lem->create($bag)->getResource();
     }
 
@@ -54,6 +54,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('city', 'ROME');
         $bag->set('province', 'RM');
         $bag->set('country', 'IT');
+
         return $am->create($bag)->getResource();
     }
 
@@ -68,7 +69,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('name', 'a common name');
         $bag->set('recipient_id', $this->newLegalEntity()->id);
         $bag->set('sender_id', $this->newLegalEntity()->id);
-        
+
         return $bag;
     }
 

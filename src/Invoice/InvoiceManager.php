@@ -14,7 +14,7 @@ class InvoiceManager extends ModelManager
      * @var string
      */
     public $entity = Invoice::class;
-    
+
     /**
      * List of all attributes.
      *
@@ -27,7 +27,7 @@ class InvoiceManager extends ModelManager
         Attributes\UpdatedAt\UpdatedAtAttribute::class,
         Attributes\DeletedAt\DeletedAtAttribute::class,
         Attributes\RecipientId\RecipientIdAttribute::class,
-        Attributes\SenderId\SenderIdAttribute::class
+        Attributes\SenderId\SenderIdAttribute::class,
     ];
 
     /**

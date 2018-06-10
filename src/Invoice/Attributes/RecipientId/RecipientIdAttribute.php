@@ -5,7 +5,6 @@ namespace Railken\LaraOre\Invoice\Attributes\RecipientId;
 use Railken\Laravel\Manager\Attributes\BelongsToAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\Tokens;
-use Respect\Validation\Validator as v;
 
 class RecipientIdAttribute extends BelongsToAttribute
 {
@@ -60,6 +59,7 @@ class RecipientIdAttribute extends BelongsToAttribute
     {
         return 'recipient';
     }
+
     /**
      * Retrieve eloquent relation.
      *
@@ -71,6 +71,7 @@ class RecipientIdAttribute extends BelongsToAttribute
     {
         return $entity->recipient();
     }
+
     /**
      * Retrieve relation manager.
      *

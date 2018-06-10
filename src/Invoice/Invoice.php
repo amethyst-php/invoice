@@ -4,14 +4,13 @@ namespace Railken\LaraOre\Invoice;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Railken\Laravel\Manager\Contracts\EntityContract;
 use Illuminate\Support\Facades\Config;
 use Railken\LaraOre\LegalEntity\LegalEntity;
+use Railken\Laravel\Manager\Contracts\EntityContract;
 
 class Invoice extends Model implements EntityContract
 {
     use SoftDeletes;
-
 
     /**
      * The attributes that are mass assignable.
