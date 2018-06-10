@@ -42,6 +42,7 @@ class InvoiceManager extends ModelManager
         Attributes\ExpiresAt\ExpiresAtAttribute::class,
         Attributes\TypeId\TypeIdAttribute::class,
         Attributes\CountryIso\CountryIsoAttribute::class,
+        Attributes\Currency\CurrencyAttribute::class,
     ];
 
     /**

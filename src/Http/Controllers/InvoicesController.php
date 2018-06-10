@@ -24,6 +24,7 @@ class InvoicesController extends RestController
         'expires_at',
         'type_id',
         'country_iso',
+        'currency',
         'created_at',
         'updated_at',
     ];
@@ -37,6 +38,7 @@ class InvoicesController extends RestController
         'expires_at',
         'type_id',
         'country_iso',
+        'currency',
     ];
 
     /**

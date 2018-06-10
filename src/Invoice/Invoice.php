@@ -25,6 +25,7 @@ class Invoice extends Model implements EntityContract
         'expires_at',
         'type_id',
         'country_iso',
+        'currency',
     ];
 
     /**

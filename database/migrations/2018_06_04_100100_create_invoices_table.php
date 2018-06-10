@@ -19,6 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->string('name');
             $table->string('number');
             $table->string('country_iso');
+            $table->string('currency');
             $table->integer('type_id')->unsigned();
             $table->foreign('type_id')->references('id')->on(Config::get('ore.taxonomy.table'));
             $table->integer('sender_id')->unsigned()->nullable();

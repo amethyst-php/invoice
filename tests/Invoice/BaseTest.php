@@ -89,6 +89,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('number', '2/2018');
         $bag->set('name', 'a common name');
         $bag->set('country_iso', 'IT');
+        $bag->set('currency', 'EUR');
         $bag->set('recipient_id', $this->newLegalEntity()->id);
         $bag->set('type_id', $this->newType()->id);
         $bag->set('sender_id', $this->newLegalEntity()->id);
