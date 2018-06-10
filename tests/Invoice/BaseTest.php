@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\File;
 use Railken\Bag;
 use Railken\LaraOre\Address\AddressManager;
 use Railken\LaraOre\LegalEntity\LegalEntityManager;
+use Railken\LaraOre\Taxonomy\TaxonomyManager;
+use Railken\LaraOre\Invoice\InvoiceManager;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
@@ -14,6 +16,24 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         return [
             \Railken\LaraOre\InvoiceServiceProvider::class,
         ];
+    }
+
+    /**
+     * New Taxonomy type.
+     *
+     * @return \Railken\LaraOre\Taxonomy\Taxonomy
+     */
+    public function newType()
+    {
+        $im = new InvoiceManager();
+
+        $bag = new Bag();
+        $bag->set('name', 'Ban');
+        $bag->set('vocabulary_id', $im->getTaxonomyVocabulary()->id);
+
+        $le = new TaxonomyManager();
+
+        return $le->create($bag)->getResource();
     }
 
     /**
@@ -69,6 +89,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('number', '2/2018');
         $bag->set('name', 'a common name');
         $bag->set('recipient_id', $this->newLegalEntity()->id);
+        $bag->set('type_id', $this->newType()->id);
         $bag->set('sender_id', $this->newLegalEntity()->id);
         $bag->set('issued_at', '2018-01-01 00:00:00');
         $bag->set('expires_at', '2019-01-01 00:00:00');

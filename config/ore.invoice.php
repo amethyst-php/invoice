@@ -6,6 +6,8 @@ return [
 
     'number_manager' => \Railken\LaraOre\InvoiceNumberManagers\IncrementalWithYearManager::class,
 
+    'taxonomy' => 'INVOICE_TYPE',
+
     'router' => [
         'prefix'      => 'admin/invoices',
         'middlewares' => [

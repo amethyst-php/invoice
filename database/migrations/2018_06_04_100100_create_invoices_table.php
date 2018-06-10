@@ -18,6 +18,8 @@ class CreateInvoicesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('number');
+            $table->integer('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on(Config::get('ore.taxonomy.table'));
             $table->integer('sender_id')->unsigned()->nullable();
             $table->foreign('sender_id')->references('id')->on(Config::get('ore.legal-entity.table'));
             $table->integer('recipient_id')->unsigned();

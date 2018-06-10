@@ -22,6 +22,7 @@ class InvoicesController extends RestController
         'recipient_id',
         'issued_at',
         'expires_at',
+        'type_id',
         'created_at',
         'updated_at',
     ];
@@ -33,6 +34,7 @@ class InvoicesController extends RestController
         'recipient_id',
         'issued_at',
         'expires_at',
+        'type_id',
     ];
 
     /**

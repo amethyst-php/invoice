@@ -6,6 +6,7 @@ use Railken\Laravel\Manager\Contracts\AgentContract;
 use Railken\Laravel\Manager\ModelManager;
 use Railken\Laravel\Manager\Tokens;
 use Illuminate\Support\Facades\Config;
+use Railken\LaraOre\Vocabulary\VocabularyManager;
 
 class InvoiceManager extends ModelManager
 {
@@ -39,6 +40,7 @@ class InvoiceManager extends ModelManager
         Attributes\Number\NumberAttribute::class,
         Attributes\IssuedAt\IssuedAtAttribute::class,
         Attributes\ExpiresAt\ExpiresAtAttribute::class,
+        Attributes\TypeId\TypeIdAttribute::class,
     ];
 
     /**
@@ -70,5 +72,30 @@ class InvoiceManager extends ModelManager
     {
         $class = Config::get('ore.invoice.number_manager');
         return new $class($this);
+    }
+
+    /**
+     * Retrieve the vocabulary used for the taxonomy attribute.
+     *
+     * @return \Railken\LaraOre\Vocabulary\Vocabulary
+     */
+    public function getTaxonomyVocabulary()
+    {
+        $vocabulary_name = Config::get('ore.invoice.taxonomy');
+
+        $vm = new VocabularyManager();
+        $resource = $vm->getRepository()->findOneBy(['name' => $vocabulary_name]);
+
+        if (!$resource) {
+            $result = $vm->create(['name' => $vocabulary_name]);
+
+            if (!$result->ok()) {
+                throw new \Exception(sprintf('Something did wrong while retrieving vocabulary %s, errors: %s', $vocabulary_name, json_encode($result->getSimpleErrors())));
+            }
+
+            $resource = $result->getResource();
+        }
+
+        return $resource;
     }
 }

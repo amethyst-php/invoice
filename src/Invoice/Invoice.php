@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
 use Railken\LaraOre\LegalEntity\LegalEntity;
+use Railken\LaraOre\Taxonomy\Taxonomy;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 
 class Invoice extends Model implements EntityContract
@@ -22,6 +23,7 @@ class Invoice extends Model implements EntityContract
         'number',
         'issued_at',
         'expires_at',
+        'type_id',
     ];
 
     /**
@@ -56,5 +58,13 @@ class Invoice extends Model implements EntityContract
     public function recipient()
     {
         return $this->belongsTo(LegalEntity::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function type()
+    {
+        return $this->belongsTo(Taxonomy::class);
     }
 }
