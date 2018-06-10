@@ -12,7 +12,8 @@
         "railken/lara-ore-user": "dev-master",
         "railken/lara-ore-legal-entity": "dev-master",
         "railken/lara-ore-taxonomy": "dev-master",
-        "railken/lara-ore-address": "dev-master"
+        "railken/lara-ore-address": "dev-master",
+        "league/iso3166": "^2.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.9.2",
