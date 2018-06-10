@@ -30,4 +30,12 @@ class ManagerTest extends BaseTest
 
         $this->assertEquals(false, $this->getManager()->create($this->getParameters()->set('sender_id', $resource->sender->id))->ok());
     }
+
+    public function testInvoiceIssued()
+    {
+        $result = $this->getManager()->create($this->getParameters());
+        $this->assertEquals(true, $result->ok());
+        $this->newListener();
+        $this->getManager()->issue($result->getResource());
+    }
 }

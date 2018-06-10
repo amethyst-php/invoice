@@ -101,4 +101,22 @@ class InvoiceManager extends ModelManager
 
         return $resource;
     }
+
+    /**
+     * Issue an invoice
+     *
+     * @param Invoice $invoice
+     *
+     * @return Result
+     */
+    public function issue(Invoice $invoice)
+    {
+        $result = $this->update($invoice, ['issued_at' => new \DateTime(), 'number' => $this->getNumberManager()->calculateNextFreeNumber()]);
+
+        $result->ok() && event(new Events\InvoiceIssued([
+            'invoice' => $invoice
+        ]));
+
+        return $result;
+    }
 }

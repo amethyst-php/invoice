@@ -39,6 +39,7 @@ class InvoiceServiceProvider extends ServiceProvider
         $this->app->register(\Railken\LaraOre\UserServiceProvider::class);
         $this->app->register(\Railken\LaraOre\TaxonomyServiceProvider::class);
         $this->app->register(\Railken\LaraOre\LegalEntityServiceProvider::class);
+        $this->app->register(\Railken\LaraOre\ListenerServiceProvider::class);
         $this->mergeConfigFrom(__DIR__.'/../config/ore.invoice.php', 'ore.invoice');
     }
 

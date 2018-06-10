@@ -8,6 +8,9 @@ use Railken\LaraOre\Address\AddressManager;
 use Railken\LaraOre\Invoice\InvoiceManager;
 use Railken\LaraOre\LegalEntity\LegalEntityManager;
 use Railken\LaraOre\Taxonomy\TaxonomyManager;
+use Railken\LaraOre\Invoice\InvoiceManager;
+use Railken\LaraOre\Listener\ListenerManager;
+use Railken\LaraOre\Work\WorkManager;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
@@ -19,8 +22,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * New Taxonomy type.
-     *
      * @return \Railken\LaraOre\Taxonomy\Taxonomy
      */
     public function newType()
@@ -37,8 +38,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * New LegalEntity.
-     *
      * @return \Railken\LaraOre\LegalEntity\LegalEntity
      */
     public function newLegalEntity()
@@ -60,8 +59,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * New address.
-     *
      * @return \Railken\LaraOre\Address\Address
      */
     public function newAddress()
@@ -74,6 +71,39 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('city', 'ROME');
         $bag->set('province', 'RM');
         $bag->set('country', 'IT');
+
+        return $am->create($bag)->getResource();
+    }
+
+    /**
+     * @return \Railken\LaraOre\Work\Work
+     */
+    public function newWork()
+    {
+        $am = new WorkManager();
+        $bag = new Bag();
+        $bag->set('name', 'El. psy. congroo. '.microtime(true));
+        $bag->set('worker', 'Railken\LaraOre\Workers\FileWorker');
+        $bag->set('extra', [
+            'filename' => "invoice-{{ invoice.id }}-{{ invoice.issued_at|date('Y-m-d') }}.pdf",
+            'filetype' => 'application/pdf',
+            'content'  => '# {{ invoice.number }}',
+            'tags'     => 'pdf,invoice',
+        ]);
+        return $am->create($bag)->getResource();
+    }
+
+
+    /**
+     * @return \Railken\LaraOre\Listener\Listener
+     */
+    public function newListener()
+    {
+        $am = new ListenerManager();
+        $bag = new Bag();
+        $bag->set('name', 'El. psy. congroo. '.microtime(true));
+        $bag->set('work_id', $this->newWork()->id);
+        $bag->set('event_class', 'Railken\LaraOre\Invoice\Events\InvoiceIssued');
 
         return $am->create($bag)->getResource();
     }
@@ -113,6 +143,11 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
         $this->artisan('migrate:fresh');
         $this->artisan('lara-ore:user:install');
+
+        $this->artisan('vendor:publish', [
+            '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
+            '--force'    => true,
+        ]);
 
         $this->artisan('vendor:publish', [
             '--provider' => 'Railken\LaraOre\InvoiceServiceProvider',

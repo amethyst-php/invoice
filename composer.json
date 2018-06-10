@@ -13,6 +13,10 @@
         "railken/lara-ore-legal-entity": "dev-master",
         "railken/lara-ore-taxonomy": "dev-master",
         "railken/lara-ore-address": "dev-master",
+        "railken/lara-ore-template": "dev-master",
+        "railken/lara-ore-file": "dev-master",
+        "railken/lara-ore-work": "dev-master",
+        "railken/lara-ore-listener": "dev-master",
         "league/iso3166": "^2.1"
     },
     "require-dev": {
