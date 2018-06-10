@@ -107,7 +107,7 @@ class InvoiceManager extends ModelManager
      *
      * @param Invoice $invoice
      *
-     * @return Result
+     * @return \Railken\Laravel\Manager\ResultAction
      */
     public function issue(Invoice $invoice)
     {
