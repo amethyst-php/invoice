@@ -17,6 +17,10 @@ class CreateInvoicesTable extends Migration
         Schema::create(Config::get('ore.invoice.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('sender_id')->unsigned();
+            $table->foreign('sender_id')->references('id')->on(Config::get('ore.legal-entity.table'));
+            $table->integer('recipient_id')->unsigned();
+            $table->foreign('recipient_id')->references('id')->on(Config::get('ore.legal-entity.table'));
             $table->timestamps();
             $table->softDeletes();
         });

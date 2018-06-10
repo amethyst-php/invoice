@@ -17,12 +17,16 @@ class InvoicesController extends RestController
     protected static $query = [
         'id',
         'name',
+        'sender_id',
+        'recipient_id',
         'created_at',
         'updated_at',
     ];
 
     protected static $fillable = [
         'name',
+        'sender_id',
+        'recipient_id',
     ];
 
     /**

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Illuminate\Support\Facades\Config;
+use Railken\LaraOre\LegalEntity\LegalEntity;
 
 class Invoice extends Model implements EntityContract
 {
@@ -18,7 +19,7 @@ class Invoice extends Model implements EntityContract
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     /**
@@ -37,5 +38,21 @@ class Invoice extends Model implements EntityContract
     {
         $this->table = Config::get('ore.invoice.table');
         parent::__construct($attributes);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function sender()
+    {
+        return $this->belongsTo(LegalEntity::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function recipient()
+    {
+        return $this->belongsTo(LegalEntity::class);
     }
 }
