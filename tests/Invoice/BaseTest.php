@@ -70,6 +70,8 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('name', 'a common name');
         $bag->set('recipient_id', $this->newLegalEntity()->id);
         $bag->set('sender_id', $this->newLegalEntity()->id);
+        $bag->set('issued_at', '2018-01-01 00:00:00');
+        $bag->set('expires_at', '2019-01-01 00:00:00');
 
         return $bag;
     }

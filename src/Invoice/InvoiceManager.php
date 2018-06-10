@@ -36,6 +36,8 @@ class InvoiceManager extends ModelManager
         Attributes\RecipientId\RecipientIdAttribute::class,
         Attributes\SenderId\SenderIdAttribute::class,
         Attributes\Number\NumberAttribute::class,
+        Attributes\IssuedAt\IssuedAtAttribute::class,
+        Attributes\ExpiresAt\ExpiresAtAttribute::class,
     ];
 
     /**

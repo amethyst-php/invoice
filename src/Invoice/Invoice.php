@@ -18,7 +18,10 @@ class Invoice extends Model implements EntityContract
      * @var array
      */
     protected $fillable = [
-        'name', 'number',
+        'name',
+        'number',
+        'issued_at',
+        'expires_at',
     ];
 
     /**
@@ -26,7 +29,7 @@ class Invoice extends Model implements EntityContract
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['issued_at', 'expires_at', 'deleted_at'];
 
     /**
      * Creates a new instance of the model.
