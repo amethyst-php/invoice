@@ -16,6 +16,13 @@ class InvoiceManager extends ModelManager
     public $entity = Invoice::class;
 
     /**
+     * @var array
+     */
+    protected $unique = [
+        'sender_number' => ['sender_id', 'number']
+    ];
+
+    /**
      * List of all attributes.
      *
      * @var array
@@ -28,6 +35,7 @@ class InvoiceManager extends ModelManager
         Attributes\DeletedAt\DeletedAtAttribute::class,
         Attributes\RecipientId\RecipientIdAttribute::class,
         Attributes\SenderId\SenderIdAttribute::class,
+        Attributes\Number\NumberAttribute::class,
     ];
 
     /**
@@ -37,6 +45,7 @@ class InvoiceManager extends ModelManager
      */
     protected $exceptions = [
         Tokens::NOT_AUTHORIZED => Exceptions\InvoiceNotAuthorizedException::class,
+        Tokens::NOT_UNIQUE => Exceptions\InvoiceNotUniqueException::class,
     ];
 
     /**

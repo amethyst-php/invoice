@@ -18,7 +18,7 @@ class Invoice extends Model implements EntityContract
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 'number',
     ];
 
     /**

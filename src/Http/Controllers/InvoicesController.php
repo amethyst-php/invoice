@@ -17,6 +17,7 @@ class InvoicesController extends RestController
     protected static $query = [
         'id',
         'name',
+        'number',
         'sender_id',
         'recipient_id',
         'created_at',
@@ -25,6 +26,7 @@ class InvoicesController extends RestController
 
     protected static $fillable = [
         'name',
+        'number',
         'sender_id',
         'recipient_id',
     ];
