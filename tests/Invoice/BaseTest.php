@@ -10,6 +10,7 @@ use Railken\LaraOre\Taxonomy\TaxonomyManager;
 use Railken\LaraOre\Invoice\InvoiceManager;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Work\WorkManager;
+use Railken\LaraOre\InvoiceTax\InvoiceTaxManager;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
@@ -92,6 +93,19 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         return $am->create($bag)->getResource();
     }
 
+    /**
+     * @return \Railken\LaraOre\InvoiceTax\InvoiceTax
+     */
+    public function newInvoiceTax()
+    {
+        $am = new InvoiceTaxManager();
+        $bag = new Bag();
+        $bag->set('name', 'Ultra tax-'.microtime(true));
+        $bag->set('description', "Give me");
+        $bag->set('calculator', 'x*0.22');
+
+        return $am->create($bag)->getResource();
+    }
 
     /**
      * @return \Railken\LaraOre\Listener\Listener
@@ -119,6 +133,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('name', 'a common name');
         $bag->set('country_iso', 'IT');
         $bag->set('currency', 'EUR');
+        $bag->set('tax_id', $this->newInvoiceTax()->id);
         $bag->set('recipient_id', $this->newLegalEntity()->id);
         $bag->set('type_id', $this->newType()->id);
         $bag->set('sender_id', $this->newLegalEntity()->id);

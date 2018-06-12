@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Config;
 use Railken\LaraOre\LegalEntity\LegalEntity;
 use Railken\LaraOre\Taxonomy\Taxonomy;
 use Railken\Laravel\Manager\Contracts\EntityContract;
+use Railken\LaraOre\InvoiceTax\InvoiceTax;
 
 class Invoice extends Model implements EntityContract
 {
@@ -68,5 +69,13 @@ class Invoice extends Model implements EntityContract
     public function type()
     {
         return $this->belongsTo(Taxonomy::class);
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tax()
+    {
+        return $this->belongsTo(InvoiceTax::class);
     }
 }

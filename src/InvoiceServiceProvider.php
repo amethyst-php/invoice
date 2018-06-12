@@ -21,6 +21,9 @@ class InvoiceServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/ore.invoice-item.php' => config_path('ore.invoice-item.php'),
         ], 'config');
+        $this->publishes([
+            __DIR__.'/../config/ore.invoice-tax.php' => config_path('ore.invoice-tax.php'),
+        ], 'config');
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutes();
@@ -46,6 +49,7 @@ class InvoiceServiceProvider extends ServiceProvider
         $this->app->register(\Railken\LaraOre\ListenerServiceProvider::class);
         $this->mergeConfigFrom(__DIR__.'/../config/ore.invoice.php', 'ore.invoice');
         $this->mergeConfigFrom(__DIR__.'/../config/ore.invoice-item.php', 'ore.invoice-item');
+        $this->mergeConfigFrom(__DIR__.'/../config/ore.invoice-tax.php', 'ore.invoice-tax');
     }
 
     /**
@@ -65,7 +69,6 @@ class InvoiceServiceProvider extends ServiceProvider
             $router->get('/{id}', ['uses' => 'InvoicesController@show']);
         });
 
-
         Router::group(array_merge(Config::get('ore.invoice-item.router'), [
             'namespace' => 'Railken\LaraOre\Http\Controllers',
         ]), function ($router) {
@@ -74,6 +77,16 @@ class InvoiceServiceProvider extends ServiceProvider
             $router->put('/{id}', ['uses' => 'InvoiceItemsController@update']);
             $router->delete('/{id}', ['uses' => 'InvoiceItemsController@remove']);
             $router->get('/{id}', ['uses' => 'InvoiceItemsController@show']);
+        });
+
+        Router::group(array_merge(Config::get('ore.invoice-tax.router'), [
+            'namespace' => 'Railken\LaraOre\Http\Controllers',
+        ]), function ($router) {
+            $router->get('/', ['uses' => 'InvoiceTaxesController@index']);
+            $router->post('/', ['uses' => 'InvoiceTaxesController@create']);
+            $router->put('/{id}', ['uses' => 'InvoiceTaxesController@update']);
+            $router->delete('/{id}', ['uses' => 'InvoiceTaxesController@remove']);
+            $router->get('/{id}', ['uses' => 'InvoiceTaxesController@show']);
         });
     }
 }

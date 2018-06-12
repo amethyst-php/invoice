@@ -8,6 +8,7 @@ use Railken\LaraOre\Address\AddressManager;
 use Railken\LaraOre\LegalEntity\LegalEntityManager;
 use Railken\LaraOre\Taxonomy\TaxonomyManager;
 use Railken\LaraOre\Invoice\InvoiceManager;
+use Railken\LaraOre\InvoiceTax\InvoiceTaxManager;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Work\WorkManager;
 
@@ -94,6 +95,21 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
 
     /**
+     * @return \Railken\LaraOre\InvoiceTax\InvoiceTax
+     */
+    public function newInvoiceTax()
+    {
+        $am = new InvoiceTaxManager();
+        $bag = new Bag();
+        $bag->set('name', 'Ultra tax-'.microtime(true));
+        $bag->set('description', "Give me");
+        $bag->set('calculator', 'x*0.22');
+
+        return $am->create($bag)->getResource();
+    }
+
+
+    /**
      * @return \Railken\LaraOre\Listener\Listener
      */
     public function newListener()
@@ -121,6 +137,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('country_iso', 'IT');
         $bag->set('currency', 'EUR');
         $bag->set('recipient_id', $this->newLegalEntity()->id);
+        $bag->set('tax_id', $this->newInvoiceTax()->id);
         $bag->set('type_id', $this->newType()->id);
         $bag->set('sender_id', $this->newLegalEntity()->id);
         $bag->set('issued_at', '2018-01-01 00:00:00');
@@ -143,6 +160,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('description', 'maybe');
         $bag->set('quantity', 10);
         $bag->set('price', 40);
+        $bag->set('tax_id', $this->newInvoiceTax()->id);
         $bag->set('invoice_id', $this->newInvoice()->id);
 
         return $bag;

@@ -32,7 +32,8 @@ class InvoiceItemManager extends ModelManager
         Attributes\UnitId\UnitIdAttribute::class,
         Attributes\Description\DescriptionAttribute::class,
         Attributes\Price\PriceAttribute::class,
-        Attributes\Quantity\QuantityAttribute::class
+        Attributes\Quantity\QuantityAttribute::class,
+        Attributes\TaxId\TaxIdAttribute::class
     ];
 
     /**
@@ -66,15 +67,6 @@ class InvoiceItemManager extends ModelManager
      */
     public function getTaxonomyItemVocabulary()
     {
-        $vocabulary_name = Config::get('ore.invoice-item.unit_taxonomy');
-
-        $vm = new VocabularyManager();
-        $result = $vm->findOrCreate(['name' => $vocabulary_name]);
-
-        if (!$result->ok()) {
-            throw new \Exception(sprintf('Something did wrong while retrieving vocabulary %s, errors: %s', $vocabulary_name, json_encode($result->getSimpleErrors())));
-        }
-
-        return $result->getResource();
+        return (new VocabularyManager())->findOrCreateOrFail(['name' => Config::get('ore.invoice-item.unit_taxonomy')])->getResource();
     }
 }

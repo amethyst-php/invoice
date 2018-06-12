@@ -43,6 +43,7 @@ class InvoiceManager extends ModelManager
         Attributes\TypeId\TypeIdAttribute::class,
         Attributes\CountryIso\CountryIsoAttribute::class,
         Attributes\Currency\CurrencyAttribute::class,
+        Attributes\TaxId\TaxIdAttribute::class,
     ];
 
     /**
@@ -84,22 +85,7 @@ class InvoiceManager extends ModelManager
      */
     public function getTaxonomyVocabulary()
     {
-        $vocabulary_name = Config::get('ore.invoice.taxonomy');
-
-        $vm = new VocabularyManager();
-        $resource = $vm->getRepository()->findOneBy(['name' => $vocabulary_name]);
-
-        if (!$resource) {
-            $result = $vm->create(['name' => $vocabulary_name]);
-
-            if (!$result->ok()) {
-                throw new \Exception(sprintf('Something did wrong while retrieving vocabulary %s, errors: %s', $vocabulary_name, json_encode($result->getSimpleErrors())));
-            }
-
-            $resource = $result->getResource();
-        }
-
-        return $resource;
+        return (new VocabularyManager())->findOrCreateOrFail(['name' => Config::get('ore.invoice.taxonomy')])->getResource();
     }
 
     /**

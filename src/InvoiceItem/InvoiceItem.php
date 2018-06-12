@@ -8,6 +8,7 @@ use Railken\Laravel\Manager\Contracts\EntityContract;
 use Illuminate\Support\Facades\Config;
 use Railken\LaraOre\Taxonomy\Taxonomy;
 use Railken\LaraOre\Invoice\Invoice;
+use Railken\LaraOre\InvoiceTax\InvoiceTax;
 
 class InvoiceItem extends Model implements EntityContract
 {
@@ -19,7 +20,7 @@ class InvoiceItem extends Model implements EntityContract
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'price', 'quantity'
+        'name', 'description', 'price', 'quantity',
     ];
 
     /**
@@ -54,5 +55,13 @@ class InvoiceItem extends Model implements EntityContract
     public function invoice()
     {
         return $this->belongsTo(Invoice::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tax()
+    {
+        return $this->belongsTo(InvoiceTax::class);
     }
 }

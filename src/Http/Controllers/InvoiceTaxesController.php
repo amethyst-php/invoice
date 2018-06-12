@@ -4,9 +4,9 @@ namespace Railken\LaraOre\Http\Controllers;
 
 use Railken\LaraOre\Api\Http\Controllers\RestController;
 use Railken\LaraOre\Api\Http\Controllers\Traits as RestTraits;
-use Railken\LaraOre\Invoice\InvoiceManager;
+use Railken\LaraOre\InvoiceTax\InvoiceTaxManager;
 
-class InvoicesController extends RestController
+class InvoiceTaxesController extends RestController
 {
     use RestTraits\RestIndexTrait;
     use RestTraits\RestCreateTrait;
@@ -17,36 +17,22 @@ class InvoicesController extends RestController
     protected static $query = [
         'id',
         'name',
-        'number',
-        'sender_id',
-        'recipient_id',
-        'issued_at',
-        'expires_at',
-        'type_id',
-        'country_iso',
-        'currency',
-        'tax_id',
+        'description',
+        'calculator',
         'created_at',
         'updated_at',
     ];
 
     protected static $fillable = [
         'name',
-        'number',
-        'sender_id',
-        'recipient_id',
-        'issued_at',
-        'expires_at',
-        'type_id',
-        'country_iso',
-        'currency',
-        'tax_id',
+        'description',
+        'calculator',
     ];
 
     /**
      * Construct.
      */
-    public function __construct(InvoiceManager $manager)
+    public function __construct(InvoiceTaxManager $manager)
     {
         $this->manager = $manager;
         $this->manager->setAgent($this->getUser());
@@ -61,14 +47,5 @@ class InvoicesController extends RestController
     public function getQuery()
     {
         return $this->manager->repository->getQuery();
-    }
-
-    public function parseKey($key)
-    {
-        if ($key === 'number') {
-            return $this->getManager()->getNumberManager()->parseKey();
-        }
-
-        return parent::parseKey($key);
     }
 }

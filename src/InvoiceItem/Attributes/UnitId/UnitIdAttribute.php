@@ -117,14 +117,13 @@ class UnitIdAttribute extends BelongsToAttribute
         if ($parameters->exists('unit_name') && !$parameters->exists('unit_id') && !$parameters->exists('unit')) {
             $m = $this->getRelationManager($entity);
 
-
             $result = $m->findOrCreate([
                 'vocabulary_id' => $this->getManager()->getTaxonomyItemVocabulary()->id,
                 'name'          => $parameters->get('unit_name'),
             ]);
 
             if (!$result->ok()) {
-                $errors->merge($result->getErrors());
+                $errors = $errors->merge($result->getErrors());
             } else {
                 $parameters->set('unit', $result->getResource());
             }

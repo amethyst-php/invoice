@@ -23,6 +23,7 @@ class InvoiceItemsController extends RestController
         'price',
         'quantity',
         'invoice_id',
+        'tax_id',
         'created_at',
         'updated_at',
     ];
@@ -35,6 +36,7 @@ class InvoiceItemsController extends RestController
         'price',
         'quantity',
         'invoice_id',
+        'tax_id',
     ];
 
     /**
