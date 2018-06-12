@@ -81,11 +81,11 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     {
         $am = new InvoiceTaxManager();
         $bag = new Bag();
-        $bag->set('name', 'Ultra tax-'.microtime(true));
+        $bag->set('name', 'Vat 22%');
         $bag->set('description', "Give me");
         $bag->set('calculator', 'x*0.22');
 
-        return $am->create($bag)->getResource();
+        return $am->findOrCreate($bag->toArray())->getResource();
     }
     /**
      * Retrieve correct bag of parameters.
@@ -151,7 +151,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $this->artisan('db:seed', [
             '--class'   => 'Railken\LaraOre\Invoice\Database\Seeds\ListenerInvoiceIssuedSeeder'
         ]);
-        
+
         $this->artisan('vendor:publish', [
             '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
             '--force'    => true,

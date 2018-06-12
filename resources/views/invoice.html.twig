@@ -3,7 +3,8 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Invoice</title>
     
     <style>
@@ -11,43 +12,23 @@
         *{
             box-sizing:border-box;
             -moz-box-sizing:border-box;
+            font-size: 14px;
+            font-family: 'Roboto', sans-serif;
+            line-height: 14px;
         }
 
         .container{
             position: relative;
-            font-family: sans-serif;
         }
 
         table {
             width: 100%;
         }
 
-        .items{
-        width:100%;
-        font-size:16px;
-        }
-
-        .items td{
-            border:1px solid #efefef;
-            border-width:1px 1px 0 0;
-            padding:5px 10px;
-        }
-
-        .items tr td:first-child{
-            border-left-width:1px;
-        }
-        .items tr:last-child td{
-            border-bottom-width:1px;
-        }
-
-        .items-price{
-            width:150px;
-            text-align:right;
-        }
-
         .small{
-            font-size:13px;
-            line-height:14px;
+            font-size:10px;
+            line-height: 10px;
+            display: block;
         }
 
         .left {
@@ -69,7 +50,20 @@
         }
 
         .separator {
-            height: 80px;
+            height: 20px;
+        }
+
+        label {
+            color: #9E9E9E;
+        }
+
+        h1 {
+            font-weight: bold;
+        }
+
+
+        .primary-color {
+            color: #03A9F4;
         }
 
     </style>
@@ -84,51 +78,51 @@
                     <img src='https://assets-cdn.github.com/images/modules/logos_page/Octocat.png' width='80'>
                 </td>
                 
-                <td class='right'>
-                    #{{ invoice.number }}<br>
-                    Created: {{ invoice.issued_at|date("D F, Y") }} <br>
-                    Due: {{ invoice.expires_at|date("D F, Y") }} <br>
-                </td>
-            </tr>
-        </table>
-        <div class='separator'></div>
-        <table>
-            <tr>
-                <td class='info sender left'>
+                <td class='right info'>
+
                     {{ invoice.sender.name }}<br>
                     {{ invoice.sender.registered_office_address.street }} {{ invoice.sender.registered_office_address.zip_code }} {{ invoice.sender.registered_office_address.city }} ({{ invoice.sender.registered_office_address.province }})<br>
                     {{ invoice.sender.code_vat }}<br>
                 </td>
+            </tr>
+        </table>
+        <div class='separator'></div>
+        <h1 class='primary-color'>INVOICE</h1>
+        <b>#{{ invoice.number }}</b>
+        
+        <table>
+            <tr>
+                <td class='left'>                    
+                    Issue Date: {{ invoice.issued_at|date("D F, Y") }} <br>
+                    Due Date: {{ invoice.expires_at|date("D F, Y") }} <br>
+                </td>
                 
-                <td class='info recipient right'>
-                    {{ invoice.recipient.name }}<br>
+                <td class='recipient right'>
+                    Bill to:<br>
+
+                    <b>{{ invoice.recipient.name }}</b><br>
                     {{ invoice.recipient.registered_office_address.street }} {{ invoice.recipient.registered_office_address.zip_code }} {{ invoice.recipient.registered_office_address.city }} ({{ invoice.recipient.registered_office_address.province }})<br>
                     {{ invoice.recipient.code_vat }}<br>
                 </td>
             </tr>
         </table>
         <div class='separator'></div>
-        <table class='items' cellpadding='0' cellspacing='0'>
+        <table class='items table' cellpadding='0' cellspacing='0'>
             <tr class="heading">
                 <td>
                     Item
                 </td>
-
-                <td class="right">
-                    Unit
+                <td class="right" width='50'>
+                    Quantity
                 </td>
-
-                <td class="right">
-                    Qty
+                <td class="right" width='50'>
+                    Subtotal
                 </td>
-                <td class="right">
-                    Price
-                </td>
-                <td class="right">
+                <td class="right" width='50'>
                     Tax
                 </td>
-                <td class="right">
-                    Total
+                <td class="right" width='50'>
+                    Linetotal
                 </td>
             </tr>
 
@@ -140,17 +134,14 @@
                         <i class='small'>{{ item.description }}</i>
                     </td>
                     <td class="right">
-                        {{ item.unit.name }}
-                    </td>
-                    <td class="right">
-                        {{ item.quantity }}
+                        {{ item.quantity }} {{ item.unit.name }}
                     </td>
                     <td class='right'>
                         {{ item.formatPrice(item.getPriceTaxable()) }}
                     </td>
                     <td class="right">
-                        {{ item.formatPrice(item.getPriceTax()) }}
-
+                        {{ item.formatPrice(item.getPriceTax()) }}<br>
+                        <i class='small'>{{ item.tax.name }}</i>
                     </td>
                     <td class="right">
                         {{ item.formatPrice(item.getPriceTaxed()) }}
@@ -159,26 +150,44 @@
 
             {% endfor %}
             
-            <tr class="total">
-                <td colspan='3'></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+        </table>
 
-            <tr class="total">
-                <td colspan='3'></td>
-                <td class='right'>
-                    {{ invoice.formatPrice(invoice.getPriceTaxable()) }}
-                </td>
-                <td class="right">
-                    {{ invoice.formatPrice(invoice.getPriceTax()) }}
-                </td>
-                <td class="right">
-                    {{ invoice.formatPrice(invoice.getPriceTaxed()) }}
+        <table>
+            <tr>
+                <td></td>
+                <td width='150'>
+                    <table>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td class="right">
+                                {{ invoice.formatPrice(invoice.getPriceTaxable()) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tax</td>
+                            <td class="right">
+                                {{ invoice.formatPrice(invoice.getPriceTax()) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> <span class='primary-color'><b>TOTAL</b></span> </td>
+                            <td class="right">
+                                <b>{{ invoice.formatPrice(invoice.getPriceTaxed()) }}</b>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
+
+        <div class='footer'>
+            <span class='primary-color'>
+                Thank you very much. We really appreaciate your business.<br>
+                Please send payments before the due date.<br>
+            </span>
+            <div class='separator'></div>
+            <span class='small'>IBAN: PL61109010140000071219812874</span>
+        </div>
     </div>
 </body>
 </html>
