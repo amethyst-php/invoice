@@ -5,6 +5,7 @@ namespace Railken\LaraOre;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Railken\LaraOre\Api\Support\Router;
+use Railken\LaraOre\Console\Commands\InvoiceInstallCommand;
 
 class InvoiceServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,8 @@ class InvoiceServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/ore.invoice-tax.php' => config_path('ore.invoice-tax.php'),
         ], 'config');
+
+        $this->commands([InvoiceInstallCommand::class]);
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutes();
