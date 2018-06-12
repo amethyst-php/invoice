@@ -18,6 +18,14 @@ use Money\Currencies\ISOCurrencies;
 use MathParser\StdMathParser;
 use MathParser\Interpreting\Evaluator;
 
+/**
+ * @property public $name
+ * @property public $description
+ * @property public $price
+ * @property public $quantity
+ * @property public $invoice
+ * @property public $tax
+ */
 class InvoiceItem extends Model implements EntityContract
 {
     use SoftDeletes;
@@ -28,7 +36,10 @@ class InvoiceItem extends Model implements EntityContract
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'price', 'quantity',
+        'name',
+        'description',
+        'price',
+        'quantity',
     ];
 
     /**
@@ -89,9 +100,7 @@ class InvoiceItem extends Model implements EntityContract
      */
     public function setPriceAttribute($value)
     {
-
         if (!$value instanceof Money) {
-
             $currencies = new ISOCurrencies();
 
             $numberFormatter = new \NumberFormatter($this->invoice->locale, \NumberFormatter::DECIMAL);
@@ -110,7 +119,6 @@ class InvoiceItem extends Model implements EntityContract
      */
     public function getPriceAttribute($value)
     {
-
         if (!$value instanceof Money) {
             $value = json_decode($value);
             $value = new Money($value->amount, new Currency($this->invoice->currency));
@@ -140,7 +148,6 @@ class InvoiceItem extends Model implements EntityContract
         $value = $AST->accept($evaluator);
 
         return new Money($value, new Currency($this->invoice->currency));
-
     }
 
     public function getPriceTaxed()
@@ -152,5 +159,4 @@ class InvoiceItem extends Model implements EntityContract
     {
         return $this->price;
     }
-
 }

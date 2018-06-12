@@ -26,6 +26,9 @@ class InvoiceItemSerializer extends ModelSerializer
         $this->getManager()->authorizer->getAuthorizedAttributes(Tokens::PERMISSION_SHOW, $entity)->has('unit_id') &&
         $bag->set('unit_name', $entity->unit->name);
 
+
+        $bag->set('price', $entity->formatPrice($entity->getPriceTaxable()));
+        
         return $bag;
     }
 }

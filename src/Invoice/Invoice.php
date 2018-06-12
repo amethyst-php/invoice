@@ -17,6 +17,21 @@ use Money\Formatter\IntlMoneyFormatter;
 use Money\Parser\IntlLocalizedDecimalParser;
 use Money\Currencies\ISOCurrencies;
 
+/**
+ * @property public $name
+ * @property public $number
+ * @property public $issued_at
+ * @property public $expires_at
+ * @property public $type_id
+ * @property public $country_iso
+ * @property public $currency
+ * @property public $locale
+ * @property public $items
+ * @property public $sender
+ * @property public $recipient
+ * @property public $type
+ * @property public $tax
+ */
 class Invoice extends Model implements EntityContract
 {
     use SoftDeletes;
@@ -42,7 +57,11 @@ class Invoice extends Model implements EntityContract
      *
      * @var array
      */
-    protected $dates = ['issued_at', 'expires_at', 'deleted_at'];
+    protected $dates = [
+        'issued_at',
+        'expires_at',
+        'deleted_at'
+    ];
 
     /**
      * Creates a new instance of the model.
@@ -120,7 +139,7 @@ class Invoice extends Model implements EntityContract
     {
         $money = new Money(0, new Currency($this->currency));
 
-        $this->items->map(function($item) use (&$money) {
+        $this->items->map(function ($item) use (&$money) {
             $money = $money->add($item->getPriceTaxable());
         });
 
@@ -131,7 +150,7 @@ class Invoice extends Model implements EntityContract
     {
         $money = new Money(0, new Currency($this->currency));
 
-        $this->items->map(function($item) use (&$money) {
+        $this->items->map(function ($item) use (&$money) {
             $money = $money->add($item->getPriceTax());
         });
 
@@ -142,7 +161,7 @@ class Invoice extends Model implements EntityContract
     {
         $money = new Money(0, new Currency($this->currency));
 
-        $this->items->map(function($item) use (&$money) {
+        $this->items->map(function ($item) use (&$money) {
             $money = $money->add($item->getPriceTaxed());
         });
 

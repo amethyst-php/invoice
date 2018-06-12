@@ -112,7 +112,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
 
     /**
-     * @param Invoice $invoice
+     * @param \Railken\LaraOre\Invoice\Invoice $invoice
      *
      * @return \Railken\LaraOre\InvoiceItem\InvoiceItem
      */

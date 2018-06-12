@@ -135,6 +135,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('number', '2/2018');
         $bag->set('name', 'a common name');
         $bag->set('country_iso', 'IT');
+        $bag->set('locale', 'it_IT');
         $bag->set('currency', 'EUR');
         $bag->set('recipient_id', $this->newLegalEntity()->id);
         $bag->set('tax_id', $this->newInvoiceTax()->id);
@@ -159,7 +160,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('unit_name', 'kg');
         $bag->set('description', 'maybe');
         $bag->set('quantity', 10);
-        $bag->set('price', 50);
+        $bag->set('price', "50,00 €");
         $bag->set('tax_id', $this->newInvoiceTax()->id);
         $bag->set('invoice_id', $this->newInvoice()->id);
 
