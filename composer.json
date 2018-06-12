@@ -28,6 +28,7 @@
     },
     "autoload": {
         "psr-4" : {
+            "Railken\\LaraOre\\Invoice\\Database\\Seeds\\": "database/seeds/",
             "Railken\\LaraOre\\" : "src/"
         }
     },
