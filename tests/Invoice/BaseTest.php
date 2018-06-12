@@ -11,6 +11,7 @@ use Railken\LaraOre\Invoice\InvoiceManager;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Work\WorkManager;
 use Railken\LaraOre\InvoiceTax\InvoiceTaxManager;
+use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
@@ -43,8 +44,8 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     public function newLegalEntity()
     {
         $bag = new Bag();
-        $bag->set('name', str_random(40));
-        $bag->set('notes', str_random(40));
+        $bag->set('name', str_random(5));
+        $bag->set('notes', str_random(5));
         $bag->set('country_iso', 'IT');
         $bag->set('vat_number', '203458239B01');
         $bag->set('code_vat', '203458239B01');
@@ -66,7 +67,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $am = new AddressManager();
         $bag = new Bag();
         $bag->set('name', 'El. psy. congroo.');
-        $bag->set('street', str_random(40));
+        $bag->set('street', str_random(5));
         $bag->set('zip_code', '00100');
         $bag->set('city', 'ROME');
         $bag->set('province', 'RM');
@@ -87,7 +88,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('extra', [
             'filename' => "invoice-{{ invoice.id }}-{{ invoice.issued_at|date('Y-m-d') }}.pdf",
             'filetype' => 'application/pdf',
-            'content'  => '# {{ invoice.number }}',
+            'content'  => file_get_contents(__DIR__."/../../resources/views/invoice.html.twig"),
             'tags'     => 'pdf,invoice',
         ]);
         return $am->create($bag)->getResource();
@@ -142,6 +143,28 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
         return $bag;
     }
+
+
+    /**
+     * @param Invoice $invoice
+     *
+     * @return \Railken\LaraOre\InvoiceItem\InvoiceItem
+     */
+    public function newInvoiceItem($invoice)
+    {
+        $am = new InvoiceItemManager();
+        $bag = new Bag();
+        $bag->set('name', 'something');
+        $bag->set('unit_name', 'kg');
+        $bag->set('description', 'maybe');
+        $bag->set('quantity', 10);
+        $bag->set('price', 40);
+        $bag->set('tax_id', $this->newInvoiceTax()->id);
+        $bag->set('invoice_id', $invoice->id);
+
+        return $am->create($bag)->getResource();
+    }
+
 
     /**
      * Setup the test environment.

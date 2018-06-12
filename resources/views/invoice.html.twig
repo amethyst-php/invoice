@@ -1,0 +1,163 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>Invoice</title>
+    
+    <style>
+
+        *{
+            box-sizing:border-box;
+            -moz-box-sizing:border-box;
+        }
+
+        .container{
+            position:relative;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .items{
+        width:100%;
+        font-size:16px;
+        }
+
+        .items td{
+            border:1px solid #efefef;
+            border-width:1px 1px 0 0;
+            padding:5px 10px;
+        }
+
+        .items tr td:first-child{
+            border-left-width:1px;
+        }
+        .items tr:last-child td{
+            border-bottom-width:1px;
+        }
+
+        .items-price{
+            width:150px;
+            text-align:right;
+        }
+
+        .small{
+            font-size:13px;
+            line-height:14px;
+        }
+
+        .left {
+            text-align: left;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .footer{
+            position:absolute;
+            bottom:0;
+            left:0;
+        }
+
+        .recipient {
+
+        }
+
+        .separator {
+            height: 80px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class='container'>
+        <table>
+            <tr>
+                <td class="title">
+
+                    <img src='https://assets-cdn.github.com/images/modules/logos_page/Octocat.png' width='80'>
+                </td>
+                
+                <td class='right'>
+                    Invoice: #{{ invoice.number }}<br>
+                    Created: {{ invoice.issued_at|date("D F, Y") }} <br>
+                    Due: {{ invoice.expires_at|date("D F, Y") }} <br>
+                </td>
+            </tr>
+        </table>
+        <div class='separator'></div>
+        <table>
+            <tr>
+                <td class='info sender left'>
+                    {{ invoice.sender.name }}<br>
+                    {{ invoice.sender.registered_office_address.street }} {{ invoice.sender.registered_office_address.zip_code }} {{ invoice.sender.registered_office_address.city }} ({{ invoice.sender.registered_office_address.province }})<br>
+                    {{ invoice.sender.code_vat }}<br>
+                </td>
+                
+                <td class='info recipient right'>
+                    {{ invoice.recipient.name }}<br>
+                    {{ invoice.recipient.registered_office_address.street }} {{ invoice.recipient.registered_office_address.zip_code }} {{ invoice.recipient.registered_office_address.city }} ({{ invoice.recipient.registered_office_address.province }})<br>
+                    {{ invoice.recipient.code_vat }}<br>
+                </td>
+            </tr>
+        </table>
+        <div class='separator'></div>
+        <table class='items' cellpadding='0' cellspacing='0'>
+            <tr class="heading">
+                <td>
+                    Item
+                </td>
+
+                <td>
+                    Unit
+                </td>
+
+                <td>
+                    Qty
+                </td>
+                
+                <td>
+                    Price
+                </td>
+            </tr>
+
+            {% for item in invoice.items %}
+
+                <tr class="item">
+                    <td>
+                        {{ item.name }}<br>
+                        <i class='small'>{{ item.description }}</i>
+                    </td>
+                    <td>
+                        {{ item.unit_name }}
+                    </td>
+                    <td>
+                        {{ item.quantity }}
+                    </td>
+                    <td class='right'>
+                        {{ item.price|localizedcurrency(invoice.currency) }}
+                    </td>
+                </tr>
+
+            {% endfor %}
+            
+        
+            <tr class="total">
+                <td ></td>
+                <td ></td>
+                <td ></td>
+                
+                <td>
+                   Total: {{ invoice.price }}
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
