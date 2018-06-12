@@ -37,7 +37,6 @@ class ManagerTest extends BaseTest
         $this->assertEquals(true, $result->ok());
         $this->newInvoiceItem($result->getResource());
         $this->newInvoiceItem($result->getResource());
-        $this->newListener();
         $this->getManager()->issue($result->getResource());
     }
 }

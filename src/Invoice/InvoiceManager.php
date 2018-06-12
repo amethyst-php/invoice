@@ -44,6 +44,7 @@ class InvoiceManager extends ModelManager
         Attributes\CountryIso\CountryIsoAttribute::class,
         Attributes\Currency\CurrencyAttribute::class,
         Attributes\TaxId\TaxIdAttribute::class,
+        Attributes\Locale\LocaleAttribute::class,
     ];
 
     /**

@@ -8,8 +8,6 @@ use Railken\LaraOre\Address\AddressManager;
 use Railken\LaraOre\LegalEntity\LegalEntityManager;
 use Railken\LaraOre\Taxonomy\TaxonomyManager;
 use Railken\LaraOre\Invoice\InvoiceManager;
-use Railken\LaraOre\Listener\ListenerManager;
-use Railken\LaraOre\Work\WorkManager;
 use Railken\LaraOre\InvoiceTax\InvoiceTaxManager;
 use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
 
@@ -77,24 +75,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * @return \Railken\LaraOre\Work\Work
-     */
-    public function newWork()
-    {
-        $am = new WorkManager();
-        $bag = new Bag();
-        $bag->set('name', 'El. psy. congroo. '.microtime(true));
-        $bag->set('worker', 'Railken\LaraOre\Workers\FileWorker');
-        $bag->set('extra', [
-            'filename' => "invoice-{{ invoice.id }}-{{ invoice.issued_at|date('Y-m-d') }}.pdf",
-            'filetype' => 'application/pdf',
-            'content'  => file_get_contents(__DIR__."/../../resources/views/invoice.html.twig"),
-            'tags'     => 'pdf,invoice',
-        ]);
-        return $am->create($bag)->getResource();
-    }
-
-    /**
      * @return \Railken\LaraOre\InvoiceTax\InvoiceTax
      */
     public function newInvoiceTax()
@@ -107,21 +87,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
         return $am->create($bag)->getResource();
     }
-
-    /**
-     * @return \Railken\LaraOre\Listener\Listener
-     */
-    public function newListener()
-    {
-        $am = new ListenerManager();
-        $bag = new Bag();
-        $bag->set('name', 'El. psy. congroo. '.microtime(true));
-        $bag->set('work_id', $this->newWork()->id);
-        $bag->set('event_class', 'Railken\LaraOre\Invoice\Events\InvoiceIssued');
-
-        return $am->create($bag)->getResource();
-    }
-
     /**
      * Retrieve correct bag of parameters.
      *
@@ -133,6 +98,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('number', '2/2018');
         $bag->set('name', 'a common name');
         $bag->set('country_iso', 'IT');
+        $bag->set('locale', 'it_IT');
         $bag->set('currency', 'EUR');
         $bag->set('tax_id', $this->newInvoiceTax()->id);
         $bag->set('recipient_id', $this->newLegalEntity()->id);
@@ -176,11 +142,16 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
         parent::setUp();
 
+
         File::cleanDirectory(database_path('migrations/'));
 
         $this->artisan('migrate:fresh');
         $this->artisan('lara-ore:user:install');
 
+        $this->artisan('db:seed', [
+            '--class'   => 'Railken\LaraOre\Invoice\Database\Seeds\ListenerInvoiceIssuedSeeder'
+        ]);
+        
         $this->artisan('vendor:publish', [
             '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
             '--force'    => true,

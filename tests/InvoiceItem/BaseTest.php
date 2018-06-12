@@ -159,7 +159,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('unit_name', 'kg');
         $bag->set('description', 'maybe');
         $bag->set('quantity', 10);
-        $bag->set('price', 40);
+        $bag->set('price', 50);
         $bag->set('tax_id', $this->newInvoiceTax()->id);
         $bag->set('invoice_id', $this->newInvoice()->id);
 
@@ -181,6 +181,10 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $this->artisan('migrate:fresh');
         $this->artisan('lara-ore:user:install');
 
+        $this->artisan('db:seed', [
+            '--class'   => 'Railken\LaraOre\Invoice\Database\Seeds\ListenerInvoiceIssuedSeeder'
+        ]);
+        
         $this->artisan('vendor:publish', [
             '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
             '--force'    => true,

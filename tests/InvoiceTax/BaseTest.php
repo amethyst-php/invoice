@@ -43,6 +43,10 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
         $this->artisan('migrate:fresh');
         $this->artisan('lara-ore:user:install');
+        
+        $this->artisan('db:seed', [
+            '--class'   => 'Railken\LaraOre\Invoice\Database\Seeds\ListenerInvoiceIssuedSeeder'
+        ]);
 
         $this->artisan('vendor:publish', [
             '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',

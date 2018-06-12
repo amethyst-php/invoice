@@ -1,7 +1,7 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>Invoice</title>
@@ -14,8 +14,8 @@
         }
 
         .container{
-            position:relative;
-            font-family: 'Roboto', sans-serif;
+            position: relative;
+            font-family: sans-serif;
         }
 
         table {
@@ -85,7 +85,7 @@
                 </td>
                 
                 <td class='right'>
-                    Invoice: #{{ invoice.number }}<br>
+                    #{{ invoice.number }}<br>
                     Created: {{ invoice.issued_at|date("D F, Y") }} <br>
                     Due: {{ invoice.expires_at|date("D F, Y") }} <br>
                 </td>
@@ -114,16 +114,21 @@
                     Item
                 </td>
 
-                <td>
+                <td class="right">
                     Unit
                 </td>
 
-                <td>
+                <td class="right">
                     Qty
                 </td>
-                
-                <td>
+                <td class="right">
                     Price
+                </td>
+                <td class="right">
+                    Tax
+                </td>
+                <td class="right">
+                    Total
                 </td>
             </tr>
 
@@ -134,27 +139,43 @@
                         {{ item.name }}<br>
                         <i class='small'>{{ item.description }}</i>
                     </td>
-                    <td>
-                        {{ item.unit_name }}
+                    <td class="right">
+                        {{ item.unit.name }}
                     </td>
-                    <td>
+                    <td class="right">
                         {{ item.quantity }}
                     </td>
                     <td class='right'>
-                        {{ item.price|localizedcurrency(invoice.currency) }}
+                        {{ item.formatPrice(item.getPriceTaxable()) }}
+                    </td>
+                    <td class="right">
+                        {{ item.formatPrice(item.getPriceTax()) }}
+
+                    </td>
+                    <td class="right">
+                        {{ item.formatPrice(item.getPriceTaxed()) }}
                     </td>
                 </tr>
 
             {% endfor %}
             
-        
             <tr class="total">
-                <td ></td>
-                <td ></td>
-                <td ></td>
-                
-                <td>
-                   Total: {{ invoice.price }}
+                <td colspan='3'></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr class="total">
+                <td colspan='3'></td>
+                <td class='right'>
+                    {{ invoice.formatPrice(invoice.getPriceTaxable()) }}
+                </td>
+                <td class="right">
+                    {{ invoice.formatPrice(invoice.getPriceTax()) }}
+                </td>
+                <td class="right">
+                    {{ invoice.formatPrice(invoice.getPriceTaxed()) }}
                 </td>
             </tr>
         </table>

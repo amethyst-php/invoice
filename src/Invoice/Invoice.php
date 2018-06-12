@@ -11,6 +11,12 @@ use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\LaraOre\InvoiceTax\InvoiceTax;
 use Railken\LaraOre\InvoiceItem\InvoiceItem;
 
+use Money\Money;
+use Money\Currency;
+use Money\Formatter\IntlMoneyFormatter;
+use Money\Parser\IntlLocalizedDecimalParser;
+use Money\Currencies\ISOCurrencies;
+
 class Invoice extends Model implements EntityContract
 {
     use SoftDeletes;
@@ -28,6 +34,7 @@ class Invoice extends Model implements EntityContract
         'type_id',
         'country_iso',
         'currency',
+        'locale',
     ];
 
     /**
@@ -86,5 +93,59 @@ class Invoice extends Model implements EntityContract
     public function items()
     {
         return $this->hasMany(InvoiceItem::class);
+    }
+    
+    /**
+     * Set the user's first name.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = strtolower($value);
+    }
+
+    public function formatPrice($price)
+    {
+        $currencies = new ISOCurrencies();
+
+        $numberFormatter = new \NumberFormatter($this->locale, \NumberFormatter::CURRENCY);
+        $moneyFormatter = new IntlMoneyFormatter($numberFormatter, $currencies);
+
+        return $moneyFormatter->format($price);
+    }
+
+    public function getPriceTaxable()
+    {
+        $money = new Money(0, new Currency($this->currency));
+
+        $this->items->map(function($item) use (&$money) {
+            $money = $money->add($item->getPriceTaxable());
+        });
+
+        return $money;
+    }
+
+    public function getPriceTax()
+    {
+        $money = new Money(0, new Currency($this->currency));
+
+        $this->items->map(function($item) use (&$money) {
+            $money = $money->add($item->getPriceTax());
+        });
+
+        return $money;
+    }
+
+    public function getPriceTaxed()
+    {
+        $money = new Money(0, new Currency($this->currency));
+
+        $this->items->map(function($item) use (&$money) {
+            $money = $money->add($item->getPriceTaxed());
+        });
+
+        return $money;
     }
 }
