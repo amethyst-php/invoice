@@ -5,7 +5,6 @@ namespace Railken\LaraOre\InvoiceItem\Attributes\TaxId;
 use Railken\Laravel\Manager\Attributes\BelongsToAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\Tokens;
-use Respect\Validation\Validator as v;
 
 class TaxIdAttribute extends BelongsToAttribute
 {
@@ -50,7 +49,7 @@ class TaxIdAttribute extends BelongsToAttribute
         Tokens::PERMISSION_FILL => 'invoiceitem.attributes.tax_id.fill',
         Tokens::PERMISSION_SHOW => 'invoiceitem.attributes.tax_id.show',
     ];
-    
+
     /**
      * Retrieve the name of the relation.
      *

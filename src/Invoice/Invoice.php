@@ -5,17 +5,15 @@ namespace Railken\LaraOre\Invoice;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
+use Money\Currencies\ISOCurrencies;
+use Money\Currency;
+use Money\Formatter\IntlMoneyFormatter;
+use Money\Money;
+use Railken\LaraOre\InvoiceItem\InvoiceItem;
+use Railken\LaraOre\InvoiceTax\InvoiceTax;
 use Railken\LaraOre\LegalEntity\LegalEntity;
 use Railken\LaraOre\Taxonomy\Taxonomy;
 use Railken\Laravel\Manager\Contracts\EntityContract;
-use Railken\LaraOre\InvoiceTax\InvoiceTax;
-use Railken\LaraOre\InvoiceItem\InvoiceItem;
-
-use Money\Money;
-use Money\Currency;
-use Money\Formatter\IntlMoneyFormatter;
-use Money\Parser\IntlLocalizedDecimalParser;
-use Money\Currencies\ISOCurrencies;
 
 /**
  * @property public $name
@@ -60,7 +58,7 @@ class Invoice extends Model implements EntityContract
     protected $dates = [
         'issued_at',
         'expires_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     /**
@@ -97,7 +95,7 @@ class Invoice extends Model implements EntityContract
     {
         return $this->belongsTo(Taxonomy::class);
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -113,11 +111,12 @@ class Invoice extends Model implements EntityContract
     {
         return $this->hasMany(InvoiceItem::class);
     }
-    
+
     /**
      * Set the user's first name.
      *
-     * @param  string  $value
+     * @param string $value
+     *
      * @return void
      */
     public function setFirstNameAttribute($value)

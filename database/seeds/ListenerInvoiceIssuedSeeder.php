@@ -3,9 +3,9 @@
 namespace Railken\LaraOre\Invoice\Database\Seeds;
 
 use Illuminate\Database\Seeder;
+use Railken\Bag;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Work\WorkManager;
-use Railken\Bag;
 
 class ListenerInvoiceIssuedSeeder extends Seeder
 {
@@ -21,9 +21,10 @@ class ListenerInvoiceIssuedSeeder extends Seeder
         $bag->set('extra', [
             'filename' => "invoice-{{ invoice.id }}-{{ invoice.issued_at|date('Y-m-d') }}.pdf",
             'filetype' => 'application/pdf',
-            'content'  => file_get_contents(__DIR__."/../../resources/views/invoice.html.twig"),
+            'content'  => file_get_contents(__DIR__.'/../../resources/views/invoice.html.twig'),
             'tags'     => 'pdf,invoice',
         ]);
+
         return $am->create($bag)->getResource();
     }
 
@@ -47,8 +48,8 @@ class ListenerInvoiceIssuedSeeder extends Seeder
      * @return void
      */
     public function run()
-    {	
-    	$this->newListener();
+    {
+        $this->newListener();
 
         return 1;
     }

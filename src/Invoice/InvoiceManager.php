@@ -90,7 +90,7 @@ class InvoiceManager extends ModelManager
     }
 
     /**
-     * Issue an invoice
+     * Issue an invoice.
      *
      * @param Invoice $invoice
      *
@@ -101,7 +101,7 @@ class InvoiceManager extends ModelManager
         $result = $this->update($invoice, ['issued_at' => new \DateTime(), 'number' => $this->getNumberManager()->calculateNextFreeNumber()]);
 
         $result->ok() && event(new Events\InvoiceIssued([
-            'invoice' => $invoice
+            'invoice' => $invoice,
         ]));
 
         return $result;

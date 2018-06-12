@@ -14,7 +14,7 @@ class InvoiceTaxManager extends ModelManager
      * @var string
      */
     public $entity = InvoiceTax::class;
-    
+
     /**
      * List of all attributes.
      *

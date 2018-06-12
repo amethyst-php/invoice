@@ -5,11 +5,11 @@ namespace Railken\LaraOre\Tests\Invoice;
 use Illuminate\Support\Facades\File;
 use Railken\Bag;
 use Railken\LaraOre\Address\AddressManager;
+use Railken\LaraOre\Invoice\InvoiceManager;
+use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
+use Railken\LaraOre\InvoiceTax\InvoiceTaxManager;
 use Railken\LaraOre\LegalEntity\LegalEntityManager;
 use Railken\LaraOre\Taxonomy\TaxonomyManager;
-use Railken\LaraOre\Invoice\InvoiceManager;
-use Railken\LaraOre\InvoiceTax\InvoiceTaxManager;
-use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
@@ -82,11 +82,12 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $am = new InvoiceTaxManager();
         $bag = new Bag();
         $bag->set('name', 'Vat 22%');
-        $bag->set('description', "Give me");
+        $bag->set('description', 'Give me');
         $bag->set('calculator', 'x*0.22');
 
         return $am->findOrCreate($bag->toArray())->getResource();
     }
+
     /**
      * Retrieve correct bag of parameters.
      *
@@ -110,7 +111,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         return $bag;
     }
 
-
     /**
      * @param \Railken\LaraOre\Invoice\Invoice $invoice
      *
@@ -131,7 +131,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         return $am->create($bag)->getResource();
     }
 
-
     /**
      * Setup the test environment.
      */
@@ -141,7 +140,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $dotenv->load();
 
         parent::setUp();
-
 
         File::cleanDirectory(database_path('migrations/'));
 

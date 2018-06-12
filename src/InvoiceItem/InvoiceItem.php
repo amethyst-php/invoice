@@ -4,19 +4,18 @@ namespace Railken\LaraOre\InvoiceItem;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Railken\Laravel\Manager\Contracts\EntityContract;
 use Illuminate\Support\Facades\Config;
-use Railken\LaraOre\Taxonomy\Taxonomy;
-use Railken\LaraOre\Invoice\Invoice;
-use Railken\LaraOre\InvoiceTax\InvoiceTax;
-
-use Money\Money;
+use MathParser\Interpreting\Evaluator;
+use MathParser\StdMathParser;
+use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
+use Money\Money;
 use Money\Parser\IntlLocalizedDecimalParser;
-use Money\Currencies\ISOCurrencies;
-use MathParser\StdMathParser;
-use MathParser\Interpreting\Evaluator;
+use Railken\LaraOre\Invoice\Invoice;
+use Railken\LaraOre\InvoiceTax\InvoiceTax;
+use Railken\LaraOre\Taxonomy\Taxonomy;
+use Railken\Laravel\Manager\Contracts\EntityContract;
 
 /**
  * @property public $name
@@ -94,7 +93,7 @@ class InvoiceItem extends Model implements EntityContract
     }
 
     /**
-     * @param  mixed  $value
+     * @param mixed $value
      *
      * @return void
      */
@@ -106,14 +105,14 @@ class InvoiceItem extends Model implements EntityContract
             $numberFormatter = new \NumberFormatter($this->invoice->locale, \NumberFormatter::DECIMAL);
             $moneyParser = new IntlLocalizedDecimalParser($numberFormatter, $currencies);
 
-            $value = $moneyParser->parse((string)$value, new Currency($this->invoice->currency));
+            $value = $moneyParser->parse((string) $value, new Currency($this->invoice->currency));
         }
 
         $this->attributes['price'] = json_encode($value);
     }
 
     /**
-     * @param  mixed  $value
+     * @param mixed $value
      *
      * @return void
      */
@@ -144,7 +143,7 @@ class InvoiceItem extends Model implements EntityContract
         $parser = new StdMathParser();
         $AST = $parser->parse($this->tax->calculator);
         $evaluator = new Evaluator();
-        $evaluator->setVariables([ 'x' => $this->getPriceTaxable()->getAmount() ]);
+        $evaluator->setVariables(['x' => $this->getPriceTaxable()->getAmount()]);
         $value = $AST->accept($evaluator);
 
         return new Money($value, new Currency($this->invoice->currency));

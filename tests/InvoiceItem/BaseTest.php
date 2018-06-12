@@ -5,11 +5,11 @@ namespace Railken\LaraOre\Tests\InvoiceItem;
 use Illuminate\Support\Facades\File;
 use Railken\Bag;
 use Railken\LaraOre\Address\AddressManager;
-use Railken\LaraOre\LegalEntity\LegalEntityManager;
-use Railken\LaraOre\Taxonomy\TaxonomyManager;
 use Railken\LaraOre\Invoice\InvoiceManager;
 use Railken\LaraOre\InvoiceTax\InvoiceTaxManager;
+use Railken\LaraOre\LegalEntity\LegalEntityManager;
 use Railken\LaraOre\Listener\ListenerManager;
+use Railken\LaraOre\Taxonomy\TaxonomyManager;
 use Railken\LaraOre\Work\WorkManager;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
@@ -90,9 +90,9 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
             'content'  => '# {{ invoice.number }}',
             'tags'     => 'pdf,invoice',
         ]);
+
         return $am->create($bag)->getResource();
     }
-
 
     /**
      * @return \Railken\LaraOre\InvoiceTax\InvoiceTax
@@ -102,12 +102,11 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $am = new InvoiceTaxManager();
         $bag = new Bag();
         $bag->set('name', 'Vat 22%');
-        $bag->set('description', "Give me");
+        $bag->set('description', 'Give me');
         $bag->set('calculator', 'x*0.22');
 
         return $am->findOrCreate($bag->toArray())->getResource();
     }
-
 
     /**
      * @return \Railken\LaraOre\Listener\Listener
@@ -147,7 +146,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         return $im->create($bag)->getResource();
     }
 
-
     /**
      * Retrieve correct bag of parameters.
      *
@@ -160,7 +158,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('unit_name', 'kg');
         $bag->set('description', 'maybe');
         $bag->set('quantity', 10);
-        $bag->set('price', "50,00 €");
+        $bag->set('price', '50,00 €');
         $bag->set('tax_id', $this->newInvoiceTax()->id);
         $bag->set('invoice_id', $this->newInvoice()->id);
 

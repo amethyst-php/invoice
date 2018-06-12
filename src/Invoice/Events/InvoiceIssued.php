@@ -1,4 +1,5 @@
 <?php
+
 namespace Railken\LaraOre\Invoice\Events;
 
 use Illuminate\Queue\SerializesModels;
@@ -6,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 class InvoiceIssued
 {
     use SerializesModels;
-    
+
     public $data;
 
     /**

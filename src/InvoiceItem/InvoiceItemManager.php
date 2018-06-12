@@ -2,11 +2,11 @@
 
 namespace Railken\LaraOre\InvoiceItem;
 
+use Illuminate\Support\Facades\Config;
+use Railken\LaraOre\Vocabulary\VocabularyManager;
 use Railken\Laravel\Manager\Contracts\AgentContract;
 use Railken\Laravel\Manager\ModelManager;
 use Railken\Laravel\Manager\Tokens;
-use Railken\LaraOre\Vocabulary\VocabularyManager;
-use Illuminate\Support\Facades\Config;
 
 class InvoiceItemManager extends ModelManager
 {
@@ -16,7 +16,7 @@ class InvoiceItemManager extends ModelManager
      * @var string
      */
     public $entity = InvoiceItem::class;
-    
+
     /**
      * List of all attributes.
      *
@@ -33,7 +33,7 @@ class InvoiceItemManager extends ModelManager
         Attributes\Description\DescriptionAttribute::class,
         Attributes\Price\PriceAttribute::class,
         Attributes\Quantity\QuantityAttribute::class,
-        Attributes\TaxId\TaxIdAttribute::class
+        Attributes\TaxId\TaxIdAttribute::class,
     ];
 
     /**

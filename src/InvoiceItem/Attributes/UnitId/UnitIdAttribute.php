@@ -2,12 +2,11 @@
 
 namespace Railken\LaraOre\InvoiceItem\Attributes\UnitId;
 
+use Illuminate\Support\Collection;
 use Railken\Laravel\Manager\Attributes\BelongsToAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
-use Railken\Laravel\Manager\Tokens;
-use Respect\Validation\Validator as v;
 use Railken\Laravel\Manager\Contracts\ParameterBagContract;
-use Illuminate\Support\Collection;
+use Railken\Laravel\Manager\Tokens;
 
 class UnitIdAttribute extends BelongsToAttribute
 {
@@ -99,7 +98,6 @@ class UnitIdAttribute extends BelongsToAttribute
     {
         return parent::valid($entity, $value) && $value->vocabulary->id === $this->getManager()->getTaxonomyItemVocabulary()->id;
     }
-
 
     /**
      * Update entity value.

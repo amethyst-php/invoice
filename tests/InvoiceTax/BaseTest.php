@@ -23,7 +23,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     {
         $bag = new Bag();
         $bag->set('name', 'Ultra tax-'.microtime(true));
-        $bag->set('description', "Give me");
+        $bag->set('description', 'Give me');
         $bag->set('calculator', 'x*0.22');
 
         return $bag;
