@@ -19,3 +19,10 @@ composer require railken/lara-ore-invoice
 ```
 
 The package will automatically register itself.
+
+
+## Documentation
+
+Demo invoice generated
+
+![invoice](docs/invoice.png)
