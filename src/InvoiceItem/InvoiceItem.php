@@ -126,35 +126,52 @@ class InvoiceItem extends Model implements EntityContract
         return $value;
     }
 
-    public function formatPrice($price)
+    /**
+     * Readable price
+     *
+     * @param Money $price
+     *
+     * @return string
+     */
+    public function formatPrice(Money $price)
     {
-        $currencies = new ISOCurrencies();
-
-        $numberFormatter = new \NumberFormatter($this->invoice->locale, \NumberFormatter::CURRENCY);
-        $moneyFormatter = new IntlMoneyFormatter($numberFormatter, $currencies);
-
-        return $moneyFormatter->format($price);
+        return $this->invoice->formatPrice($price);
     }
 
-    public function getPriceTax()
+    /**
+     * Calculate the price tax
+     *
+     * @return Money
+     */
+    public function calculatePriceTax()
     {
         $expression = $this->tax->calculator;
 
         $parser = new StdMathParser();
         $AST = $parser->parse($this->tax->calculator);
         $evaluator = new Evaluator();
-        $evaluator->setVariables(['x' => $this->getPriceTaxable()->getAmount()]);
+        $evaluator->setVariables(['x' => $this->calculatePriceTaxable()->getAmount()]);
         $value = $AST->accept($evaluator);
 
         return new Money($value, new Currency($this->invoice->currency));
     }
 
-    public function getPriceTaxed()
+    /**
+     * Calculate the price taxed
+     *
+     * @return Money
+     */
+    public function calculatePriceTaxed()
     {
-        return $this->getPriceTaxable()->add($this->getPriceTax());
+        return $this->calculatePriceTaxable()->add($this->calculatePriceTax());
     }
 
-    public function getPriceTaxable()
+    /**
+     * Calculate the price taxable
+     *
+     * @return Money
+     */
+    public function calculatePriceTaxable()
     {
         return $this->price;
     }

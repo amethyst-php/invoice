@@ -113,16 +113,12 @@ class Invoice extends Model implements EntityContract
     }
 
     /**
-     * Set the user's first name.
+     * Readable price
      *
-     * @param string $value
+     * @param Money $price
      *
-     * @return void
+     * @return string
      */
-    public function setFirstNameAttribute($value)
-    {
-        $this->attributes['first_name'] = strtolower($value);
-    }
 
     public function formatPrice($price)
     {
@@ -134,34 +130,49 @@ class Invoice extends Model implements EntityContract
         return $moneyFormatter->format($price);
     }
 
-    public function getPriceTaxable()
+    /**
+     * Calculate the price tax
+     *
+     * @return Money
+     */
+    public function calculatePriceTaxable()
     {
         $money = new Money(0, new Currency($this->currency));
 
         $this->items->map(function ($item) use (&$money) {
-            $money = $money->add($item->getPriceTaxable());
+            $money = $money->add($item->calculatePriceTaxable());
         });
 
         return $money;
     }
 
-    public function getPriceTax()
+    /**
+     * Calculate the price tax
+     *
+     * @return Money
+     */
+    public function calculatePriceTax()
     {
         $money = new Money(0, new Currency($this->currency));
 
         $this->items->map(function ($item) use (&$money) {
-            $money = $money->add($item->getPriceTax());
+            $money = $money->add($item->calculatePriceTax());
         });
 
         return $money;
     }
 
-    public function getPriceTaxed()
+    /**
+     * Calculate the price tax
+     *
+     * @return Money
+     */
+    public function calculatePriceTaxed()
     {
         $money = new Money(0, new Currency($this->currency));
 
         $this->items->map(function ($item) use (&$money) {
-            $money = $money->add($item->getPriceTaxed());
+            $money = $money->add($item->calculatePriceTaxed());
         });
 
         return $money;

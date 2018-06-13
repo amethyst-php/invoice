@@ -137,14 +137,14 @@
                         {{ item.quantity }} {{ item.unit.name }}
                     </td>
                     <td class='right'>
-                        {{ item.formatPrice(item.getPriceTaxable()) }}
+                        {{ item.formatPrice(item.calculatePriceTaxable()) }}
                     </td>
                     <td class="right">
-                        {{ item.formatPrice(item.getPriceTax()) }}<br>
+                        {{ item.formatPrice(item.calculatePriceTax()) }}<br>
                         <i class='small'>{{ item.tax.name }}</i>
                     </td>
                     <td class="right">
-                        {{ item.formatPrice(item.getPriceTaxed()) }}
+                        {{ item.formatPrice(item.calculatePriceTaxed()) }}
                     </td>
                 </tr>
 
@@ -160,19 +160,19 @@
                         <tr>
                             <td>Subtotal</td>
                             <td class="right">
-                                {{ invoice.formatPrice(invoice.getPriceTaxable()) }}
+                                {{ invoice.formatPrice(invoice.calculatePriceTaxable()) }}
                             </td>
                         </tr>
                         <tr>
                             <td>Tax</td>
                             <td class="right">
-                                {{ invoice.formatPrice(invoice.getPriceTax()) }}
+                                {{ invoice.formatPrice(invoice.calculatePriceTax()) }}
                             </td>
                         </tr>
                         <tr>
                             <td> <span class='primary-color'><b>TOTAL</b></span> </td>
                             <td class="right">
-                                <b>{{ invoice.formatPrice(invoice.getPriceTaxed()) }}</b>
+                                <b>{{ invoice.formatPrice(invoice.calculatePriceTaxed()) }}</b>
                             </td>
                         </tr>
                     </table>
