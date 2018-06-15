@@ -14,7 +14,7 @@ class InvoicesController extends RestController
     use RestTraits\RestShowTrait;
     use RestTraits\RestRemoveTrait;
 
-    protected static $query = [
+    public $queryable = [
         'id',
         'name',
         'number',
@@ -31,7 +31,7 @@ class InvoicesController extends RestController
         'updated_at',
     ];
 
-    protected static $fillable = [
+    public $fillable = [
         'name',
         'number',
         'sender_id',

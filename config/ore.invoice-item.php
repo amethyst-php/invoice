@@ -7,7 +7,7 @@ return [
     'unit_taxonomy' => 'INVOICE_ITEM_UNIT',
 
     'router' => [
-        'prefix'      => 'admin/invoice-items',
+        'prefix'      => '/admin/invoice-items',
         'middlewares' => [
             \Railken\LaraOre\RequestLoggerMiddleware::class,
             'auth:api',

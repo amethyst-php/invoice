@@ -102,7 +102,7 @@ class InvoiceManager extends ModelManager
 
         $result->ok() && event(new Events\InvoiceIssued([
             'invoice' => $invoice,
-        ]));
+        ], [$invoice]));
 
         return $result;
     }

@@ -3,6 +3,7 @@
 namespace Railken\LaraOre\Tests\Invoice;
 
 use Railken\LaraOre\Support\Testing\ApiTestableTrait;
+use Illuminate\Support\Facades\Config;
 
 class ApiTest extends BaseTest
 {
@@ -15,21 +16,7 @@ class ApiTest extends BaseTest
      */
     public function getBaseUrl()
     {
-        return '/api/v1/admin/invoices';
-    }
-
-    public function signIn()
-    {
-        $response = $this->post('/api/v1/sign-in', [
-            'username' => 'admin@admin.com',
-            'password' => 'vercingetorige',
-        ]);
-
-        $access_token = json_decode($response->getContent())->data->access_token;
-
-        $this->withHeaders(['Authorization' => 'Bearer '.$access_token]);
-
-        return $response;
+        return Config::get('ore.api.router.prefix').Config::get('ore.invoice.router.prefix');
     }
 
     /**

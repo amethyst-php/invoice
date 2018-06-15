@@ -14,6 +14,7 @@ use Railken\LaraOre\InvoiceTax\InvoiceTax;
 use Railken\LaraOre\LegalEntity\LegalEntity;
 use Railken\LaraOre\Taxonomy\Taxonomy;
 use Railken\Laravel\Manager\Contracts\EntityContract;
+use Railken\LaraOre\File\HasFileTrait;
 
 /**
  * @property public $name
@@ -32,7 +33,7 @@ use Railken\Laravel\Manager\Contracts\EntityContract;
  */
 class Invoice extends Model implements EntityContract
 {
-    use SoftDeletes;
+    use SoftDeletes, hasFileTrait;
 
     /**
      * The attributes that are mass assignable.

@@ -9,7 +9,7 @@ return [
     'taxonomy' => 'INVOICE_TYPE',
 
     'router' => [
-        'prefix'      => 'admin/invoices',
+        'prefix'      => '/admin/invoices',
         'middlewares' => [
             \Railken\LaraOre\RequestLoggerMiddleware::class,
             'auth:api',

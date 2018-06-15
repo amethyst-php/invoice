@@ -2,21 +2,6 @@
 
 namespace Railken\LaraOre\Invoice\Events;
 
-use Illuminate\Queue\SerializesModels;
-
-class InvoiceIssued
+class InvoiceIssued extends \Railken\LaraOre\Listener\Events\BaseEvent
 {
-    use SerializesModels;
-
-    public $data;
-
-    /**
-     * @param array $data
-     *
-     * @return void
-     */
-    public function __construct(array $data)
-    {
-        $this->data = $data;
-    }
 }
