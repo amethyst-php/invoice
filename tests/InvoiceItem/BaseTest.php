@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\File;
 use Railken\Bag;
 use Railken\LaraOre\Address\AddressManager;
 use Railken\LaraOre\Invoice\InvoiceManager;
-use Railken\LaraOre\Tax\TaxManager;
 use Railken\LaraOre\LegalEntity\LegalEntityManager;
 use Railken\LaraOre\Listener\ListenerManager;
+use Railken\LaraOre\Tax\TaxManager;
 use Railken\LaraOre\Taxonomy\TaxonomyManager;
 use Railken\LaraOre\Work\WorkManager;
 
