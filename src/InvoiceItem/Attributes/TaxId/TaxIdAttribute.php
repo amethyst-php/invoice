@@ -81,6 +81,6 @@ class TaxIdAttribute extends BelongsToAttribute
      */
     public function getRelationManager(EntityContract $entity)
     {
-        return new \Railken\LaraOre\InvoiceTax\InvoiceTaxManager($this->getManager()->getAgent());
+        return new \Railken\LaraOre\Tax\TaxManager($this->getManager()->getAgent());
     }
 }

@@ -25,7 +25,7 @@ class CreateInvoiceItemsTable extends Migration
             $table->integer('invoice_id')->unsigned();
             $table->foreign('invoice_id')->references('id')->on(Config::get('ore.invoice.table'));
             $table->integer('tax_id')->unsigned()->nullable();
-            $table->foreign('tax_id')->references('id')->on(Config::get('ore.invoice-tax.table'));
+            $table->foreign('tax_id')->references('id')->on(Config::get('ore.tax.table'));
             $table->timestamps();
             $table->softDeletes();
         });

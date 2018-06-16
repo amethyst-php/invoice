@@ -28,7 +28,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('recipient_id')->unsigned();
             $table->foreign('recipient_id')->references('id')->on(Config::get('ore.legal-entity.table'));
             $table->integer('tax_id')->unsigned()->nullable();
-            $table->foreign('tax_id')->references('id')->on(Config::get('ore.invoice-tax.table'));
+            $table->foreign('tax_id')->references('id')->on(Config::get('ore.tax.table'));
             $table->date('issued_at')->nullable();
             $table->date('expires_at')->nullable();
             $table->timestamps();

@@ -10,7 +10,7 @@ use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
 use Railken\LaraOre\InvoiceItem\InvoiceItem;
-use Railken\LaraOre\InvoiceTax\InvoiceTax;
+use Railken\LaraOre\Tax\Tax;
 use Railken\LaraOre\LegalEntity\LegalEntity;
 use Railken\LaraOre\Taxonomy\Taxonomy;
 use Railken\Laravel\Manager\Contracts\EntityContract;
@@ -102,7 +102,7 @@ class Invoice extends Model implements EntityContract
      */
     public function tax()
     {
-        return $this->belongsTo(InvoiceTax::class);
+        return $this->belongsTo(Tax::class);
     }
 
     /**

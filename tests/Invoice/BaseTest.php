@@ -7,7 +7,7 @@ use Railken\Bag;
 use Railken\LaraOre\Address\AddressManager;
 use Railken\LaraOre\Invoice\InvoiceManager;
 use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
-use Railken\LaraOre\InvoiceTax\InvoiceTaxManager;
+use Railken\LaraOre\Tax\TaxManager;
 use Railken\LaraOre\LegalEntity\LegalEntityManager;
 use Railken\LaraOre\Taxonomy\TaxonomyManager;
 
@@ -75,11 +75,11 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * @return \Railken\LaraOre\InvoiceTax\InvoiceTax
+     * @return \Railken\LaraOre\Tax\Tax
      */
-    public function newInvoiceTax()
+    public function newTax()
     {
-        $am = new InvoiceTaxManager();
+        $am = new TaxManager();
         $bag = new Bag();
         $bag->set('name', 'Vat 22%');
         $bag->set('description', 'Give me');
@@ -101,7 +101,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('country_iso', 'IT');
         $bag->set('locale', 'it_IT');
         $bag->set('currency', 'EUR');
-        $bag->set('tax_id', $this->newInvoiceTax()->id);
+        $bag->set('tax_id', $this->newTax()->id);
         $bag->set('recipient_id', $this->newLegalEntity()->id);
         $bag->set('type_id', $this->newType()->id);
         $bag->set('sender_id', $this->newLegalEntity()->id);
@@ -125,7 +125,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('description', 'maybe');
         $bag->set('quantity', 10);
         $bag->set('price', 40);
-        $bag->set('tax_id', $this->newInvoiceTax()->id);
+        $bag->set('tax_id', $this->newTax()->id);
         $bag->set('invoice_id', $invoice->id);
 
         return $am->create($bag)->getResource();
