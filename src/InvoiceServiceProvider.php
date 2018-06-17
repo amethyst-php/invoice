@@ -23,7 +23,6 @@ class InvoiceServiceProvider extends ServiceProvider
             __DIR__.'/../config/ore.invoice-item.php' => config_path('ore.invoice-item.php'),
         ], 'config');
 
-
         $this->commands([InvoiceInstallCommand::class]);
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');

@@ -9,7 +9,6 @@ use MathParser\Interpreting\Evaluator;
 use MathParser\StdMathParser;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
-use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
 use Money\Parser\IntlLocalizedDecimalParser;
 use Railken\LaraOre\Invoice\Invoice;
@@ -127,7 +126,7 @@ class InvoiceItem extends Model implements EntityContract
     }
 
     /**
-     * Readable price
+     * Readable price.
      *
      * @param Money $price
      *
@@ -139,7 +138,7 @@ class InvoiceItem extends Model implements EntityContract
     }
 
     /**
-     * Calculate the price tax
+     * Calculate the price tax.
      *
      * @return Money
      */
@@ -157,7 +156,7 @@ class InvoiceItem extends Model implements EntityContract
     }
 
     /**
-     * Calculate the price taxed
+     * Calculate the price taxed.
      *
      * @return Money
      */
@@ -167,7 +166,7 @@ class InvoiceItem extends Model implements EntityContract
     }
 
     /**
-     * Calculate the price taxable
+     * Calculate the price taxable.
      *
      * @return Money
      */

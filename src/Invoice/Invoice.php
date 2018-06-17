@@ -9,12 +9,12 @@ use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
+use Railken\LaraOre\File\HasFileTrait;
 use Railken\LaraOre\InvoiceItem\InvoiceItem;
-use Railken\LaraOre\Tax\Tax;
 use Railken\LaraOre\LegalEntity\LegalEntity;
+use Railken\LaraOre\Tax\Tax;
 use Railken\LaraOre\Taxonomy\Taxonomy;
 use Railken\Laravel\Manager\Contracts\EntityContract;
-use Railken\LaraOre\File\HasFileTrait;
 
 /**
  * @property public $number
@@ -112,13 +112,12 @@ class Invoice extends Model implements EntityContract
     }
 
     /**
-     * Readable price
+     * Readable price.
      *
      * @param Money $price
      *
      * @return string
      */
-
     public function formatPrice($price)
     {
         $currencies = new ISOCurrencies();
@@ -130,7 +129,7 @@ class Invoice extends Model implements EntityContract
     }
 
     /**
-     * Calculate the price tax
+     * Calculate the price tax.
      *
      * @return Money
      */
@@ -146,7 +145,7 @@ class Invoice extends Model implements EntityContract
     }
 
     /**
-     * Calculate the price tax
+     * Calculate the price tax.
      *
      * @return Money
      */
@@ -162,7 +161,7 @@ class Invoice extends Model implements EntityContract
     }
 
     /**
-     * Calculate the price tax
+     * Calculate the price tax.
      *
      * @return Money
      */

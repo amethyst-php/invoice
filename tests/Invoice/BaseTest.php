@@ -7,8 +7,8 @@ use Railken\Bag;
 use Railken\LaraOre\Address\AddressManager;
 use Railken\LaraOre\Invoice\InvoiceManager;
 use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
-use Railken\LaraOre\Tax\TaxManager;
 use Railken\LaraOre\LegalEntity\LegalEntityManager;
+use Railken\LaraOre\Tax\TaxManager;
 use Railken\LaraOre\Taxonomy\TaxonomyManager;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
