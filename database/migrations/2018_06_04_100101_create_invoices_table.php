@@ -16,7 +16,7 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create(Config::get('ore.invoice.table'), function (Blueprint $table) {
             $table->increments('id');
-            $table->string('number');
+            $table->string('number')->nullable();
             $table->string('country');
             $table->string('locale');
             $table->string('currency');
