@@ -35,6 +35,7 @@ class ListenerInvoiceIssuedSeeder extends Seeder
     {
         $am = new ListenerManager();
         $bag = new Bag();
+        $bag->set('entities', 1);
         $bag->set('name', 'El. psy. congroo. '.microtime(true));
         $bag->set('work_id', $this->newWork()->id);
         $bag->set('event_class', 'Railken\LaraOre\Invoice\Events\InvoiceIssued');
