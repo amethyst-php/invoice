@@ -1,19 +1,19 @@
 <?php
 
-namespace Railken\LaraOre\Invoice\Attributes\CountryIso;
+namespace Railken\LaraOre\Invoice\Attributes\Country;
 
 use Railken\Laravel\Manager\Attributes\BaseAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\Tokens;
 
-class CountryIsoAttribute extends BaseAttribute
+class CountryAttribute extends BaseAttribute
 {
     /**
      * Name attribute.
      *
      * @var string
      */
-    protected $name = 'country_iso';
+    protected $name = 'country';
 
     /**
      * Is the attribute required
@@ -36,18 +36,18 @@ class CountryIsoAttribute extends BaseAttribute
      * @var array
      */
     protected $exceptions = [
-        Tokens::NOT_DEFINED    => Exceptions\InvoiceCountryIsoNotDefinedException::class,
-        Tokens::NOT_VALID      => Exceptions\InvoiceCountryIsoNotValidException::class,
-        Tokens::NOT_AUTHORIZED => Exceptions\InvoiceCountryIsoNotAuthorizedException::class,
-        Tokens::NOT_UNIQUE     => Exceptions\InvoiceCountryIsoNotUniqueException::class,
+        Tokens::NOT_DEFINED    => Exceptions\InvoiceCountryNotDefinedException::class,
+        Tokens::NOT_VALID      => Exceptions\InvoiceCountryNotValidException::class,
+        Tokens::NOT_AUTHORIZED => Exceptions\InvoiceCountryNotAuthorizedException::class,
+        Tokens::NOT_UNIQUE     => Exceptions\InvoiceCountryNotUniqueException::class,
     ];
 
     /**
      * List of all permissions.
      */
     protected $permissions = [
-        Tokens::PERMISSION_FILL => 'invoice.attributes.country_iso.fill',
-        Tokens::PERMISSION_SHOW => 'invoice.attributes.country_iso.show',
+        Tokens::PERMISSION_FILL => 'invoice.attributes.country.fill',
+        Tokens::PERMISSION_SHOW => 'invoice.attributes.country.show',
     ];
 
     /**

@@ -21,7 +21,7 @@ use Railken\Laravel\Manager\Contracts\EntityContract;
  * @property public $issued_at
  * @property public $expires_at
  * @property public $type_id
- * @property public $country_iso
+ * @property public $country
  * @property public $currency
  * @property public $locale
  * @property public $items
@@ -44,7 +44,7 @@ class Invoice extends Model implements EntityContract
         'issued_at',
         'expires_at',
         'type_id',
-        'country_iso',
+        'country',
         'currency',
         'locale',
     ];

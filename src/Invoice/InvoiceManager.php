@@ -40,7 +40,7 @@ class InvoiceManager extends ModelManager
         Attributes\IssuedAt\IssuedAtAttribute::class,
         Attributes\ExpiresAt\ExpiresAtAttribute::class,
         Attributes\TypeId\TypeIdAttribute::class,
-        Attributes\CountryIso\CountryIsoAttribute::class,
+        Attributes\Country\CountryAttribute::class,
         Attributes\Currency\CurrencyAttribute::class,
         Attributes\TaxId\TaxIdAttribute::class,
         Attributes\Locale\LocaleAttribute::class,

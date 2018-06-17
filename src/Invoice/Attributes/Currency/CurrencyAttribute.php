@@ -62,7 +62,7 @@ class CurrencyAttribute extends BaseAttribute
     public function valid(EntityContract $entity, $value)
     {
         try {
-            $country = (new \League\ISO3166\ISO3166())->alpha2($entity->country_iso);
+            $country = (new \League\ISO3166\ISO3166())->alpha2($entity->country);
 
             return Collection::make($country['currency'])->contains($value);
 

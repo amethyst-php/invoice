@@ -44,7 +44,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag = new Bag();
         $bag->set('name', str_random(5));
         $bag->set('notes', str_random(5));
-        $bag->set('country_iso', 'IT');
+        $bag->set('country', 'IT');
         $bag->set('vat_number', '203458239B01');
         $bag->set('code_vat', '203458239B01');
         $bag->set('code_tin', '203458239B01');
@@ -97,7 +97,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     {
         $bag = new Bag();
         $bag->set('number', '2/2018');
-        $bag->set('country_iso', 'IT');
+        $bag->set('country', 'IT');
         $bag->set('locale', 'it_IT');
         $bag->set('currency', 'EUR');
         $bag->set('tax_id', $this->newTax()->id);
