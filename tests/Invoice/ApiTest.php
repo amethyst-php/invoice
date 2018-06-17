@@ -31,7 +31,7 @@ class ApiTest extends BaseTest
     }
 
     public function testInvoiceIssued()
-    {   
+    {
         $response = $this->post($this->getBaseUrl(), $this->getParameters()->toArray());
         $this->assertOrPrint($response, 201);
 
