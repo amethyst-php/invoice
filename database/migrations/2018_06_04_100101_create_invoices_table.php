@@ -16,12 +16,11 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create(Config::get('ore.invoice.table'), function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->string('number');
             $table->string('country_iso');
             $table->string('locale');
             $table->string('currency');
-            $table->integer('type_id')->unsigned();
+            $table->integer('type_id')->unsigned()->nullable();
             $table->foreign('type_id')->references('id')->on(Config::get('ore.taxonomy.table'));
             $table->integer('sender_id')->unsigned()->nullable();
             $table->foreign('sender_id')->references('id')->on(Config::get('ore.legal-entity.table'));

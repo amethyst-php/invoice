@@ -17,7 +17,6 @@ use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\LaraOre\File\HasFileTrait;
 
 /**
- * @property public $name
  * @property public $number
  * @property public $issued_at
  * @property public $expires_at
@@ -41,7 +40,6 @@ class Invoice extends Model implements EntityContract
      * @var array
      */
     protected $fillable = [
-        'name',
         'number',
         'issued_at',
         'expires_at',

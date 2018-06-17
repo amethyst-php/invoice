@@ -97,7 +97,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     {
         $bag = new Bag();
         $bag->set('number', '2/2018');
-        $bag->set('name', 'a common name');
         $bag->set('country_iso', 'IT');
         $bag->set('locale', 'it_IT');
         $bag->set('currency', 'EUR');

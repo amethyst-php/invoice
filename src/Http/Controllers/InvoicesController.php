@@ -16,7 +16,6 @@ class InvoicesController extends RestController
 
     public $queryable = [
         'id',
-        'name',
         'number',
         'sender_id',
         'recipient_id',
@@ -32,7 +31,6 @@ class InvoicesController extends RestController
     ];
 
     public $fillable = [
-        'name',
         'number',
         'sender_id',
         'recipient_id',
