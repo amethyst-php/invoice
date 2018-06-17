@@ -29,4 +29,17 @@ class ApiTest extends BaseTest
         $this->signIn();
         $this->commonTest($this->getBaseUrl(), $parameters = $this->getParameters());
     }
+
+    public function testInvoiceIssued()
+    {   
+        $response = $this->post($this->getBaseUrl(), $this->getParameters()->toArray());
+        $this->assertOrPrint($response, 201);
+
+        $resource = json_decode($response->getContent())->resource;
+        $this->newInvoiceItem($resource->id);
+        $this->newInvoiceItem($resource->id);
+
+        $response = $this->post($this->getBaseUrl() . "/" . $resource->id . "/issue", []);
+        $this->assertOrPrint($response, 200);
+    }
 }

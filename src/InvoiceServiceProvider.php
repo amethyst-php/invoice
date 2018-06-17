@@ -67,6 +67,7 @@ class InvoiceServiceProvider extends ServiceProvider
             $router->put('/{id}', ['uses' => 'InvoicesController@update']);
             $router->delete('/{id}', ['uses' => 'InvoicesController@remove']);
             $router->get('/{id}', ['uses' => 'InvoicesController@show']);
+            $router->post('/{id}/issue', ['uses' => 'InvoicesController@issue']);
         });
 
         Router::group(array_merge(Config::get('ore.invoice-item.router'), [

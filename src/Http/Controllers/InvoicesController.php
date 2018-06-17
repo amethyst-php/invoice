@@ -5,6 +5,7 @@ namespace Railken\LaraOre\Http\Controllers;
 use Railken\LaraOre\Api\Http\Controllers\RestController;
 use Railken\LaraOre\Api\Http\Controllers\Traits as RestTraits;
 use Railken\LaraOre\Invoice\InvoiceManager;
+use Illuminate\Http\Request;
 
 class InvoicesController extends RestController
 {
@@ -63,6 +64,11 @@ class InvoicesController extends RestController
         return $this->manager->repository->getQuery();
     }
 
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
     public function parseKey($key)
     {
         if ($key === 'number') {
@@ -70,5 +76,34 @@ class InvoicesController extends RestController
         }
 
         return parent::parseKey($key);
+    }
+
+    /**
+     * Issue a resource.
+     *
+     * @param mixed                    $id
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function issue($id, Request $request)
+    {
+        $resource = $this->manager->getRepository()->findOneById($id);
+
+        if (!$resource) {
+            return $this->not_found();
+        }
+
+        $result = $this->manager->issue($resource);
+
+        if ($result->ok()) {
+            return $this->success([
+                'resource' => $this->manager->serializer->serialize($result->getResource(), $this->keys->selectable)->all(),
+            ]);
+        }
+
+        return $this->error([
+            'errors' => $result->getSimpleErrors(),
+        ]);
     }
 }

@@ -111,11 +111,11 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * @param \Railken\LaraOre\Invoice\Invoice $invoice
+     * @param int $invoice_id
      *
      * @return \Railken\LaraOre\InvoiceItem\InvoiceItem
      */
-    public function newInvoiceItem($invoice)
+    public function newInvoiceItem($invoice_id)
     {
         $am = new InvoiceItemManager();
         $bag = new Bag();
@@ -125,7 +125,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('quantity', 10);
         $bag->set('price', 40);
         $bag->set('tax_id', $this->newTax()->id);
-        $bag->set('invoice_id', $invoice->id);
+        $bag->set('invoice_id', $invoice_id);
 
         return $am->create($bag)->getResource();
     }
