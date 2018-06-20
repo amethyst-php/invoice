@@ -2,10 +2,10 @@
 
 namespace Railken\LaraOre\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Railken\LaraOre\Api\Http\Controllers\RestController;
 use Railken\LaraOre\Api\Http\Controllers\Traits as RestTraits;
 use Railken\LaraOre\Invoice\InvoiceManager;
-use Illuminate\Http\Request;
 
 class InvoicesController extends RestController
 {

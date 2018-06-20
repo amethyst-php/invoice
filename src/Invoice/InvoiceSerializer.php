@@ -20,9 +20,9 @@ class InvoiceSerializer extends ModelSerializer
     {
         $bag = parent::serialize($entity, $select);
 
-        $bag->set('files', $entity->files->map(function($file) {
+        $bag->set('files', $entity->files->map(function ($file) {
             return [
-                'url' => $file->media->first()->getFullUrl()
+                'url' => $file->media->first()->getFullUrl(),
             ];
         }));
 

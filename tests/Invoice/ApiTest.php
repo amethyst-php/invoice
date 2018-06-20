@@ -39,7 +39,7 @@ class ApiTest extends BaseTest
         $this->newInvoiceItem($resource->id);
         $this->newInvoiceItem($resource->id);
 
-        $response = $this->post($this->getBaseUrl() . "/" . $resource->id . "/issue", []);
+        $response = $this->post($this->getBaseUrl().'/'.$resource->id.'/issue', []);
         $this->assertOrPrint($response, 200);
     }
 }
