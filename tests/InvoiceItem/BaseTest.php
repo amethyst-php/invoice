@@ -158,7 +158,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $bag->set('unit_name', 'kg');
         $bag->set('description', 'maybe');
         $bag->set('quantity', 10);
-        $bag->set('price', '50,00 €');
+        $bag->set('price', 19.99);
         $bag->set('tax_id', $this->newTax()->id);
         $bag->set('invoice_id', $this->newInvoice()->id);
 
