@@ -91,39 +91,6 @@ class InvoiceItem extends Model implements EntityContract
         return $this->belongsTo(Tax::class);
     }
 
-    /**
-     * @param mixed $value
-     *
-     * @return void
-     */
-    public function setPriceAttribute($value)
-    {
-        if (!$value instanceof Money) {
-            $currencies = new ISOCurrencies();
-
-            $numberFormatter = new \NumberFormatter($this->invoice->locale, \NumberFormatter::DECIMAL);
-            $moneyParser = new IntlLocalizedDecimalParser($numberFormatter, $currencies);
-
-            $value = $moneyParser->parse((string) $value, new Currency($this->invoice->currency));
-        }
-
-        $this->attributes['price'] = json_encode($value);
-    }
-
-    /**
-     * @param mixed $value
-     *
-     * @return void
-     */
-    public function getPriceAttribute($value)
-    {
-        if (!$value instanceof Money) {
-            $value = json_decode($value);
-            $value = new Money($value->amount, new Currency($this->invoice->currency));
-        }
-
-        return $value;
-    }
 
     /**
      * Readable price.
@@ -149,10 +116,10 @@ class InvoiceItem extends Model implements EntityContract
         $parser = new StdMathParser();
         $AST = $parser->parse($this->tax->calculator);
         $evaluator = new Evaluator();
-        $evaluator->setVariables(['x' => $this->calculatePriceTaxable()->getAmount()]);
+        $evaluator->setVariables(['x' => $this->calculatePriceTaxable()->getAmount()/100]);
         $value = $AST->accept($evaluator);
-
-        return new Money($value, new Currency($this->invoice->currency));
+        $money = new Money(round($value, 2, PHP_ROUND_HALF_UP) * 100, new Currency($this->invoice->currency));
+        return $money;
     }
 
     /**
@@ -172,6 +139,8 @@ class InvoiceItem extends Model implements EntityContract
      */
     public function calculatePriceTaxable()
     {
-        return $this->price;
+        $money = new Money(round($this->price, 2, PHP_ROUND_HALF_UP) * 100, new Currency($this->invoice->currency));
+
+        return $money;
     }
 }
