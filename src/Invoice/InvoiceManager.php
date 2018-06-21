@@ -18,13 +18,6 @@ class InvoiceManager extends ModelManager
     public $entity = Invoice::class;
 
     /**
-     * @var array
-     */
-    protected $unique = [
-        'sender_number' => ['sender_id', 'number'],
-    ];
-
-    /**
      * List of all attributes.
      *
      * @var array
