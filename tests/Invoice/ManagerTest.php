@@ -24,13 +24,6 @@ class ManagerTest extends BaseTest
         $this->commonTest(new InvoiceManager(), $this->getParameters());
     }
 
-    public function testNotUnique()
-    {
-        $resource = $this->getManager()->create($this->getParameters())->getResource();
-
-        $this->assertEquals(false, $this->getManager()->create($this->getParameters()->set('sender_id', $resource->sender->id))->ok());
-    }
-
     public function testInvoiceIssued()
     {
         $result = $this->getManager()->create($this->getParameters());
