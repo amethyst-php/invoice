@@ -6,6 +6,9 @@ use Illuminate\Database\Seeder;
 use Railken\Bag;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Work\WorkManager;
+use Railken\LaraOre\LegalEntity\LegalEntityFaker;
+use Railken\LaraOre\Tax\TaxFaker;
+
 
 class ListenerInvoiceIssuedSeeder extends Seeder
 {
@@ -52,44 +55,14 @@ class ListenerInvoiceIssuedSeeder extends Seeder
     public function getMockDataInvoice()
     {
 
-        $taxBag = new Bag();
-        $taxBag->set('name', 'Vat 22%');
-        $taxBag->set('description', 'Give me');
-        $taxBag->set('calculator', 'x*0.22');
-
-        $addressBag = new Bag();
-        $addressBag->set('name', 'El. psy. congroo.');
-        $addressBag->set('street', str_random(5));
-        $addressBag->set('zip_code', '00100');
-        $addressBag->set('city', 'ROME');
-        $addressBag->set('province', 'RM');
-        $addressBag->set('country', 'IT');
-
-
-        $legalEntityBag = new Bag();
-        $legalEntityBag->set('name', str_random(5));
-        $legalEntityBag->set('notes', str_random(5));
-        $legalEntityBag->set('country', 'IT');
-        $legalEntityBag->set('vat_number', '203458239B01');
-        $legalEntityBag->set('code_vat', '203458239B01');
-        $legalEntityBag->set('code_tin', '203458239B01');
-        $legalEntityBag->set('code_it_rea', '123');
-        $legalEntityBag->set('code_it_sia', '123');
-        $legalEntityBag->set('registered_office_address', $addressBag->all());
-
-        $taxBag = new Bag();
-        $taxBag->set('name', 'Vat 22%');
-        $taxBag->set('description', 'Give me');
-        $taxBag->set('calculator', 'x*0.22');
-
         $bag = new Bag();
         $bag->set('number', '1/2018');
         $bag->set('country', 'IT');
         $bag->set('locale', 'it_IT');
         $bag->set('currency', 'EUR');
-        $bag->set('tax', $taxBag->all());
-        $bag->set('recipient', $legalEntityBag->all());
-        $bag->set('sender', $legalEntityBag->all());
+        $bag->set('tax', TaxFaker::make());
+        $bag->set('recipient', LegalEntityFaker::make());
+        $bag->set('sender', LegalEntityFaker::make());
         $bag->set('issued_at', '2018-01-01 00:00:00');
         $bag->set('expires_at', '2019-01-01 00:00:00');
 
