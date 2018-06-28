@@ -26,7 +26,6 @@ class ApiTest extends BaseTest
      */
     public function testSuccessCommon()
     {
-        $this->signIn();
         $this->commonTest($this->getBaseUrl(), $parameters = $this->getParameters());
     }
 
