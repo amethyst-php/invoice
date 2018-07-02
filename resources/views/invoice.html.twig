@@ -4,7 +4,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Invoice</title>
     
     <style>
@@ -80,12 +80,12 @@
                 
                 <td class='right info'>
 
-                    {{ invoice.sender.name }}<br>
-                    {{ invoice.sender.registered_office_address.street }} 
-                    {{ invoice.sender.registered_office_address.zip_code }} 
-                    {{ invoice.sender.registered_office_address.city }} 
-                    ({{ invoice.sender.registered_office_address.province }})<br>
-                    {{ invoice.sender.code_vat }}<br>
+                    <span>{{ invoice.sender.name }}</span><br>
+                    <span>{{ invoice.sender.registered_office_address.street }}</span>
+                    <span>{{ invoice.sender.registered_office_address.zip_code }}</span>
+                    <span>{{ invoice.sender.registered_office_address.city }}</span>
+                    <span>({{ invoice.sender.registered_office_address.province }})</span><br>
+                    <span>{{ invoice.sender.code_vat }}</span><br>
                 </td>
             </tr>
         </table>
@@ -104,11 +104,11 @@
                     Bill to:<br>
 
                     <b>{{ invoice.recipient.name }}</b><br>
-                    {{ invoice.recipient.registered_office_address.street }} 
-                    {{ invoice.recipient.registered_office_address.zip_code }} 
-                    {{ invoice.recipient.registered_office_address.city }} 
-                    ({{ invoice.recipient.registered_office_address.province }})<br>
-                    {{ invoice.recipient.code_vat }}<br>
+                    <span>{{ invoice.recipient.registered_office_address.street }}</span>
+                    <span>{{ invoice.recipient.registered_office_address.zip_code }}</span>
+                    <span>{{ invoice.recipient.registered_office_address.city }}</span>
+                    <span>({{ invoice.recipient.registered_office_address.province }})</span><br>
+                    <span>{{ invoice.recipient.code_vat }}</span><br>
                 </td>
             </tr>
         </table>
