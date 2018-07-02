@@ -81,7 +81,10 @@
                 <td class='right info'>
 
                     {{ invoice.sender.name }}<br>
-                    {{ invoice.sender.registered_office_address.street }} {{ invoice.sender.registered_office_address.zip_code }} {{ invoice.sender.registered_office_address.city }} ({{ invoice.sender.registered_office_address.province }})<br>
+                    {{ invoice.sender.registered_office_address.street }} 
+                    {{ invoice.sender.registered_office_address.zip_code }} 
+                    {{ invoice.sender.registered_office_address.city }} 
+                    ({{ invoice.sender.registered_office_address.province }})<br>
                     {{ invoice.sender.code_vat }}<br>
                 </td>
             </tr>
@@ -101,7 +104,10 @@
                     Bill to:<br>
 
                     <b>{{ invoice.recipient.name }}</b><br>
-                    {{ invoice.recipient.registered_office_address.street }} {{ invoice.recipient.registered_office_address.zip_code }} {{ invoice.recipient.registered_office_address.city }} ({{ invoice.recipient.registered_office_address.province }})<br>
+                    {{ invoice.recipient.registered_office_address.street }} 
+                    {{ invoice.recipient.registered_office_address.zip_code }} 
+                    {{ invoice.recipient.registered_office_address.city }} 
+                    ({{ invoice.recipient.registered_office_address.province }})<br>
                     {{ invoice.recipient.code_vat }}<br>
                 </td>
             </tr>
