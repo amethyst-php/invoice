@@ -8,9 +8,5 @@ return [
 
     'router' => [
         'prefix'      => '/admin/invoice-items',
-        'middlewares' => [
-            \Railken\LaraOre\RequestLoggerMiddleware::class,
-            'auth:api',
-        ],
     ],
 ];
