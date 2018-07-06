@@ -43,7 +43,6 @@ class InvoiceServiceProvider extends ServiceProvider
     {
         $this->app->register(\Railken\Laravel\Manager\ManagerServiceProvider::class);
         $this->app->register(\Railken\LaraOre\ApiServiceProvider::class);
-        $this->app->register(\Railken\LaraOre\UserServiceProvider::class);
         $this->app->register(\Railken\LaraOre\TaxonomyServiceProvider::class);
         $this->app->register(\Railken\LaraOre\LegalEntityServiceProvider::class);
         $this->app->register(\Railken\LaraOre\ListenerServiceProvider::class);

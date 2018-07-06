@@ -4,6 +4,9 @@ namespace Railken\LaraOre\Tests\Invoice;
 
 use Illuminate\Support\Facades\Config;
 use Railken\LaraOre\Support\Testing\ApiTestableTrait;
+use Railken\LaraOre\Invoice\InvoiceFaker;
+use Railken\LaraOre\InvoiceItem\InvoiceItemFaker;
+use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
 
 class ApiTest extends BaseTest
 {
@@ -26,17 +29,20 @@ class ApiTest extends BaseTest
      */
     public function testSuccessCommon()
     {
-        $this->commonTest($this->getBaseUrl(), $parameters = $this->getParameters());
+        $this->commonTest($this->getBaseUrl(), InvoiceFaker::make());
     }
 
     public function testInvoiceIssued()
     {
-        $response = $this->post($this->getBaseUrl(), $this->getParameters()->toArray());
+        $response = $this->post($this->getBaseUrl(), InvoiceFaker::make()->toArray());
         $this->assertOrPrint($response, 201);
 
         $resource = json_decode($response->getContent())->resource;
-        $this->newInvoiceItem($resource->id);
-        $this->newInvoiceItem($resource->id);
+
+        $am = new InvoiceItemManager();
+
+        $am->create(InvoiceItemFaker::make()->remove('invoice')->set('invoice_id', $resource->id));
+        $am->create(InvoiceItemFaker::make()->remove('invoice')->set('invoice_id', $resource->id));
 
         $response = $this->post($this->getBaseUrl().'/'.$resource->id.'/issue', []);
         $this->assertOrPrint($response, 200);

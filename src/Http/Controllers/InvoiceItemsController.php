@@ -19,11 +19,12 @@ class InvoiceItemsController extends RestController
         'name',
         'description',
         'unit_id',
-        'unit_name',
+        'unit',
         'price',
         'quantity',
         'invoice_id',
         'tax_id',
+        'invoice',
         'created_at',
         'updated_at',
     ];
@@ -32,10 +33,11 @@ class InvoiceItemsController extends RestController
         'name',
         'description',
         'unit_id',
-        'unit_name',
+        'unit',
         'price',
         'quantity',
         'invoice_id',
+        'invoice',
         'tax_id',
     ];
 

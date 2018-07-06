@@ -7,6 +7,7 @@ use Railken\Laravel\Manager\Attributes\BelongsToAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\Contracts\ParameterBagContract;
 use Railken\Laravel\Manager\Tokens;
+use Railken\Bag;
 
 class UnitIdAttribute extends BelongsToAttribute
 {
@@ -97,36 +98,5 @@ class UnitIdAttribute extends BelongsToAttribute
     public function valid(EntityContract $entity, $value)
     {
         return parent::valid($entity, $value) && $value->vocabulary->id === $this->getManager()->getTaxonomyItemVocabulary()->id;
-    }
-
-    /**
-     * Update entity value.
-     *
-     * @param EntityContract       $entity
-     * @param ParameterBagContract $parameters
-     *
-     * @return Collection
-     */
-    public function update(EntityContract $entity, ParameterBagContract $parameters)
-    {
-        // "unit_value" may be sent.
-        $errors = new Collection();
-
-        if ($parameters->exists('unit_name') && !$parameters->exists('unit_id') && !$parameters->exists('unit')) {
-            $m = $this->getRelationManager($entity);
-
-            $result = $m->findOrCreate([
-                'vocabulary_id' => $this->getManager()->getTaxonomyItemVocabulary()->id,
-                'name'          => $parameters->get('unit_name'),
-            ]);
-
-            if (!$result->ok()) {
-                $errors = $errors->merge($result->getErrors());
-            } else {
-                $parameters->set('unit', $result->getResource());
-            }
-        }
-
-        return $errors->merge(parent::update($entity, $parameters));
     }
 }

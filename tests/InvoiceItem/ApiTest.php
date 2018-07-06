@@ -4,6 +4,7 @@ namespace Railken\LaraOre\Tests\InvoiceItem;
 
 use Illuminate\Support\Facades\Config;
 use Railken\LaraOre\Support\Testing\ApiTestableTrait;
+use Railken\Laraore\InvoiceItem\InvoiceItemFaker;
 
 class ApiTest extends BaseTest
 {
@@ -26,6 +27,6 @@ class ApiTest extends BaseTest
      */
     public function testSuccessCommon()
     {
-        $this->commonTest($this->getBaseUrl(), $parameters = $this->getParameters());
+        $this->commonTest($this->getBaseUrl(), InvoiceItemFaker::make());
     }
 }

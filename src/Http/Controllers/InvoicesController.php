@@ -34,14 +34,18 @@ class InvoicesController extends RestController
     public $fillable = [
         'number',
         'sender_id',
+        'sender',
         'recipient_id',
+        'recipient',
         'issued_at',
         'expires_at',
         'type_id',
+        'type',
         'country',
         'locale',
         'currency',
         'tax_id',
+        'tax',
     ];
 
     /**

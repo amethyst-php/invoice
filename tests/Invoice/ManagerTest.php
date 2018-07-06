@@ -4,6 +4,9 @@ namespace Railken\LaraOre\Tests\Invoice;
 
 use Railken\LaraOre\Invoice\InvoiceManager;
 use Railken\LaraOre\Support\Testing\ManagerTestableTrait;
+use Railken\LaraOre\Invoice\InvoiceFaker;
+use Railken\LaraOre\InvoiceItem\InvoiceItemFaker;
+use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
 
 class ManagerTest extends BaseTest
 {
@@ -21,15 +24,20 @@ class ManagerTest extends BaseTest
 
     public function testSuccessCommon()
     {
-        $this->commonTest(new InvoiceManager(), $this->getParameters());
+        $this->commonTest($this->getManager(), InvoiceFaker::make());
     }
 
     public function testInvoiceIssued()
     {
-        $result = $this->getManager()->create($this->getParameters());
+        $result = $this->getManager()->create(InvoiceFaker::make()->toArray());
         $this->assertEquals(true, $result->ok());
-        $this->newInvoiceItem($result->getResource()->id);
-        $this->newInvoiceItem($result->getResource()->id);
+
+        $resource = $result->getResource();
+
+        $am = new InvoiceItemManager();
+
+        $am->create(InvoiceItemFaker::make()->remove('invoice')->set('invoice_id', $resource->id));
+        $am->create(InvoiceItemFaker::make()->remove('invoice')->set('invoice_id', $resource->id));
         $this->getManager()->issue($result->getResource());
     }
 }

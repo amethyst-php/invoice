@@ -4,6 +4,7 @@ namespace Railken\LaraOre\Tests\InvoiceItem;
 
 use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
 use Railken\LaraOre\Support\Testing\ManagerTestableTrait;
+use Railken\Laraore\InvoiceItem\InvoiceItemFaker;
 
 class ManagerTest extends BaseTest
 {
@@ -21,6 +22,6 @@ class ManagerTest extends BaseTest
 
     public function testSuccessCommon()
     {
-        $this->commonTest($this->getManager(), $this->getParameters());
+        $this->commonTest($this->getManager(), InvoiceItemFaker::make()->toArray());
     }
 }
