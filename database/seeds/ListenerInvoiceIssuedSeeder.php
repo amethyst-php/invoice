@@ -21,7 +21,7 @@ class ListenerInvoiceIssuedSeeder extends Seeder
         $bag = new Bag();
         $bag->set('name', 'El. psy. congroo. '.microtime(true));
         $bag->set('worker', 'Railken\LaraOre\Workers\FileWorker');
-        $bag->set('mock_data', ['invoice' => "Railken/LaraOre/Invoice/InvoiceFaker"]);
+        $bag->set('mock_data', ['invoice' => "Railken\\LaraOre\\Invoice\\InvoiceFaker"]);
         $bag->set('extra', [
             'filename' => "invoice-{{ invoice.id }}-{{ invoice.issued_at|date('Y-m-d') }}.pdf",
             'filetype' => 'application/pdf',
