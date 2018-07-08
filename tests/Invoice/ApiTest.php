@@ -29,20 +29,20 @@ class ApiTest extends BaseTest
      */
     public function testSuccessCommon()
     {
-        $this->commonTest($this->getBaseUrl(), InvoiceFaker::make());
+        $this->commonTest($this->getBaseUrl(), InvoiceFaker::make()->parameters());
     }
 
     public function testInvoiceIssued()
     {
-        $response = $this->post($this->getBaseUrl(), InvoiceFaker::make()->toArray());
+        $response = $this->post($this->getBaseUrl(), InvoiceFaker::make()->parameters()->toArray());
         $this->assertOrPrint($response, 201);
 
         $resource = json_decode($response->getContent())->resource;
 
         $am = new InvoiceItemManager();
 
-        $am->create(InvoiceItemFaker::make()->remove('invoice')->set('invoice_id', $resource->id));
-        $am->create(InvoiceItemFaker::make()->remove('invoice')->set('invoice_id', $resource->id));
+        $am->create(InvoiceItemFaker::make()->parameters()->remove('invoice')->set('invoice_id', $resource->id));
+        $am->create(InvoiceItemFaker::make()->parameters()->remove('invoice')->set('invoice_id', $resource->id));
 
         $response = $this->post($this->getBaseUrl().'/'.$resource->id.'/issue', []);
         $this->assertOrPrint($response, 200);

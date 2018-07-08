@@ -22,6 +22,6 @@ class ManagerTest extends BaseTest
 
     public function testSuccessCommon()
     {
-        $this->commonTest($this->getManager(), InvoiceItemFaker::make()->toArray());
+        $this->commonTest($this->getManager(), InvoiceItemFaker::make()->parameters());
     }
 }

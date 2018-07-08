@@ -21,7 +21,7 @@ class ListenerInvoiceIssuedSeeder extends Seeder
         $bag = new Bag();
         $bag->set('name', 'El. psy. congroo. '.microtime(true));
         $bag->set('worker', 'Railken\LaraOre\Workers\FileWorker');
-        $bag->set('mock_data', ['invoice' => $this->getMockDataInvoice()]);
+        $bag->set('mock_data', ['invoice' => "Railken/LaraOre/Invoice/InvoiceFaker"]);
         $bag->set('extra', [
             'filename' => "invoice-{{ invoice.id }}-{{ invoice.issued_at|date('Y-m-d') }}.pdf",
             'filetype' => 'application/pdf',
@@ -45,28 +45,6 @@ class ListenerInvoiceIssuedSeeder extends Seeder
         $bag->set('event_class', 'Railken\LaraOre\Invoice\Events\InvoiceIssued');
 
         return $am->create($bag)->getResource();
-    }
-
-    /**
-     * Return mock data invoice
-     *
-     * @return Bag
-     */
-    public function getMockDataInvoice()
-    {
-
-        $bag = new Bag();
-        $bag->set('number', '1/2018');
-        $bag->set('country', 'IT');
-        $bag->set('locale', 'it_IT');
-        $bag->set('currency', 'EUR');
-        $bag->set('tax', TaxFaker::make()->toArray());
-        $bag->set('recipient', LegalEntityFaker::make()->toArray());
-        $bag->set('sender', LegalEntityFaker::make()->toArray());
-        $bag->set('issued_at', '2018-01-01 00:00:00');
-        $bag->set('expires_at', '2019-01-01 00:00:00');
-
-        return $bag->toArray();
     }
 
     /**

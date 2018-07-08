@@ -24,20 +24,20 @@ class ManagerTest extends BaseTest
 
     public function testSuccessCommon()
     {
-        $this->commonTest($this->getManager(), InvoiceFaker::make());
+        $this->commonTest($this->getManager(), InvoiceFaker::make()->parameters());
     }
 
     public function testInvoiceIssued()
     {
-        $result = $this->getManager()->create(InvoiceFaker::make()->toArray());
+        $result = $this->getManager()->create(InvoiceFaker::make()->parameters()->toArray());
         $this->assertEquals(true, $result->ok());
 
         $resource = $result->getResource();
 
         $am = new InvoiceItemManager();
 
-        $am->create(InvoiceItemFaker::make()->remove('invoice')->set('invoice_id', $resource->id));
-        $am->create(InvoiceItemFaker::make()->remove('invoice')->set('invoice_id', $resource->id));
+        $am->create(InvoiceItemFaker::make()->parameters()->remove('invoice')->set('invoice_id', $resource->id));
+        $am->create(InvoiceItemFaker::make()->parameters()->remove('invoice')->set('invoice_id', $resource->id));
         $this->getManager()->issue($result->getResource());
     }
 }
