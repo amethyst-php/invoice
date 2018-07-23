@@ -17,18 +17,16 @@ use Railken\LaraOre\Taxonomy\Taxonomy;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 
 /**
- * @property public $number
- * @property public $issued_at
- * @property public $expires_at
- * @property public $type_id
- * @property public $country
- * @property public $currency
- * @property public $locale
- * @property public $items
- * @property public $sender
- * @property public $recipient
- * @property public $type
- * @property public $tax
+ * @property string      $number
+ * @property DateTime    $issued_at
+ * @property DateTime    $expires_at
+ * @property string      $country
+ * @property string      $currency
+ * @property string      $locale
+ * @property LegalEntity $sender
+ * @property LegalEntity $recipient
+ * @property Taxonomy    $type
+ * @property Tax         $tax
  */
 class Invoice extends Model implements EntityContract
 {

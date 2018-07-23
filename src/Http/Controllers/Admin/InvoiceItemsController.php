@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\LaraOre\Http\Controllers;
+namespace Railken\LaraOre\Http\Controllers\Admin;
 
 use Railken\LaraOre\Api\Http\Controllers\RestController;
 use Railken\LaraOre\Api\Http\Controllers\Traits as RestTraits;

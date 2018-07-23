@@ -2,12 +2,12 @@
 
 namespace Railken\LaraOre\Invoice;
 
-use Railken\Bag;
 use Faker\Factory;
-use Railken\LaraOre\Tax\TaxFaker;
-use Railken\LaraOre\LegalEntity\LegalEntityFaker;
-use Railken\LaraOre\Taxonomy\TaxonomyFaker;
 use Illuminate\Support\Facades\Config;
+use Railken\Bag;
+use Railken\LaraOre\LegalEntity\LegalEntityFaker;
+use Railken\LaraOre\Tax\TaxFaker;
+use Railken\LaraOre\Taxonomy\TaxonomyFaker;
 use Railken\Laravel\Manager\BaseFaker;
 
 class InvoiceFaker extends BaseFaker
@@ -23,8 +23,8 @@ class InvoiceFaker extends BaseFaker
     public function parameters()
     {
         $faker = Factory::create();
-        
-        $bag = new Bag;
+
+        $bag = new Bag();
 
         $bag->set('number', '2/2018');
         $bag->set('country', 'IT');
@@ -37,7 +37,7 @@ class InvoiceFaker extends BaseFaker
         $bag->set('sender', LegalEntityFaker::make()->parameters()->toArray());
         $bag->set('issued_at', '2018-01-01 00:00:00');
         $bag->set('expires_at', '2019-01-01 00:00:00');
-        
+
         return $bag;
     }
 }

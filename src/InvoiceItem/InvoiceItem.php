@@ -7,10 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
 use MathParser\Interpreting\Evaluator;
 use MathParser\StdMathParser;
-use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Money;
-use Money\Parser\IntlLocalizedDecimalParser;
 use Railken\LaraOre\Invoice\Invoice;
 use Railken\LaraOre\Tax\Tax;
 use Railken\LaraOre\Taxonomy\Taxonomy;
@@ -91,7 +89,6 @@ class InvoiceItem extends Model implements EntityContract
         return $this->belongsTo(Tax::class);
     }
 
-
     /**
      * Readable price.
      *
@@ -116,9 +113,10 @@ class InvoiceItem extends Model implements EntityContract
         $parser = new StdMathParser();
         $AST = $parser->parse($this->tax->calculator);
         $evaluator = new Evaluator();
-        $evaluator->setVariables(['x' => $this->calculatePriceTaxable()->getAmount()/100]);
+        $evaluator->setVariables(['x' => $this->calculatePriceTaxable()->getAmount() / 100]);
         $value = $AST->accept($evaluator);
         $money = new Money(round($value, 2, PHP_ROUND_HALF_UP) * 100, new Currency($this->invoice->currency));
+
         return $money;
     }
 

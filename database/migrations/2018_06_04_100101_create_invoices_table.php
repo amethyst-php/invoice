@@ -9,8 +9,6 @@ class CreateInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -37,8 +35,6 @@ class CreateInvoicesTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

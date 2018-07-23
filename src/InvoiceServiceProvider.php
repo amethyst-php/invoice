@@ -2,6 +2,7 @@
 
 namespace Railken\LaraOre;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Railken\LaraOre\Api\Support\Router;
@@ -11,8 +12,6 @@ class InvoiceServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(\Illuminate\Routing\Router $router)
     {
@@ -36,8 +35,6 @@ class InvoiceServiceProvider extends ServiceProvider
 
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register()
     {
@@ -53,30 +50,36 @@ class InvoiceServiceProvider extends ServiceProvider
 
     /**
      * Load routes.
-     *
-     * @return void
      */
     public function loadRoutes()
     {
-        Router::group(array_merge(Config::get('ore.invoice.router'), [
-            'namespace' => 'Railken\LaraOre\Http\Controllers',
-        ]), function ($router) {
-            $router->get('/', ['uses' => 'InvoicesController@index']);
-            $router->post('/', ['uses' => 'InvoicesController@create']);
-            $router->put('/{id}', ['uses' => 'InvoicesController@update']);
-            $router->delete('/{id}', ['uses' => 'InvoicesController@remove']);
-            $router->get('/{id}', ['uses' => 'InvoicesController@show']);
-            $router->post('/{id}/issue', ['uses' => 'InvoicesController@issue']);
-        });
+        $config = Config::get('ore.invoice.http.admin');
 
-        Router::group(array_merge(Config::get('ore.invoice-item.router'), [
-            'namespace' => 'Railken\LaraOre\Http\Controllers',
-        ]), function ($router) {
-            $router->get('/', ['uses' => 'InvoiceItemsController@index']);
-            $router->post('/', ['uses' => 'InvoiceItemsController@create']);
-            $router->put('/{id}', ['uses' => 'InvoiceItemsController@update']);
-            $router->delete('/{id}', ['uses' => 'InvoiceItemsController@remove']);
-            $router->get('/{id}', ['uses' => 'InvoiceItemsController@show']);
-        });
+        if (Arr::get($config, 'enabled')) {
+            Router::group('admin', Arr::get($config, 'router'), function ($router) use ($config) {
+                $controller = Arr::get($config, 'controller');
+
+                $router->get('/', ['uses' => $controller.'@index']);
+                $router->post('/', ['uses' => $controller.'@create']);
+                $router->put('/{id}', ['uses' => $controller.'@update']);
+                $router->delete('/{id}', ['uses' => $controller.'@remove']);
+                $router->get('/{id}', ['uses' => $controller.'@show']);
+                $router->post('/{id}/issue', ['uses' => $controller.'@issue']);
+            });
+        }
+
+        $config = Config::get('ore.invoice-item.http.admin');
+
+        if (Arr::get($config, 'enabled')) {
+            Router::group('admin', Arr::get($config, 'router'), function ($router) use ($config) {
+                $controller = Arr::get($config, 'controller');
+
+                $router->get('/', ['uses' => $controller.'@index']);
+                $router->post('/', ['uses' => $controller.'@create']);
+                $router->put('/{id}', ['uses' => $controller.'@update']);
+                $router->delete('/{id}', ['uses' => $controller.'@remove']);
+                $router->get('/{id}', ['uses' => $controller.'@show']);
+            });
+        }
     }
 }

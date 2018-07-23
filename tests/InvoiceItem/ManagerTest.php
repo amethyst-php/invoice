@@ -2,9 +2,9 @@
 
 namespace Railken\LaraOre\Tests\InvoiceItem;
 
+use Railken\LaraOre\InvoiceItem\InvoiceItemFaker;
 use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
 use Railken\LaraOre\Support\Testing\ManagerTestableTrait;
-use Railken\Laraore\InvoiceItem\InvoiceItemFaker;
 
 class ManagerTest extends BaseTest
 {

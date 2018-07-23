@@ -6,9 +6,6 @@ use Illuminate\Database\Seeder;
 use Railken\Bag;
 use Railken\LaraOre\Listener\ListenerManager;
 use Railken\LaraOre\Work\WorkManager;
-use Railken\LaraOre\LegalEntity\LegalEntityFaker;
-use Railken\LaraOre\Tax\TaxFaker;
-
 
 class ListenerInvoiceIssuedSeeder extends Seeder
 {
@@ -21,7 +18,7 @@ class ListenerInvoiceIssuedSeeder extends Seeder
         $bag = new Bag();
         $bag->set('name', 'El. psy. congroo. '.microtime(true));
         $bag->set('worker', 'Railken\LaraOre\Workers\FileWorker');
-        $bag->set('mock_data', ['invoice' => "Railken\\LaraOre\\Invoice\\InvoiceFaker"]);
+        $bag->set('mock_data', ['invoice' => 'Railken\\LaraOre\\Invoice\\InvoiceFaker']);
         $bag->set('extra', [
             'filename' => "invoice-{{ invoice.id }}-{{ invoice.issued_at|date('Y-m-d') }}.pdf",
             'filetype' => 'application/pdf',
@@ -49,8 +46,6 @@ class ListenerInvoiceIssuedSeeder extends Seeder
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {

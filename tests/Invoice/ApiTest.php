@@ -3,10 +3,10 @@
 namespace Railken\LaraOre\Tests\Invoice;
 
 use Illuminate\Support\Facades\Config;
-use Railken\LaraOre\Support\Testing\ApiTestableTrait;
 use Railken\LaraOre\Invoice\InvoiceFaker;
 use Railken\LaraOre\InvoiceItem\InvoiceItemFaker;
 use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
+use Railken\LaraOre\Support\Testing\ApiTestableTrait;
 
 class ApiTest extends BaseTest
 {
@@ -19,13 +19,11 @@ class ApiTest extends BaseTest
      */
     public function getBaseUrl()
     {
-        return Config::get('ore.api.router.prefix').Config::get('ore.invoice.router.prefix');
+        return Config::get('ore.api.router.prefix').Config::get('ore.invoice.http.admin.router.prefix');
     }
 
     /**
      * Test common requests.
-     *
-     * @return void
      */
     public function testSuccessCommon()
     {

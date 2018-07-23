@@ -2,12 +2,12 @@
 
 namespace Railken\LaraOre\InvoiceItem;
 
-use Railken\Bag;
 use Faker\Factory;
+use Illuminate\Support\Facades\Config;
+use Railken\Bag;
 use Railken\LaraOre\Invoice\InvoiceFaker;
 use Railken\LaraOre\Tax\TaxFaker;
 use Railken\LaraOre\Taxonomy\TaxonomyFaker;
-use Illuminate\Support\Facades\Config;
 use Railken\Laravel\Manager\BaseFaker;
 
 class InvoiceItemFaker extends BaseFaker
@@ -23,9 +23,9 @@ class InvoiceItemFaker extends BaseFaker
     public function parameters()
     {
         $faker = Factory::create();
-        
+
         $bag = new Bag();
-        
+
         $bag->set('name', 'something');
         $bag->set('unit', TaxonomyFaker::make()->parameters()->toArray());
         $bag->set('unit.vocabulary.name', Config::get('ore.invoice-item.unit_taxonomy'));
