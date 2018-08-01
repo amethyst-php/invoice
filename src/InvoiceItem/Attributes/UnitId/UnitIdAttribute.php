@@ -2,6 +2,7 @@
 
 namespace Railken\LaraOre\InvoiceItem\Attributes\UnitId;
 
+use Railken\Bag;
 use Railken\Laravel\Manager\Attributes\BelongsToAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\Tokens;
@@ -95,5 +96,10 @@ class UnitIdAttribute extends BelongsToAttribute
     public function valid(EntityContract $entity, $value)
     {
         return parent::valid($entity, $value) && $value->vocabulary->id === $this->getManager()->getTaxonomyItemVocabulary()->id;
+    }
+
+    public function filterRelationPrameters(Bag $parameters)
+    {
+        return $parameters->set('vocabulary_id', $this->getManager()->getTaxonomyItemVocabulary()->id);
     }
 }
