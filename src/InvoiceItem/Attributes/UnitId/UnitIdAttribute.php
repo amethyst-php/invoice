@@ -98,7 +98,7 @@ class UnitIdAttribute extends BelongsToAttribute
         return parent::valid($entity, $value) && $value->vocabulary->id === $this->getManager()->getTaxonomyItemVocabulary()->id;
     }
 
-    public function filterRelationPrameters(Bag $parameters)
+    public function filterRelationParameters(Bag $parameters)
     {
         return $parameters->set('vocabulary_id', $this->getManager()->getTaxonomyItemVocabulary()->id);
     }
