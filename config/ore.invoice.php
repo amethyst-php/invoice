@@ -20,7 +20,7 @@ return [
             'enabled'    => true,
             'controller' => Railken\LaraOre\Http\Controllers\Admin\InvoicesController::class,
             'router'     => [
-                'prefix'      => '/admin/invoices',
+                'prefix'      => '/invoices',
             ],
         ],
     ],

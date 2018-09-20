@@ -92,9 +92,7 @@ class InvoiceManager extends ModelManager
     {
         $result = $this->update($invoice, ['issued_at' => new \DateTime(), 'number' => $this->getNumberManager()->calculateNextFreeNumber()]);
 
-        $result->ok() && event(new Events\InvoiceIssued([
-            'invoice' => $invoice,
-        ], [$invoice]));
+        $result->ok() && event(new Events\InvoiceIssued($invoice));
 
         return $result;
     }

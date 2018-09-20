@@ -27,7 +27,7 @@ class InvoiceItemFaker extends BaseFaker
         $bag = new Bag();
 
         $bag->set('name', 'something');
-        $bag->set('unit', TaxonomyFaker::make()->parameters()->toArray());
+        $bag->set('unit', TaxonomyFaker::make()->parameters()->set('unit.name', 'pz')->toArray());
         $bag->set('unit.vocabulary.name', Config::get('ore.invoice-item.unit_taxonomy'));
         $bag->set('description', 'maybe');
         $bag->set('quantity', 10);

@@ -3,46 +3,47 @@
 namespace Railken\LaraOre\Tests\Invoice;
 
 use Illuminate\Support\Facades\Config;
+use Railken\LaraOre\Api\Support\Testing\TestableBaseTrait;
 use Railken\LaraOre\Invoice\InvoiceFaker;
 use Railken\LaraOre\InvoiceItem\InvoiceItemFaker;
 use Railken\LaraOre\InvoiceItem\InvoiceItemManager;
-use Railken\LaraOre\Support\Testing\ApiTestableTrait;
 
 class ApiTest extends BaseTest
 {
-    use ApiTestableTrait;
+    use TestableBaseTrait;
 
     /**
-     * Retrieve basic url.
+     * Faker class.
      *
-     * @return string
+     * @var string
      */
-    public function getBaseUrl()
-    {
-        return Config::get('ore.api.router.prefix').Config::get('ore.invoice.http.admin.router.prefix');
-    }
+    protected $faker = InvoiceFaker::class;
 
     /**
-     * Test common requests.
+     * Router group resource.
+     *
+     * @var string
      */
-    public function testSuccessCommon()
-    {
-        $this->commonTest($this->getBaseUrl(), InvoiceFaker::make()->parameters());
-    }
+    protected $group = 'admin';
+
+    /**
+     * Base path config.
+     *
+     * @var string
+     */
+    protected $config = 'ore.invoice';
 
     public function testInvoiceIssued()
     {
-        $response = $this->post($this->getBaseUrl(), InvoiceFaker::make()->parameters()->toArray());
-        $this->assertOrPrint($response, 201);
+        $response = $this->callAndTest('post', $this->getResourceUrl(), InvoiceFaker::make()->parameters()->toArray(), 201);
 
-        $resource = json_decode($response->getContent())->resource;
+        $resource = json_decode($response->getContent())->data;
 
         $am = new InvoiceItemManager();
 
         $am->create(InvoiceItemFaker::make()->parameters()->remove('invoice')->set('invoice_id', $resource->id));
         $am->create(InvoiceItemFaker::make()->parameters()->remove('invoice')->set('invoice_id', $resource->id));
 
-        $response = $this->post($this->getBaseUrl().'/'.$resource->id.'/issue', []);
-        $this->assertOrPrint($response, 200);
+        $this->callAndTest('post', $this->getResourceUrl().'/'.$resource->id.'/issue', [], 200);
     }
 }
