@@ -1,32 +1,29 @@
 <?php
 
-namespace Railken\LaraOre\Invoice\Database\Seeds;
+namespace Railken\Amethyst\Database\Seeds;
 
 use Illuminate\Database\Seeder;
+use Railken\Amethyst\DataBuilders\InvoiceDataBuilder;
+use Railken\Amethyst\Managers\FileGeneratorManager;
+use Railken\Amethyst\Managers\ListenerManager;
+use Railken\Amethyst\Managers\WorkManager;
 use Railken\Bag;
-use Railken\LaraOre\FileGenerator\FileGeneratorManager;
-use Railken\LaraOre\Listener\ListenerManager;
-use Railken\LaraOre\Repositories\InvoiceRepository;
-use Railken\LaraOre\Work\WorkManager;
 
 class ListenerInvoiceIssuedSeeder extends Seeder
 {
     /**
-     * @return \Railken\LaraOre\Work\Work
+     * @return \Railken\Amethyst\Models\Work
      */
     public function newWork()
     {
         $fgm = new FileGeneratorManager();
         $fg = $fgm->createOrFail([
-            'name'         => 'PDF INVOICE',
+            'name'         => 'invoice.pdf',
             'description'  => 'Generate a .pdf file',
             'data_builder' => [
-                'name'       => 'INVOICE BY ID',
-                'repository' => [
-                    'name'       => 'INVOICE BY ID',
-                    'filter'     => 'id eq {{ id }}',
-                    'class_name' => InvoiceRepository::class,
-                ],
+                'name'       => 'invoice',
+                'filter'     => 'id eq {{ id }}',
+                'class_name' => InvoiceDataBuilder::class,
                 'input', [
                     'id' => [
                         'type'       => 'text',
@@ -41,10 +38,10 @@ class ListenerInvoiceIssuedSeeder extends Seeder
 
         $am = new WorkManager();
         $bag = new Bag();
-        $bag->set('name', 'El. psy. congroo. '.microtime(true));
-        $bag->set('worker', 'Railken\LaraOre\Workers\FileWorker');
+        $bag->set('name', 'Create an invoice');
+        $bag->set('worker', 'Railken\Amethyst\Workers\FileWorker');
         $bag->set('payload', [
-            'class' => 'Railken\LaraOre\Workers\FileWorker',
+            'class' => 'Railken\Amethyst\Workers\FileWorker',
             'data'  => [
                 'id' => $fg->id,
             ],
@@ -54,18 +51,18 @@ class ListenerInvoiceIssuedSeeder extends Seeder
     }
 
     /**
-     * @return \Railken\LaraOre\Listener\Listener
+     * @return \Railken\Amethyst\Listener\Listener
      */
     public function newListener()
     {
         $am = new ListenerManager();
         $bag = new Bag();
-        $bag->set('name', 'El. psy. congroo. '.microtime(true));
+        $bag->set('name', 'Create an invoice.pdf file when invoice is issued');
         $bag->set('work_id', $this->newWork()->id);
         $bag->set('data', [
             'id' => '{{ invoice.id }}',
         ]);
-        $bag->set('event_class', 'Railken\LaraOre\Invoice\Events\InvoiceIssued');
+        $bag->set('event_class', 'Railken\Amethyst\Events\InvoiceIssued');
         $bag->set('enabled', 1);
 
         return $am->createOrFail($bag)->getResource();

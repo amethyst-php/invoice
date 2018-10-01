@@ -1,49 +1,41 @@
 {
-    "name": "railken/lara-ore-invoice",
-    "keywords": ["lara-ore"],
+    "name": "railken/amethyst-invoice",
+    "keywords": ["laravel", "amethyst", "amethyst-invoice", "invoice"],
     "license": "MIT",
     "require": {
         "php": ">=7.1",
-        "league/flysystem-aws-s3-v3": "^1.0",
-        "railken/bag": "^1.2",
-        "railken/laravel-manager": "^3.1",
-        "railken/lara-ore-api": "dev-master",
-        "railken/lara-ore-support": "dev-master",
-        "railken/lara-ore-legal-entity": "dev-master",
-        "railken/lara-ore-taxonomy": "dev-master",
-        "railken/lara-ore-address": "dev-master",
-        "railken/lara-ore-template": "dev-master",
-        "railken/lara-ore-data-builder": "dev-master",
-        "railken/lara-ore-repository": "dev-master",
-        "railken/lara-ore-file-generator": "dev-master",
-        "railken/lara-ore-email-sender": "dev-master",
-        "railken/lara-ore-file": "dev-master",
-        "railken/lara-ore-work": "dev-master",
-        "railken/lara-ore-listener": "dev-master",
-        "railken/lara-ore-tax": "dev-master",
+        "railken/amethyst-common": "0.1.*",
+        "railken/amethyst-legal-entity": "0.1.*",
+        "railken/amethyst-taxonomy": "0.1.*",
+        "railken/amethyst-file-generator": "0.1.*",
+        "railken/amethyst-work": "0.1.*",
+        "railken/amethyst-listener": "0.1.*",
+        "railken/amethyst-tax": "0.1.*",
         "league/iso3166": "^2.1",
         "mossadal/math-parser": "^1.3",
         "moneyphp/money": "^3.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "~7.0",
         "phpstan/phpstan": "^0.10",
-        "orchestra/testbench": "~3.6",
+        "phpunit/phpunit": "~7.0",
+        "orchestra/testbench": "3.6.*",
         "friendsofphp/php-cs-fixer": "^2.8.1"
     },
     "autoload": {
         "psr-4" : {
-            "Railken\\LaraOre\\Invoice\\Database\\Seeds\\": "database/seeds/",
-            "Railken\\LaraOre\\" : "src/"
+            "Railken\\Amethyst\\Database\\Seeds\\": "database/seeds/",
+            "Railken\\Amethyst\\" : "src/"
         }
     },
     "autoload-dev": {
-        "psr-4": { "Railken\\LaraOre\\Tests\\": "tests/" }
+        "psr-4": { 
+            "Railken\\Amethyst\\Tests\\": "tests/" 
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Railken\\LaraOre\\InvoiceServiceProvider"
+                "Railken\\Amethyst\\Providers\\InvoiceServiceProvider"
             ]
         }
     }

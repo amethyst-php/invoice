@@ -1,72 +1,26 @@
 <?php
 
-namespace Railken\LaraOre\Http\Controllers\Admin;
+namespace Railken\Amethyst\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Railken\LaraOre\Api\Http\Controllers\RestController;
-use Railken\LaraOre\Api\Http\Controllers\Traits as RestTraits;
-use Railken\LaraOre\Invoice\InvoiceManager;
+use Railken\Amethyst\Api\Http\Controllers\RestManagerController;
+use Railken\Amethyst\Api\Http\Controllers\Traits as RestTraits;
+use Railken\Amethyst\Managers\InvoiceManager;
 
-class InvoicesController extends RestController
+class InvoicesController extends RestManagerController
 {
     use RestTraits\RestIndexTrait;
+    use RestTraits\RestShowTrait;
     use RestTraits\RestCreateTrait;
     use RestTraits\RestUpdateTrait;
-    use RestTraits\RestShowTrait;
     use RestTraits\RestRemoveTrait;
 
-    public $queryable = [
-        'id',
-        'number',
-        'sender_id',
-        'recipient_id',
-        'issued_at',
-        'expires_at',
-        'type_id',
-        'country',
-        'locale',
-        'currency',
-        'tax_id',
-        'created_at',
-        'updated_at',
-    ];
-
-    public $fillable = [
-        'number',
-        'sender_id',
-        'sender',
-        'recipient_id',
-        'recipient',
-        'issued_at',
-        'expires_at',
-        'type_id',
-        'type',
-        'country',
-        'locale',
-        'currency',
-        'tax_id',
-        'tax',
-    ];
-
     /**
-     * Construct.
-     */
-    public function __construct(InvoiceManager $manager)
-    {
-        $this->manager = $manager;
-        $this->manager->setAgent($this->getUser());
-        parent::__construct();
-    }
-
-    /**
-     * Create a new instance for query.
+     * The class of the manager.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @var string
      */
-    public function getQuery()
-    {
-        return $this->manager->repository->getQuery();
-    }
+    public $class = InvoiceManager::class;
 
     /**
      * @param string $key
@@ -92,17 +46,17 @@ class InvoicesController extends RestController
      */
     public function issue($id, Request $request)
     {
-        $resource = $this->manager->getRepository()->findOneById($id);
+        $resource = $this->getManager()->getRepository()->findOneById($id);
 
         if (!$resource) {
             return $this->not_found();
         }
 
-        $result = $this->manager->issue($resource);
+        $result = $this->getManager()->issue($resource);
 
         if ($result->ok()) {
             return $this->success([
-                'resource' => $this->manager->serializer->serialize($result->getResource(), $this->keys->selectable)->all(),
+                'data' => $this->getManager()->getSerializer()->serialize($result->getResource(), $this->keys->selectable)->all(),
             ]);
         }
 

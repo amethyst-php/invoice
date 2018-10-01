@@ -4,6 +4,6 @@ namespace Railken\Amethyst\Repositories;
 
 use Railken\Lem\Repository;
 
-class InvoiceRepository extends Repository
+class InvoiceItemRepository extends Repository
 {
 }

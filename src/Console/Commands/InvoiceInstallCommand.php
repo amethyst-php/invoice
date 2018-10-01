@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\LaraOre\Console\Commands;
+namespace Railken\Amethyst\Console\Commands;
 
 use Illuminate\Console\Command;
 
@@ -11,14 +11,14 @@ class InvoiceInstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'lara-ore:invoice:install';
+    protected $signature = 'amethyst:invoice:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Install lara-ore-invoice package';
+    protected $description = 'Install amethyst-invoice package';
 
     /**
      * Create a new command instance.
@@ -36,6 +36,6 @@ class InvoiceInstallCommand extends Command
     public function handle()
     {
         !file_exists(storage_path('/fonts')) && mkdir(storage_path('/fonts'), 0755);
-        $this->call('db:seed', ['--class'   => 'Railken\LaraOre\Invoice\Database\Seeds\ListenerInvoiceIssuedSeeder']);
+        $this->call('db:seed', ['--class'   => 'Railken\Amethyst\Database\Seeds\ListenerInvoiceIssuedSeeder']);
     }
 }

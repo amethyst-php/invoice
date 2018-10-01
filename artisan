@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
+
 define('LARAVEL_START', microtime(true));
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
@@ -12,8 +14,10 @@ define('LARAVEL_START', microtime(true));
 | loading of any our classes "manually". Feels great to relax.
 |
 */
+
 require __DIR__.'/vendor/autoload.php';
-class AppTest extends \Railken\LaraOre\Tests\Invoice\BaseTest
+
+class AppTest extends \Railken\Amethyst\Tests\BaseTest
 {
     /**
      * Retrieve app.
@@ -23,9 +27,13 @@ class AppTest extends \Railken\LaraOre\Tests\Invoice\BaseTest
     	return $this->app;
     }
 }
+
 $t = new AppTest();
 $t->setUp();
+
 $app = $t->getApp();
+
+
 /*
 |--------------------------------------------------------------------------
 | Run The Artisan Application
@@ -36,11 +44,14 @@ $app = $t->getApp();
 | or another output device for the developers. Here goes nothing!
 |
 */
+
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+
 $status = $kernel->handle(
     $input = new Symfony\Component\Console\Input\ArgvInput,
     new Symfony\Component\Console\Output\ConsoleOutput
 );
+
 /*
 |--------------------------------------------------------------------------
 | Shutdown The Application
@@ -51,5 +62,7 @@ $status = $kernel->handle(
 | down the process. This is the last thing to happen to the request.
 |
 */
+
 $kernel->terminate($input, $status);
+
 exit($status);
