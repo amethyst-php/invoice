@@ -52,7 +52,7 @@ class InvoiceDataBuilder implements DataBuilderContract
     public function extract(Collection $resources, Closure $callback)
     {
         foreach ($resources as $resource) {
-            $callback($resource, ['record' => $resource]);
+            $callback($resource, ['invoice' => $resource]);
         }
     }
 
@@ -65,6 +65,6 @@ class InvoiceDataBuilder implements DataBuilderContract
      */
     public function parse(Collection $resources): Collection
     {
-        return new Collection(['records' => $resources]);
+        return new Collection(['invoices' => $resources]);
     }
 }
