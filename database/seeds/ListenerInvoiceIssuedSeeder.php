@@ -18,10 +18,10 @@ class ListenerInvoiceIssuedSeeder extends Seeder
     {
         $fgm = new FileGeneratorManager();
         $fg = $fgm->createOrFail([
-            'name'         => 'invoice.pdf',
+            'name'         => 'Generate an invoice.pdf',
             'description'  => 'Generate a .pdf file',
             'data_builder' => [
-                'name'       => 'invoice',
+                'name'       => 'InvoiceById',
                 'filter'     => 'id eq {{ id }}',
                 'class_name' => InvoiceDataBuilder::class,
                 'input', [
