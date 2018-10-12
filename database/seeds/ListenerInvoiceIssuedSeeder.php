@@ -24,7 +24,7 @@ class ListenerInvoiceIssuedSeeder extends Seeder
                 'name'       => 'InvoiceById',
                 'filter'     => 'id eq {{ id }}',
                 'class_name' => InvoiceDataBuilder::class,
-                'input' => [
+                'input'      => [
                     'id' => [
                         'type'       => 'text',
                         'validation' => 'integer',
