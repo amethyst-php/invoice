@@ -53,6 +53,14 @@ class InvoiceItem extends Model implements EntityContract
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function invoice_container()
+    {
+        return $this->belongsTo(InvoiceContainer::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function tax()
     {
         return $this->belongsTo(Tax::class);

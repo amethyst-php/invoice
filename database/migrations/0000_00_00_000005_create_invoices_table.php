@@ -32,6 +32,16 @@ class CreateInvoicesTable extends Migration
             $table->softDeletes();
         });
 
+        Schema::create(Config::get('amethyst.invoice.data.invoice-container.table'), function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+            $table->text('description')->nullable();
+            $table->integer('invoice_id')->unsigned();
+            $table->foreign('invoice_id')->references('id')->on(Config::get('amethyst.invoice.data.invoice.table'));
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         Schema::create(Config::get('amethyst.invoice.data.invoice-item.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -40,6 +50,8 @@ class CreateInvoicesTable extends Migration
             $table->float('quantity');
             $table->integer('unit_id')->unsigned();
             $table->foreign('unit_id')->references('id')->on(Config::get('amethyst.taxonomy.data.taxonomy.table'));
+            $table->integer('invoice_container_id')->unsigned();
+            $table->foreign('invoice_container_id')->references('id')->on(Config::get('amethyst.invoice.data.invoice-container.table'));
             $table->integer('invoice_id')->unsigned();
             $table->foreign('invoice_id')->references('id')->on(Config::get('amethyst.invoice.data.invoice.table'));
             $table->integer('tax_id')->unsigned()->nullable();
@@ -56,5 +68,6 @@ class CreateInvoicesTable extends Migration
     {
         Schema::dropIfExists(Config::get('amethyst.invoice.data.invoice.table'));
         Schema::dropIfExists(Config::get('amethyst.invoice.data.invoice-item.table'));
+        Schema::dropIfExists(Config::get('amethyst.invoice.data.invoice-container.table'));
     }
 }

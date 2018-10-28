@@ -4,10 +4,10 @@ namespace Railken\Amethyst\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 use Railken\Amethyst\DataBuilders\InvoiceDataBuilder;
+use Railken\Amethyst\Fakers\WorkFaker;
 use Railken\Amethyst\Managers\FileGeneratorManager;
 use Railken\Amethyst\Managers\ListenerManager;
 use Railken\Amethyst\Managers\WorkManager;
-use Railken\Amethyst\Fakers\WorkFaker;
 use Railken\Bag;
 
 class ListenerInvoiceIssuedSeeder extends Seeder

@@ -25,6 +25,7 @@ class InvoiceItemFaker extends Faker
         $bag->set('price', 19.99);
         $bag->set('tax', TaxFaker::make()->parameters()->toArray());
         $bag->set('invoice', InvoiceFaker::make()->parameters()->toArray());
+        $bag->set('invoice_container', InvoiceContainerFaker::make()->parameters()->toArray());
 
         return $bag;
     }

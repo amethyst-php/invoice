@@ -132,27 +132,33 @@
                 </td>
             </tr>
 
-            {% for item in invoice.items %}
-
+            {% for container in invoice.containers %}
                 <tr class="item">
-                    <td>
-                        {{ item.name }}<br>
-                        <i class='small'>{{ item.description }}</i>
-                    </td>
-                    <td class="right">
-                        {{ item.quantity }} {{ item.unit.name }}
-                    </td>
-                    <td class='right'>
-                        {{ item.formatPrice(item.calculatePriceTaxable()) }}
-                    </td>
-                    <td class="right">
-                        {{ item.formatPrice(item.calculatePriceTax()) }}<br>
-                        <i class='small'>{{ item.tax.name }}</i>
-                    </td>
-                    <td class="right">
-                        {{ item.formatPrice(item.calculatePriceTaxed()) }}
+                    <td colspan='5'>
+                        {{ container.name }}
                     </td>
                 </tr>
+                {% for item in container.items %}
+                    <tr class="item">
+                        <td>
+                            {{ item.name }}<br>
+                            <i class='small'>{{ item.description }}</i>
+                        </td>
+                        <td class="right">
+                            {{ item.quantity }} {{ item.unit.name }}
+                        </td>
+                        <td class='right'>
+                            {{ item.formatPrice(item.calculatePriceTaxable()) }}
+                        </td>
+                        <td class="right">
+                            {{ item.formatPrice(item.calculatePriceTax()) }}<br>
+                            <i class='small'>{{ item.tax.name }}</i>
+                        </td>
+                        <td class="right">
+                            {{ item.formatPrice(item.calculatePriceTaxed()) }}
+                        </td>
+                    </tr>
+                {% endfor %}
 
             {% endfor %}
             

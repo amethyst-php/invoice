@@ -29,7 +29,7 @@ class InvoiceManager extends Manager
      *
      * @param Invoice $invoice
      *
-     * @return \Railken\Laravel\Manager\ResultAction
+     * @return \Railken\Lem\Result
      */
     public function issue(Invoice $invoice)
     {

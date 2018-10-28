@@ -4,6 +4,7 @@ namespace Railken\Amethyst\Schemas;
 
 use Illuminate\Support\Facades\Config;
 use Railken\Amethyst\Attributes as AmethystAttributes;
+use Railken\Amethyst\Managers\InvoiceContainerManager;
 use Railken\Amethyst\Managers\InvoiceManager;
 use Railken\Amethyst\Managers\TaxManager;
 use Railken\Lem\Attributes;
@@ -25,6 +26,9 @@ class InvoiceItemSchema extends Schema
             Attributes\BelongsToAttribute::make('invoice_id')
                 ->setRelationName('invoice')
                 ->setRelationManager(InvoiceManager::class),
+            Attributes\BelongsToAttribute::make('invoice_container_id')
+                ->setRelationName('invoice_container')
+                ->setRelationManager(InvoiceContainerManager::class),
             Attributes\BelongsToAttribute::make('tax_id')
                 ->setRelationName('tax')
                 ->setRelationManager(TaxManager::class),

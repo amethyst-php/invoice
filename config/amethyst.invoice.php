@@ -24,6 +24,18 @@ return [
             'number_manager' => \Railken\Amethyst\InvoiceNumber\IncrementalWithYearInvoice::class,
             'taxonomy'       => 'INVOICE_TYPE',
         ],
+        'invoice-container' => [
+            'table'         => 'amethyst_invoice_containers',
+            'comment'       => 'Invoice Container',
+            'model'         => Railken\Amethyst\Models\InvoiceContainer::class,
+            'schema'        => Railken\Amethyst\Schemas\InvoiceContainerSchema::class,
+            'repository'    => Railken\Amethyst\Repositories\InvoiceContainerRepository::class,
+            'serializer'    => Railken\Amethyst\Serializers\InvoiceContainerSerializer::class,
+            'validator'     => Railken\Amethyst\Validators\InvoiceContainerValidator::class,
+            'authorizer'    => Railken\Amethyst\Authorizers\InvoiceContainerAuthorizer::class,
+            'faker'         => Railken\Amethyst\Fakers\InvoiceContainerFaker::class,
+            'manager'       => Railken\Amethyst\Managers\InvoiceContainerManager::class,
+        ],
         'invoice-item' => [
             'table'         => 'amethyst_invoice_items',
             'comment'       => 'Invoice Item',
@@ -55,6 +67,14 @@ return [
                 'router'      => [
                     'as'        => 'invoice.',
                     'prefix'    => '/invoices',
+                ],
+            ],
+            'invoice-container' => [
+                'enabled'     => true,
+                'controller'  => Railken\Amethyst\Http\Controllers\Admin\InvoiceContainersController::class,
+                'router'      => [
+                    'as'        => 'invoice-container.',
+                    'prefix'    => '/invoice-containers',
                 ],
             ],
             'invoice-item' => [

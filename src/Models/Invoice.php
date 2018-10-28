@@ -93,6 +93,14 @@ class Invoice extends Model implements EntityContract
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function containers()
+    {
+        return $this->hasMany(InvoiceContainer::class);
+    }
+
+    /**
      * Readable price.
      *
      * @param Money $price
