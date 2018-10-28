@@ -18,8 +18,7 @@ class InvoiceContainerSchema extends Schema
         return [
             Attributes\IdAttribute::make(),
             Attributes\TextAttribute::make('name')
-                ->setRequired(true)
-                ->setUnique(true),
+                ->setRequired(true),
             Attributes\LongTextAttribute::make('description'),
             Attributes\BelongsToAttribute::make('invoice_id')
                 ->setRelationName('invoice')

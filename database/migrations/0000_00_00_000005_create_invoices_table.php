@@ -34,7 +34,7 @@ class CreateInvoicesTable extends Migration
 
         Schema::create(Config::get('amethyst.invoice.data.invoice-container.table'), function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->text('description')->nullable();
             $table->integer('invoice_id')->unsigned();
             $table->foreign('invoice_id')->references('id')->on(Config::get('amethyst.invoice.data.invoice.table'));
