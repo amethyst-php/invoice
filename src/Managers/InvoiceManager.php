@@ -3,30 +3,23 @@
 namespace Railken\Amethyst\Managers;
 
 use Illuminate\Support\Facades\Config;
+use Railken\Amethyst\Common\ConfigurableManager;
 use Railken\Amethyst\Events;
 use Railken\Amethyst\Models\Invoice;
 use Railken\Lem\Manager;
 
 class InvoiceManager extends Manager
 {
-    /**
-     * Describe this manager.
-     *
-     * @var string
-     */
-    public $comment = '...';
+    use ConfigurableManager;
 
     /**
-     * Register Classes.
+     * @var string
      */
-    public function registerClasses()
-    {
-        return Config::get('amethyst.invoice.managers.invoice');
-    }
+    protected $config = 'amethyst.invoice.data.invoice';
 
     public function getNumberManager()
     {
-        $class = Config::get('amethyst.invoice.managers.invoice.number_manager');
+        $class = Config::get('amethyst.invoice.data.invoice.number_manager');
 
         return new $class($this);
     }

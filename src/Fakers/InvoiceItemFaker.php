@@ -19,7 +19,7 @@ class InvoiceItemFaker extends Faker
         $bag = new Bag();
         $bag->set('name', 'something');
         $bag->set('unit', TaxonomyFaker::make()->parameters()->set('unit.name', 'pz')->toArray());
-        $bag->set('unit.parent.name', Config::get('amethyst.invoice.managers.invoice-item.unit_taxonomy'));
+        $bag->set('unit.parent.name', Config::get('amethyst.invoice.data.invoice-item.unit_taxonomy'));
         $bag->set('description', 'maybe');
         $bag->set('quantity', 10);
         $bag->set('price', 19.99);

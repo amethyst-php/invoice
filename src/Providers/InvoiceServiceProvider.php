@@ -43,7 +43,7 @@ class InvoiceServiceProvider extends CommonServiceProvider
         if (Arr::get($config, 'enabled')) {
             Router::group('admin', Arr::get($config, 'router'), function ($router) use ($config) {
                 $controller = Arr::get($config, 'controller');
-                $router->post('/{id}/issue', ['uses' => $controller.'@issue']);
+                $router->post('/{id}/issue', ['as' => 'issue', 'uses' => $controller.'@issue']);
             });
         }
     }

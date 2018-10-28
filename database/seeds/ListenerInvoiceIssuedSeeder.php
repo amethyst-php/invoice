@@ -7,6 +7,7 @@ use Railken\Amethyst\DataBuilders\InvoiceDataBuilder;
 use Railken\Amethyst\Managers\FileGeneratorManager;
 use Railken\Amethyst\Managers\ListenerManager;
 use Railken\Amethyst\Managers\WorkManager;
+use Railken\Amethyst\Fakers\WorkFaker;
 use Railken\Bag;
 
 class ListenerInvoiceIssuedSeeder extends Seeder
@@ -40,9 +41,8 @@ class ListenerInvoiceIssuedSeeder extends Seeder
         ])->getResource();
 
         $am = new WorkManager();
-        $bag = new Bag();
+        $bag = WorkFaker::make()->parameters();
         $bag->set('name', 'Create an invoice');
-        $bag->set('worker', 'Railken\Amethyst\Workers\FileWorker');
         $bag->set('payload', [
             'class' => 'Railken\Amethyst\Workers\FileWorker',
             'data'  => [

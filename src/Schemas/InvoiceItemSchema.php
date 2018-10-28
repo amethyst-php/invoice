@@ -28,7 +28,7 @@ class InvoiceItemSchema extends Schema
             Attributes\BelongsToAttribute::make('tax_id')
                 ->setRelationName('tax')
                 ->setRelationManager(TaxManager::class),
-            AmethystAttributes\TaxonomyAttribute::make('unit_id', Config::get('amethyst.invoice.managers.invoice-item.unit_taxonomy'))
+            AmethystAttributes\TaxonomyAttribute::make('unit_id', Config::get('amethyst.invoice.data.invoice-item.unit_taxonomy'))
                 ->setRelationName('unit'),
             Attributes\NumberAttribute::make('price'),
             Attributes\NumberAttribute::make('quantity'),

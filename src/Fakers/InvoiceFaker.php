@@ -24,7 +24,7 @@ class InvoiceFaker extends Faker
         $bag->set('tax', TaxFaker::make()->parameters()->toArray());
         $bag->set('recipient', LegalEntityFaker::make()->parameters()->toArray());
         $bag->set('type', TaxonomyFaker::make()->parameters()->toArray());
-        $bag->set('type.parent.name', Config::get('amethyst.invoice.managers.invoice.taxonomy'));
+        $bag->set('type.parent.name', Config::get('amethyst.invoice.data.invoice.taxonomy'));
         $bag->set('sender', LegalEntityFaker::make()->parameters()->toArray());
         $bag->set('issued_at', '2018-01-01 00:00:00');
         $bag->set('expires_at', '2019-01-01 00:00:00');

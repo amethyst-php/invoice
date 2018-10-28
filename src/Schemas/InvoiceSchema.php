@@ -28,7 +28,7 @@ class InvoiceSchema extends Schema
             Attributes\BelongsToAttribute::make('recipient_id')
                 ->setRelationName('recipient')
                 ->setRelationManager(LegalEntityManager::class),
-            AmethystAttributes\TaxonomyAttribute::make('type', Config::get('amethyst.invoice.managers.invoice.taxonomy'))
+            AmethystAttributes\TaxonomyAttribute::make('type', Config::get('amethyst.invoice.data.invoice.taxonomy'))
                 ->setRelationName('type'),
             AmethystAttributes\CountryAttribute::make('country'),
             AmethystAttributes\Invoice\CurrencyAttribute::make('currency'),

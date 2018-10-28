@@ -12,38 +12,38 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create(Config::get('amethyst.invoice.managers.invoice.table'), function (Blueprint $table) {
+        Schema::create(Config::get('amethyst.invoice.data.invoice.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('number')->nullable();
             $table->string('country');
             $table->string('locale');
             $table->string('currency');
             $table->integer('type_id')->unsigned()->nullable();
-            $table->foreign('type_id')->references('id')->on(Config::get('amethyst.taxonomy.managers.taxonomy.table'));
+            $table->foreign('type_id')->references('id')->on(Config::get('amethyst.taxonomy.data.taxonomy.table'));
             $table->integer('sender_id')->unsigned()->nullable();
-            $table->foreign('sender_id')->references('id')->on(Config::get('amethyst.legal-entity.managers.legal-entity.table'));
+            $table->foreign('sender_id')->references('id')->on(Config::get('amethyst.legal-entity.data.legal-entity.table'));
             $table->integer('recipient_id')->unsigned();
-            $table->foreign('recipient_id')->references('id')->on(Config::get('amethyst.legal-entity.managers.legal-entity.table'));
+            $table->foreign('recipient_id')->references('id')->on(Config::get('amethyst.legal-entity.data.legal-entity.table'));
             $table->integer('tax_id')->unsigned()->nullable();
-            $table->foreign('tax_id')->references('id')->on(Config::get('amethyst.tax.managers.tax.table'));
+            $table->foreign('tax_id')->references('id')->on(Config::get('amethyst.tax.data.tax.table'));
             $table->date('issued_at')->nullable();
             $table->date('expires_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
 
-        Schema::create(Config::get('amethyst.invoice.managers.invoice-item.table'), function (Blueprint $table) {
+        Schema::create(Config::get('amethyst.invoice.data.invoice-item.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');
             $table->float('price');
             $table->float('quantity');
             $table->integer('unit_id')->unsigned();
-            $table->foreign('unit_id')->references('id')->on(Config::get('amethyst.taxonomy.managers.taxonomy.table'));
+            $table->foreign('unit_id')->references('id')->on(Config::get('amethyst.taxonomy.data.taxonomy.table'));
             $table->integer('invoice_id')->unsigned();
-            $table->foreign('invoice_id')->references('id')->on(Config::get('amethyst.invoice.managers.invoice.table'));
+            $table->foreign('invoice_id')->references('id')->on(Config::get('amethyst.invoice.data.invoice.table'));
             $table->integer('tax_id')->unsigned()->nullable();
-            $table->foreign('tax_id')->references('id')->on(Config::get('amethyst.tax.managers.tax.table'));
+            $table->foreign('tax_id')->references('id')->on(Config::get('amethyst.tax.data.tax.table'));
             $table->timestamps();
             $table->softDeletes();
         });
@@ -54,7 +54,7 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(Config::get('amethyst.invoice.managers.invoice.table'));
-        Schema::dropIfExists(Config::get('amethyst.invoice.managers.invoice-item.table'));
+        Schema::dropIfExists(Config::get('amethyst.invoice.data.invoice.table'));
+        Schema::dropIfExists(Config::get('amethyst.invoice.data.invoice-item.table'));
     }
 }

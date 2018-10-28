@@ -4,12 +4,11 @@ namespace Railken\Amethyst\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Config;
 use MathParser\Interpreting\Evaluator;
 use MathParser\StdMathParser;
 use Money\Currency;
 use Money\Money;
-use Railken\Amethyst\Schemas\InvoiceItemSchema;
+use Railken\Amethyst\Common\ConfigurableModel;
 use Railken\Lem\Contracts\EntityContract;
 
 /**
@@ -22,18 +21,17 @@ use Railken\Lem\Contracts\EntityContract;
  */
 class InvoiceItem extends Model implements EntityContract
 {
-    use SoftDeletes;
+    use SoftDeletes, ConfigurableModel;
 
     /**
-     * Creates a new instance of the model.
+     * Create a new Eloquent model instance.
      *
      * @param array $attributes
      */
     public function __construct(array $attributes = [])
     {
+        $this->ini('amethyst.invoice.data.invoice-item');
         parent::__construct($attributes);
-        $this->table = Config::get('amethyst.invoice.managers.invoice-item.table');
-        $this->fillable = (new InvoiceItemSchema())->getNameFillableAttributes();
     }
 
     /**

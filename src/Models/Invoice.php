@@ -5,12 +5,11 @@ namespace Railken\Amethyst\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Config;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
-use Railken\Amethyst\Schemas\InvoiceSchema;
+use Railken\Amethyst\Common\ConfigurableModel;
 use Railken\Amethyst\Traits\HasFileTrait;
 use Railken\Lem\Contracts\EntityContract;
 
@@ -29,7 +28,7 @@ use Railken\Lem\Contracts\EntityContract;
  */
 class Invoice extends Model implements EntityContract
 {
-    use SoftDeletes, HasFileTrait;
+    use SoftDeletes, HasFileTrait, ConfigurableModel;
 
     /**
      * The attributes that should be mutated to dates.
@@ -43,15 +42,14 @@ class Invoice extends Model implements EntityContract
     ];
 
     /**
-     * Creates a new instance of the model.
+     * Create a new Eloquent model instance.
      *
      * @param array $attributes
      */
     public function __construct(array $attributes = [])
     {
+        $this->ini('amethyst.invoice.data.invoice');
         parent::__construct($attributes);
-        $this->table = Config::get('amethyst.invoice.managers.invoice.table');
-        $this->fillable = (new InvoiceSchema())->getNameFillableAttributes();
     }
 
     /**

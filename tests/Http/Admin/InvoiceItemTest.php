@@ -25,9 +25,9 @@ class InvoiceItemTest extends BaseTest
     protected $group = 'admin';
 
     /**
-     * Base path config.
+     * Route name.
      *
      * @var string
      */
-    protected $config = 'amethyst.invoice.http.admin.invoice-item';
+    protected $route = 'admin.invoice-item';
 }

@@ -27,15 +27,15 @@ class InvoiceTest extends BaseTest
     protected $group = 'admin';
 
     /**
-     * Base path config.
+     * Route name.
      *
      * @var string
      */
-    protected $config = 'amethyst.invoice.http.admin.invoice';
+    protected $route = 'admin.invoice';
 
     public function testInvoiceIssued()
     {
-        $response = $this->callAndTest('POST', $this->getResourceUrl(), InvoiceFaker::make()->parameters()->toArray(), 201);
+        $response = $this->callAndTest('POST', route('admin.invoice.create'), InvoiceFaker::make()->parameters()->toArray(), 201);
 
         $resource = json_decode($response->getContent())->data;
 
@@ -43,7 +43,6 @@ class InvoiceTest extends BaseTest
 
         $am->create(InvoiceItemFaker::make()->parameters()->remove('invoice')->set('invoice_id', $resource->id));
         $am->create(InvoiceItemFaker::make()->parameters()->remove('invoice')->set('invoice_id', $resource->id));
-
-        $this->callAndTest('POST', $this->getResourceUrl().'/'.$resource->id.'/issue', [], 200);
+        $this->callAndTest('POST', route('admin.invoice.issue', ['id' => $resource->id]), [], 200);
     }
 }
