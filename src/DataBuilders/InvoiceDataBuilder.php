@@ -11,7 +11,7 @@ use Railken\Amethyst\Managers\InvoiceManager;
 class InvoiceDataBuilder implements DataBuilderContract
 {
     /**
-     * @var \Railken\Amethyst\Managers\DataBuilderManager
+     * @var \Railken\Amethyst\Managers\InvoiceManager
      */
     protected $manager;
 
@@ -21,6 +21,16 @@ class InvoiceDataBuilder implements DataBuilderContract
     public function __construct()
     {
         $this->manager = new InvoiceManager();
+    }
+
+    /**
+     * Get manager
+     *
+     * @return \Railken\Amethyst\Managers\InvoiceManager
+     */
+    public function getManager()
+    {
+        return $this->manager;
     }
 
     /**
