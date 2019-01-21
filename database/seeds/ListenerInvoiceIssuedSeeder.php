@@ -3,12 +3,12 @@
 namespace Railken\Amethyst\Database\Seeds;
 
 use Illuminate\Database\Seeder;
+use Railken\Amethyst\DataBuilders\CommonDataBuilder;
 use Railken\Amethyst\Fakers\WorkFaker;
 use Railken\Amethyst\Managers\FileGeneratorManager;
-use Railken\Amethyst\Managers\ListenerManager;
 use Railken\Amethyst\Managers\InvoiceManager;
+use Railken\Amethyst\Managers\ListenerManager;
 use Railken\Amethyst\Managers\WorkManager;
-use Railken\Amethyst\DataBuilders\CommonDataBuilder;
 use Railken\Bag;
 use Symfony\Component\Yaml\Yaml;
 
@@ -24,11 +24,11 @@ class ListenerInvoiceIssuedSeeder extends Seeder
             'name'         => 'Generate an invoice.pdf',
             'description'  => 'Generate a .pdf file',
             'data_builder' => [
-                'name'       => 'InvoiceById',
-                'filter'     => 'id eq {{ id }}',
-                'class_name' => CommonDataBuilder::class,
+                'name'            => 'InvoiceById',
+                'filter'          => 'id eq {{ id }}',
+                'class_name'      => CommonDataBuilder::class,
                 'class_arguments' => Yaml::dump([InvoiceManager::class]),
-                'input'      => Yaml::dump([
+                'input'           => Yaml::dump([
                     'id' => [
                         'type'       => 'text',
                         'validation' => 'integer',
