@@ -31,8 +31,7 @@ class InvoiceSchema extends Schema
                 ->setRelationManager(LegalEntityManager::class)
                 ->setRequired(true),
             AmethystAttributes\TaxonomyAttribute::make('type', Config::get('amethyst.invoice.data.invoice.taxonomy'))
-                ->setRelationName('type')
-                ->setRequired(true),
+                ->setRelationName('type'),
             AmethystAttributes\CountryAttribute::make('country')
                 ->setRequired(true),
             AmethystAttributes\Invoice\CurrencyAttribute::make('currency')
