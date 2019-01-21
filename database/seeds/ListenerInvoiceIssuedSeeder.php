@@ -3,12 +3,14 @@
 namespace Railken\Amethyst\Database\Seeds;
 
 use Illuminate\Database\Seeder;
-use Railken\Amethyst\DataBuilders\InvoiceDataBuilder;
 use Railken\Amethyst\Fakers\WorkFaker;
 use Railken\Amethyst\Managers\FileGeneratorManager;
 use Railken\Amethyst\Managers\ListenerManager;
+use Railken\Amethyst\Managers\InvoiceManager;
 use Railken\Amethyst\Managers\WorkManager;
+use Railken\Amethyst\DataBuilders\CommonDataBuilder;
 use Railken\Bag;
+use Symfony\Component\Yaml\Yaml;
 
 class ListenerInvoiceIssuedSeeder extends Seeder
 {
@@ -24,16 +26,17 @@ class ListenerInvoiceIssuedSeeder extends Seeder
             'data_builder' => [
                 'name'       => 'InvoiceById',
                 'filter'     => 'id eq {{ id }}',
-                'class_name' => InvoiceDataBuilder::class,
-                'input'      => [
+                'class_name' => CommonDataBuilder::class,
+                'class_arguments' => Yaml::dump([InvoiceManager::class]),
+                'input'      => Yaml::dump([
                     'id' => [
                         'type'       => 'text',
                         'validation' => 'integer',
                     ],
-                ],
-                'mock_data' => [
+                ]),
+                'mock_data' => Yaml::dump([
                     'id' => 1,
-                ],
+                ]),
             ],
             'filename' => '{{ invoice.id }}.pdf',
             'filetype' => 'application/pdf',
@@ -43,12 +46,12 @@ class ListenerInvoiceIssuedSeeder extends Seeder
         $am = new WorkManager();
         $bag = WorkFaker::make()->parameters();
         $bag->set('name', 'Create an invoice');
-        $bag->set('payload', [
+        $bag->set('payload', Yaml::dump([
             'class' => 'Railken\Amethyst\Workers\FileWorker',
             'data'  => [
                 'id' => $fg->id,
             ],
-        ]);
+        ]));
 
         return $am->createOrFail($bag)->getResource();
     }

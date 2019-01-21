@@ -45,7 +45,7 @@ class CreateInvoicesTable extends Migration
         Schema::create(Config::get('amethyst.invoice.data.invoice-item.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->float('price');
             $table->float('quantity');
             $table->integer('unit_id')->unsigned();

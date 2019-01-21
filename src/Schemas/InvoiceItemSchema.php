@@ -21,21 +21,28 @@ class InvoiceItemSchema extends Schema
     {
         return [
             Attributes\IdAttribute::make(),
-            Attributes\TextAttribute::make('name'),
+            Attributes\TextAttribute::make('name')
+                ->setRequired(true),
             Attributes\LongTextAttribute::make('description'),
             Attributes\BelongsToAttribute::make('invoice_id')
                 ->setRelationName('invoice')
-                ->setRelationManager(InvoiceManager::class),
+                ->setRelationManager(InvoiceManager::class)
+                ->setRequired(true),
             Attributes\BelongsToAttribute::make('invoice_container_id')
                 ->setRelationName('invoice_container')
-                ->setRelationManager(InvoiceContainerManager::class),
+                ->setRelationManager(InvoiceContainerManager::class)
+                ->setRequired(true),
             Attributes\BelongsToAttribute::make('tax_id')
                 ->setRelationName('tax')
-                ->setRelationManager(TaxManager::class),
+                ->setRelationManager(TaxManager::class)
+                ->setRequired(true),
             AmethystAttributes\TaxonomyAttribute::make('unit_id', Config::get('amethyst.invoice.data.invoice-item.unit_taxonomy'))
-                ->setRelationName('unit'),
-            Attributes\NumberAttribute::make('price'),
-            Attributes\NumberAttribute::make('quantity'),
+                ->setRelationName('unit')
+                ->setRequired(true),
+            Attributes\NumberAttribute::make('price')
+                ->setRequired(true),
+            Attributes\NumberAttribute::make('quantity')
+                ->setRequired(true),
             Attributes\CreatedAtAttribute::make(),
             Attributes\UpdatedAtAttribute::make(),
             Attributes\DeletedAtAttribute::make(),

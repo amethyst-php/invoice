@@ -25,16 +25,16 @@ return [
             'taxonomy'       => 'INVOICE_TYPE',
         ],
         'invoice-container' => [
-            'table'         => 'amethyst_invoice_containers',
-            'comment'       => 'Invoice Container',
-            'model'         => Railken\Amethyst\Models\InvoiceContainer::class,
-            'schema'        => Railken\Amethyst\Schemas\InvoiceContainerSchema::class,
-            'repository'    => Railken\Amethyst\Repositories\InvoiceContainerRepository::class,
-            'serializer'    => Railken\Amethyst\Serializers\InvoiceContainerSerializer::class,
-            'validator'     => Railken\Amethyst\Validators\InvoiceContainerValidator::class,
-            'authorizer'    => Railken\Amethyst\Authorizers\InvoiceContainerAuthorizer::class,
-            'faker'         => Railken\Amethyst\Fakers\InvoiceContainerFaker::class,
-            'manager'       => Railken\Amethyst\Managers\InvoiceContainerManager::class,
+            'table'      => 'amethyst_invoice_containers',
+            'comment'    => 'Invoice Container',
+            'model'      => Railken\Amethyst\Models\InvoiceContainer::class,
+            'schema'     => Railken\Amethyst\Schemas\InvoiceContainerSchema::class,
+            'repository' => Railken\Amethyst\Repositories\InvoiceContainerRepository::class,
+            'serializer' => Railken\Amethyst\Serializers\InvoiceContainerSerializer::class,
+            'validator'  => Railken\Amethyst\Validators\InvoiceContainerValidator::class,
+            'authorizer' => Railken\Amethyst\Authorizers\InvoiceContainerAuthorizer::class,
+            'faker'      => Railken\Amethyst\Fakers\InvoiceContainerFaker::class,
+            'manager'    => Railken\Amethyst\Managers\InvoiceContainerManager::class,
         ],
         'invoice-item' => [
             'table'         => 'amethyst_invoice_items',
@@ -62,27 +62,27 @@ return [
     'http' => [
         'admin' => [
             'invoice' => [
-                'enabled'     => true,
-                'controller'  => Railken\Amethyst\Http\Controllers\Admin\InvoicesController::class,
-                'router'      => [
-                    'as'        => 'invoice.',
-                    'prefix'    => '/invoices',
+                'enabled'    => true,
+                'controller' => Railken\Amethyst\Http\Controllers\Admin\InvoicesController::class,
+                'router'     => [
+                    'as'     => 'invoice.',
+                    'prefix' => '/invoices',
                 ],
             ],
             'invoice-container' => [
-                'enabled'     => true,
-                'controller'  => Railken\Amethyst\Http\Controllers\Admin\InvoiceContainersController::class,
-                'router'      => [
-                    'as'        => 'invoice-container.',
-                    'prefix'    => '/invoice-containers',
+                'enabled'    => true,
+                'controller' => Railken\Amethyst\Http\Controllers\Admin\InvoiceContainersController::class,
+                'router'     => [
+                    'as'     => 'invoice-container.',
+                    'prefix' => '/invoice-containers',
                 ],
             ],
             'invoice-item' => [
-                'enabled'     => true,
-                'controller'  => Railken\Amethyst\Http\Controllers\Admin\InvoiceItemsController::class,
-                'router'      => [
-                    'as'        => 'invoice-item.',
-                    'prefix'    => '/invoice-items',
+                'enabled'    => true,
+                'controller' => Railken\Amethyst\Http\Controllers\Admin\InvoiceItemsController::class,
+                'router'     => [
+                    'as'     => 'invoice-item.',
+                    'prefix' => '/invoice-items',
                 ],
             ],
         ],

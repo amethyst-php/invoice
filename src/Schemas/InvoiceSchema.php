@@ -24,15 +24,21 @@ class InvoiceSchema extends Schema
                 ->setUnique(true),
             Attributes\BelongsToAttribute::make('sender_id')
                 ->setRelationName('sender')
-                ->setRelationManager(LegalEntityManager::class),
+                ->setRelationManager(LegalEntityManager::class)
+                ->setRequired(true),
             Attributes\BelongsToAttribute::make('recipient_id')
                 ->setRelationName('recipient')
-                ->setRelationManager(LegalEntityManager::class),
+                ->setRelationManager(LegalEntityManager::class)
+                ->setRequired(true),
             AmethystAttributes\TaxonomyAttribute::make('type', Config::get('amethyst.invoice.data.invoice.taxonomy'))
-                ->setRelationName('type'),
-            AmethystAttributes\CountryAttribute::make('country'),
-            AmethystAttributes\Invoice\CurrencyAttribute::make('currency'),
-            AmethystAttributes\Invoice\LocaleAttribute::make('locale'),
+                ->setRelationName('type')
+                ->setRequired(true),
+            AmethystAttributes\CountryAttribute::make('country')
+                ->setRequired(true),
+            AmethystAttributes\Invoice\CurrencyAttribute::make('currency')
+                ->setRequired(true),
+            AmethystAttributes\Invoice\LocaleAttribute::make('locale')
+                ->setRequired(true),
             Attributes\BelongsToAttribute::make('tax_id')
                 ->setRelationName('tax')
                 ->setRelationManager(TaxManager::class),

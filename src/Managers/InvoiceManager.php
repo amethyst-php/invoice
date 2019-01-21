@@ -34,9 +34,9 @@ class InvoiceManager extends Manager
     public function issue(Invoice $invoice)
     {
         $result = $this->update($invoice, [
-            'issued_at' => new \DateTime(), 
-            'expires_at' => (new \DateTime())->modify("+1 month"), 
-            'number' => $this->getNumberManager()->calculateNextFreeNumber()
+            'issued_at'  => new \DateTime(),
+            'expires_at' => (new \DateTime())->modify('+1 month'),
+            'number'     => $this->getNumberManager()->calculateNextFreeNumber(),
         ]);
 
         $result->ok() && event(new Events\InvoiceIssued($invoice));

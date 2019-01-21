@@ -22,7 +22,8 @@ class InvoiceContainerSchema extends Schema
             Attributes\LongTextAttribute::make('description'),
             Attributes\BelongsToAttribute::make('invoice_id')
                 ->setRelationName('invoice')
-                ->setRelationManager(InvoiceManager::class),
+                ->setRelationManager(InvoiceManager::class)
+                ->setRequired(true),
             Attributes\CreatedAtAttribute::make(),
             Attributes\UpdatedAtAttribute::make(),
             Attributes\DeletedAtAttribute::make(),
