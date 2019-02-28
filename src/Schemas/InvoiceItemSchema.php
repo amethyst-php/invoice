@@ -36,7 +36,7 @@ class InvoiceItemSchema extends Schema
                 ->setRelationName('tax')
                 ->setRelationManager(TaxManager::class)
                 ->setRequired(true),
-            AmethystAttributes\TaxonomyAttribute::make('unit_id', Config::get('amethyst.invoice.data.invoice-item.unit_taxonomy'))
+            AmethystAttributes\TaxonomyAttribute::make('unit_id', Config::get('amethyst.invoice.taxonomies.1.name'))
                 ->setRelationName('unit')
                 ->setRequired(true),
             Attributes\NumberAttribute::make('price')

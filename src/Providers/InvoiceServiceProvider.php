@@ -32,8 +32,10 @@ class InvoiceServiceProvider extends CommonServiceProvider
         $this->app->register(\Railken\Amethyst\Providers\ListenerServiceProvider::class);
         $this->commands([InvoiceInstallCommand::class]);
 
-        Config::push('amethyst.taxonomy.data.taxonomy.seeds', ['name' => Config::get('amethyst.invoice.data.invoice.taxonomy')]);
-        Config::push('amethyst.taxonomy.data.taxonomy.seeds', ['name' => Config::get('amethyst.invoice.data.invoice-item.taxonomy')]);
+        Config::set('amethyst.taxonomy.data.taxonomy.seeds', array_merge(
+            Config::get('amethyst.taxonomy.data.taxonomy.seeds'),
+            Config::get('amethyst.invoice.taxonomies')
+        ));
     }
 
     /**

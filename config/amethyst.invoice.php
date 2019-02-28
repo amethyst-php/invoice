@@ -22,7 +22,6 @@ return [
             'faker'          => Railken\Amethyst\Fakers\InvoiceFaker::class,
             'manager'        => Railken\Amethyst\Managers\InvoiceManager::class,
             'number_manager' => \Railken\Amethyst\InvoiceNumber\IncrementalWithYearInvoice::class,
-            'taxonomy'       => 'INVOICE_TYPE',
         ],
         'invoice-container' => [
             'table'      => 'amethyst_invoice_containers',
@@ -47,8 +46,20 @@ return [
             'authorizer'    => Railken\Amethyst\Authorizers\InvoiceItemAuthorizer::class,
             'faker'         => Railken\Amethyst\Fakers\InvoiceItemFaker::class,
             'manager'       => Railken\Amethyst\Managers\InvoiceItemManager::class,
-            'unit_taxonomy' => 'INVOICE_ITEM_UNIT',
         ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Taxonomies
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure taxonomies
+    |
+    */
+    'taxonomies' => [ 
+        ['name' => 'INVOICE_TYPE'],
+        ['name' => 'INVOICE_ITEM_UNIT'],
     ],
 
     /*
