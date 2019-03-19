@@ -56,7 +56,7 @@ class InvoicesController extends RestManagerController
 
         if ($result->ok()) {
             return $this->success([
-                'data' => $this->getManager()->getSerializer()->serialize($result->getResource(), $this->keys->selectable)->all(),
+                'data' => $this->getManager()->getSerializer()->serialize($result->getResource(), collect($this->queryable))->all(),
             ]);
         }
 
