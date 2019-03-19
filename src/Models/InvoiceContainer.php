@@ -3,9 +3,12 @@
 namespace Railken\Amethyst\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Railken\Amethyst\Common\ConfigurableModel;
 use Railken\Lem\Contracts\EntityContract;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class InvoiceContainer extends Model implements EntityContract
 {
@@ -25,7 +28,7 @@ class InvoiceContainer extends Model implements EntityContract
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function items()
+    public function items(): BelongsTo
     {
         return $this->hasMany(InvoiceItem::class);
     }
@@ -33,7 +36,7 @@ class InvoiceContainer extends Model implements EntityContract
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function invoice()
+    public function invoice(): BelongsTo
     {
         return $this->belongsTo(Invoice::class);
     }

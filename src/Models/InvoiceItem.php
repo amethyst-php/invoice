@@ -3,6 +3,8 @@
 namespace Railken\Amethyst\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use MathParser\Interpreting\Evaluator;
 use MathParser\StdMathParser;
@@ -37,7 +39,7 @@ class InvoiceItem extends Model implements EntityContract
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function unit()
+    public function unit(): BelongsTo
     {
         return $this->belongsTo(Taxonomy::class);
     }
@@ -45,7 +47,7 @@ class InvoiceItem extends Model implements EntityContract
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function invoice()
+    public function invoice(): BelongsTo
     {
         return $this->belongsTo(Invoice::class);
     }
@@ -53,7 +55,7 @@ class InvoiceItem extends Model implements EntityContract
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function invoice_container()
+    public function invoice_container(): BelongsTo
     {
         return $this->belongsTo(InvoiceContainer::class);
     }
@@ -61,7 +63,7 @@ class InvoiceItem extends Model implements EntityContract
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tax()
+    public function tax(): BelongsTo
     {
         return $this->belongsTo(Tax::class);
     }
