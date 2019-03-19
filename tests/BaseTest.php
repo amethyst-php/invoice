@@ -24,7 +24,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
         $this->artisan('migrate:fresh');
         $this->artisan('amethyst:invoice:install');
-
     }
 
     protected function getPackageProviders($app)

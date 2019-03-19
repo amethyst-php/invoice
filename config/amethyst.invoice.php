@@ -36,16 +36,16 @@ return [
             'manager'    => Railken\Amethyst\Managers\InvoiceContainerManager::class,
         ],
         'invoice-item' => [
-            'table'         => 'amethyst_invoice_items',
-            'comment'       => 'Invoice Item',
-            'model'         => Railken\Amethyst\Models\InvoiceItem::class,
-            'schema'        => Railken\Amethyst\Schemas\InvoiceItemSchema::class,
-            'repository'    => Railken\Amethyst\Repositories\InvoiceItemRepository::class,
-            'serializer'    => Railken\Amethyst\Serializers\InvoiceItemSerializer::class,
-            'validator'     => Railken\Amethyst\Validators\InvoiceItemValidator::class,
-            'authorizer'    => Railken\Amethyst\Authorizers\InvoiceItemAuthorizer::class,
-            'faker'         => Railken\Amethyst\Fakers\InvoiceItemFaker::class,
-            'manager'       => Railken\Amethyst\Managers\InvoiceItemManager::class,
+            'table'      => 'amethyst_invoice_items',
+            'comment'    => 'Invoice Item',
+            'model'      => Railken\Amethyst\Models\InvoiceItem::class,
+            'schema'     => Railken\Amethyst\Schemas\InvoiceItemSchema::class,
+            'repository' => Railken\Amethyst\Repositories\InvoiceItemRepository::class,
+            'serializer' => Railken\Amethyst\Serializers\InvoiceItemSerializer::class,
+            'validator'  => Railken\Amethyst\Validators\InvoiceItemValidator::class,
+            'authorizer' => Railken\Amethyst\Authorizers\InvoiceItemAuthorizer::class,
+            'faker'      => Railken\Amethyst\Fakers\InvoiceItemFaker::class,
+            'manager'    => Railken\Amethyst\Managers\InvoiceItemManager::class,
         ],
     ],
 
@@ -57,7 +57,7 @@ return [
     | Here you may configure taxonomies
     |
     */
-    'taxonomies' => [ 
+    'taxonomies' => [
         ['name' => 'INVOICE_TYPE'],
         ['name' => 'INVOICE_ITEM_UNIT'],
     ],
