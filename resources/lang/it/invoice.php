@@ -30,4 +30,4 @@ return [
         'containers' => 'Raggruppamenti',
         'items' => 'Elementi'
     ]
-]
+];

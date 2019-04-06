@@ -30,4 +30,4 @@ return [
         'containers' => 'Containers',
         'items' => 'Items'
     ]
-]
+];
