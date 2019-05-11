@@ -30,7 +30,9 @@ use Railken\Lem\Contracts\EntityContract;
  */
 class Invoice extends Model implements EntityContract
 {
-    use SoftDeletes, HasFileTrait, ConfigurableModel;
+    use SoftDeletes;
+    use HasFileTrait;
+    use ConfigurableModel;
 
     /**
      * The attributes that should be mutated to dates.

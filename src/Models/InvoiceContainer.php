@@ -10,7 +10,8 @@ use Railken\Lem\Contracts\EntityContract;
 
 class InvoiceContainer extends Model implements EntityContract
 {
-    use SoftDeletes, ConfigurableModel;
+    use SoftDeletes;
+    use ConfigurableModel;
 
     /**
      * Create a new Eloquent model instance.
