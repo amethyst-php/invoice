@@ -40,7 +40,7 @@ class InvoiceItem extends Model implements EntityContract
      */
     public function unit(): BelongsTo
     {
-        return $this->belongsTo(Taxonomy::class);
+        return $this->belongsTo(config('amethyst.taxonomy.data.taxonomy.model'));
     }
 
     /**
@@ -48,7 +48,7 @@ class InvoiceItem extends Model implements EntityContract
      */
     public function invoice(): BelongsTo
     {
-        return $this->belongsTo(Invoice::class);
+        return $this->belongsTo(config('amethyst.invoice.data.invoice.model'));
     }
 
     /**
@@ -56,7 +56,7 @@ class InvoiceItem extends Model implements EntityContract
      */
     public function invoice_container(): BelongsTo
     {
-        return $this->belongsTo(InvoiceContainer::class);
+        return $this->belongsTo(config('amethyst.invoice.data.invoice-container.model'));
     }
 
     /**
@@ -64,7 +64,7 @@ class InvoiceItem extends Model implements EntityContract
      */
     public function tax(): BelongsTo
     {
-        return $this->belongsTo(Tax::class);
+        return $this->belongsTo(config('amethyst.tax.data.tax.model'));
     }
 
     /**

@@ -59,7 +59,7 @@ class Invoice extends Model implements EntityContract
      */
     public function sender(): BelongsTo
     {
-        return $this->belongsTo(LegalEntity::class);
+        return $this->belongsTo(config('amethyst.legal-entity.data.legal-entity.model'));
     }
 
     /**
@@ -67,7 +67,7 @@ class Invoice extends Model implements EntityContract
      */
     public function recipient(): BelongsTo
     {
-        return $this->belongsTo(LegalEntity::class);
+        return $this->belongsTo(config('amethyst.legal-entity.data.legal-entity.model'));
     }
 
     /**
@@ -75,7 +75,7 @@ class Invoice extends Model implements EntityContract
      */
     public function type(): BelongsTo
     {
-        return $this->belongsTo(Taxonomy::class);
+        return $this->belongsTo(config('amethyst.taxonomy.data.taxonomy.model'));
     }
 
     /**
@@ -83,7 +83,7 @@ class Invoice extends Model implements EntityContract
      */
     public function tax(): BelongsTo
     {
-        return $this->belongsTo(Tax::class);
+        return $this->belongsTo(config('amethyst.tax.data.tax.model'));
     }
 
     /**
@@ -91,7 +91,7 @@ class Invoice extends Model implements EntityContract
      */
     public function items(): HasMany
     {
-        return $this->hasMany(InvoiceItem::class);
+        return $this->hasMany(config('amethyst.invoice.data.invoice-item.model'));
     }
 
     /**
@@ -99,7 +99,7 @@ class Invoice extends Model implements EntityContract
      */
     public function containers(): HasMany
     {
-        return $this->hasMany(InvoiceContainer::class);
+        return $this->hasMany(config('amethyst.invoice.data.invoice-container.model'));
     }
 
     /**

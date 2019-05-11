@@ -28,7 +28,7 @@ class InvoiceContainer extends Model implements EntityContract
      */
     public function items(): BelongsTo
     {
-        return $this->hasMany(InvoiceItem::class);
+        return $this->hasMany(config('amethyst.invoice.data.invoice-item.model'));
     }
 
     /**
@@ -36,6 +36,6 @@ class InvoiceContainer extends Model implements EntityContract
      */
     public function invoice(): BelongsTo
     {
-        return $this->belongsTo(Invoice::class);
+        return $this->belongsTo(config('amethyst.invoice.data.invoice.model'));
     }
 }
