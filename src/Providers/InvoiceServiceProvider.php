@@ -16,7 +16,8 @@ class InvoiceServiceProvider extends CommonServiceProvider
     public function boot()
     {
         parent::boot();
-        $this->loadExtraRoutes();
+
+        app('amethyst')->pushMorphRelation('file', 'model', 'invoice');
     }
 
     /**
@@ -25,6 +26,7 @@ class InvoiceServiceProvider extends CommonServiceProvider
     public function register()
     {
         parent::register();
+        $this->loadExtraRoutes();
 
         $this->app->register(\Railken\Amethyst\Providers\TaxServiceProvider::class);
         $this->app->register(\Railken\Amethyst\Providers\TaxonomyServiceProvider::class);

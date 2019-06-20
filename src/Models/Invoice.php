@@ -12,7 +12,6 @@ use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
 use Railken\Amethyst\Common\ConfigurableModel;
-use Railken\Amethyst\Traits\HasFileTrait;
 use Railken\Lem\Contracts\EntityContract;
 
 /**
@@ -31,7 +30,6 @@ use Railken\Lem\Contracts\EntityContract;
 class Invoice extends Model implements EntityContract
 {
     use SoftDeletes;
-    use HasFileTrait;
     use ConfigurableModel;
 
     /**
