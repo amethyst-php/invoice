@@ -61,8 +61,8 @@ jobs:
     - stage: Deploy Documentation
       php: 7.2
       script:
-        - php artisan amethyst:documentation:generate
-        - php artisan amethyst:documentation:publishable
+        - artisan amethyst:documentation:generate
+        - artisan amethyst:documentation:publishable
       deploy:
         provider: pages
         skip-cleanup: true
