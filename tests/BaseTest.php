@@ -9,11 +9,8 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     /**
      * Setup the test environment.
      */
-    public function setUp()
+    public function setUp(): void
     {
-        $dotenv = new \Dotenv\Dotenv(__DIR__.'/..', '.env');
-        $dotenv->load();
-
         parent::setUp();
 
         File::cleanDirectory(database_path('migrations/'));
