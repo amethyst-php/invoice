@@ -1,6 +1,7 @@
 vendor/
-var/cache
+var/
 \.php_cs\.cache
 \.env
 composer\.lock
 build/
+phpunit\.xml
