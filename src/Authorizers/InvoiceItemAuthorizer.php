@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Authorizers;
+namespace Amethyst\Authorizers;
 
 use Railken\Lem\Authorizer;
 use Railken\Lem\Tokens;

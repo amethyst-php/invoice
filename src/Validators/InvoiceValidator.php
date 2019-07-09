@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Validators;
+namespace Amethyst\Validators;
 
 use Railken\Lem\Validator;
 

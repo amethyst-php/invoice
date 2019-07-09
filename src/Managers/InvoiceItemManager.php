@@ -1,8 +1,8 @@
 <?php
 
-namespace Railken\Amethyst\Managers;
+namespace Amethyst\Managers;
 
-use Railken\Amethyst\Common\ConfigurableManager;
+use Amethyst\Common\ConfigurableManager;
 use Railken\Lem\Manager;
 
 class InvoiceItemManager extends Manager

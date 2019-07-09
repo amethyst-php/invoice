@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Serializers;
+namespace Amethyst\Serializers;
 
 use Illuminate\Support\Collection;
 use Railken\Lem\Contracts\EntityContract;

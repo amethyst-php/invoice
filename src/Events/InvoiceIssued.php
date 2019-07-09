@@ -1,16 +1,16 @@
 <?php
 
-namespace Railken\Amethyst\Events;
+namespace Amethyst\Events;
 
 use Illuminate\Queue\SerializesModels;
-use Railken\Amethyst\Models\Invoice;
+use Amethyst\Models\Invoice;
 
 class InvoiceIssued
 {
     use SerializesModels;
 
     /**
-     * @var \Railken\Amethyst\Models\Invoice
+     * @var \Amethyst\Models\Invoice
      */
     public $invoice;
 
@@ -22,7 +22,7 @@ class InvoiceIssued
     /**
      * Create a new event instance.
      *
-     * @param \Railken\Amethyst\Models\Invoice $invoice
+     * @param \Amethyst\Models\Invoice $invoice
      */
     public function __construct(Invoice $invoice)
     {

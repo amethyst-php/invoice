@@ -1,12 +1,12 @@
 <?php
 
-namespace Railken\Amethyst\Tests\Http\Admin;
+namespace Amethyst\Tests\Http\Admin;
 
-use Railken\Amethyst\Api\Support\Testing\TestableBaseTrait;
-use Railken\Amethyst\Fakers\InvoiceFaker;
-use Railken\Amethyst\Fakers\InvoiceItemFaker;
-use Railken\Amethyst\Managers\InvoiceItemManager;
-use Railken\Amethyst\Tests\BaseTest;
+use Amethyst\Api\Support\Testing\TestableBaseTrait;
+use Amethyst\Fakers\InvoiceFaker;
+use Amethyst\Fakers\InvoiceItemFaker;
+use Amethyst\Managers\InvoiceItemManager;
+use Amethyst\Tests\BaseTest;
 
 class InvoiceTest extends BaseTest
 {

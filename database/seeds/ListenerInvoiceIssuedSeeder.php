@@ -1,21 +1,21 @@
 <?php
 
-namespace Railken\Amethyst\Database\Seeds;
+namespace Amethyst\Database\Seeds;
 
 use Illuminate\Database\Seeder;
-use Railken\Amethyst\DataBuilders\CommonDataBuilder;
-use Railken\Amethyst\Fakers\WorkFaker;
-use Railken\Amethyst\Managers\FileGeneratorManager;
-use Railken\Amethyst\Managers\InvoiceManager;
-use Railken\Amethyst\Managers\ListenerManager;
-use Railken\Amethyst\Managers\WorkManager;
+use Amethyst\DataBuilders\CommonDataBuilder;
+use Amethyst\Fakers\WorkFaker;
+use Amethyst\Managers\FileGeneratorManager;
+use Amethyst\Managers\InvoiceManager;
+use Amethyst\Managers\ListenerManager;
+use Amethyst\Managers\WorkManager;
 use Railken\Bag;
 use Symfony\Component\Yaml\Yaml;
 
 class ListenerInvoiceIssuedSeeder extends Seeder
 {
     /**
-     * @return \Railken\Amethyst\Models\Work
+     * @return \Amethyst\Models\Work
      */
     public function newWork()
     {
@@ -47,7 +47,7 @@ class ListenerInvoiceIssuedSeeder extends Seeder
         $bag = WorkFaker::make()->parameters();
         $bag->set('name', 'Create an invoice');
         $bag->set('payload', Yaml::dump([
-            'class' => 'Railken\Amethyst\Workers\FileWorker',
+            'class' => 'Amethyst\Workers\FileWorker',
             'data'  => [
                 'id' => $fg->id,
             ],
@@ -57,7 +57,7 @@ class ListenerInvoiceIssuedSeeder extends Seeder
     }
 
     /**
-     * @return \Railken\Amethyst\Listener\Listener
+     * @return \Amethyst\Listener\Listener
      */
     public function newListener()
     {
@@ -68,7 +68,7 @@ class ListenerInvoiceIssuedSeeder extends Seeder
         $bag->set('data', [
             'id' => '{{ invoice.id }}',
         ]);
-        $bag->set('event_class', 'Railken\Amethyst\Events\InvoiceIssued');
+        $bag->set('event_class', 'Amethyst\Events\InvoiceIssued');
         $bag->set('enabled', 1);
 
         return $am->createOrFail($bag)->getResource();

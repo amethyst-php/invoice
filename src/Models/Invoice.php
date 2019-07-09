@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Models;
+namespace Amethyst\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +11,7 @@ use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
-use Railken\Amethyst\Common\ConfigurableModel;
+use Amethyst\Common\ConfigurableModel;
 use Railken\Lem\Contracts\EntityContract;
 
 /**

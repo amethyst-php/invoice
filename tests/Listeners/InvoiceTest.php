@@ -1,12 +1,12 @@
 <?php
 
-namespace Railken\Amethyst\Tests\Listeners;
+namespace Amethyst\Tests\Listeners;
 
-use Railken\Amethyst\Fakers\InvoiceFaker;
-use Railken\Amethyst\Fakers\InvoiceItemFaker;
-use Railken\Amethyst\Managers\InvoiceItemManager;
-use Railken\Amethyst\Managers\InvoiceManager;
-use Railken\Amethyst\Tests\BaseTest;
+use Amethyst\Fakers\InvoiceFaker;
+use Amethyst\Fakers\InvoiceItemFaker;
+use Amethyst\Managers\InvoiceItemManager;
+use Amethyst\Managers\InvoiceManager;
+use Amethyst\Tests\BaseTest;
 
 class InvoiceTest extends BaseTest
 {

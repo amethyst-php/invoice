@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Fakers;
+namespace Amethyst\Fakers;
 
 use Faker\Factory;
 use Railken\Bag;

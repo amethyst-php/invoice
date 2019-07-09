@@ -1,10 +1,10 @@
 <?php
 
-namespace Railken\Amethyst\Tests\Managers;
+namespace Amethyst\Tests\Managers;
 
-use Railken\Amethyst\Fakers\InvoiceItemFaker;
-use Railken\Amethyst\Managers\InvoiceItemManager;
-use Railken\Amethyst\Tests\BaseTest;
+use Amethyst\Fakers\InvoiceItemFaker;
+use Amethyst\Managers\InvoiceItemManager;
+use Amethyst\Tests\BaseTest;
 use Railken\Lem\Support\Testing\TestableBaseTrait;
 
 class InvoiceItemTest extends BaseTest

@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Repositories;
+namespace Amethyst\Repositories;
 
 use Railken\Lem\Repository;
 

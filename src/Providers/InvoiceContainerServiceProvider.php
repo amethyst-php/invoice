@@ -1,8 +1,8 @@
 <?php
 
-namespace Railken\Amethyst\Providers;
+namespace Amethyst\Providers;
 
-use Railken\Amethyst\Common\CommonServiceProvider;
+use Amethyst\Common\CommonServiceProvider;
 
 class InvoiceContainerServiceProvider extends CommonServiceProvider
 {

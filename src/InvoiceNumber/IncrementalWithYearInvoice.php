@@ -1,10 +1,10 @@
 <?php
 
-namespace Railken\Amethyst\InvoiceNumber;
+namespace Amethyst\InvoiceNumber;
 
 use Illuminate\Support\Facades\DB;
-use Railken\Amethyst\Contracts\InvoiceNumberContract;
-use Railken\Amethyst\Managers\InvoiceManager;
+use Amethyst\Contracts\InvoiceNumberContract;
+use Amethyst\Managers\InvoiceManager;
 use Railken\Lem\Contracts\EntityContract;
 
 class IncrementalWithYearInvoice implements InvoiceNumberContract
@@ -52,7 +52,7 @@ class IncrementalWithYearInvoice implements InvoiceNumberContract
     {
         $year = (new \DateTime())->format('Y');
 
-        /** @var \Railken\Amethyst\Models\InvoiceModel */
+        /** @var \Amethyst\Models\InvoiceModel */
         $result = $this->getManager()
             ->getRepository()
             ->newQuery()

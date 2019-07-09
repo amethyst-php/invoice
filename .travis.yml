@@ -44,8 +44,7 @@ before_script:
   - echo 'zend.assertions=1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - echo 'assert.exception=On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - phpenv config-rm xdebug.ini
-  - composer global require railken/cli-amethyst
-  - composer global require railken/artisan
+  - composer global require amethyst/cli
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 script:
@@ -59,15 +58,3 @@ jobs:
     - stage: Style
       php: 7.2
       script: composer update && amethyst test:style --verbose
-    - stage: Deploy Documentation
-      php: 7.2
-      script:
-        - artisan amethyst:documentation:generate
-        - artisan amethyst:documentation:publishable
-      deploy:
-        provider: pages
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN
-        local-dir: docs
-        on:
-          branch: master

@@ -1,8 +1,8 @@
 <?php
 
-namespace Railken\Amethyst\Schemas;
+namespace Amethyst\Schemas;
 
-use Railken\Amethyst\Managers\InvoiceManager;
+use Amethyst\Managers\InvoiceManager;
 use Railken\Lem\Attributes;
 use Railken\Lem\Schema;
 

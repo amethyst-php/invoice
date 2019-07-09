@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Attributes\Invoice;
+namespace Amethyst\Attributes\Invoice;
 
 use Railken\Lem\Attributes\EnumAttribute;
 

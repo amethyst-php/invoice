@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Console\Commands;
+namespace Amethyst\Console\Commands;
 
 use Illuminate\Console\Command;
 
@@ -36,6 +36,6 @@ class InvoiceInstallCommand extends Command
     public function handle()
     {
         !file_exists(storage_path('/fonts')) && mkdir(storage_path('/fonts'), 0755);
-        $this->call('db:seed', ['--class' => 'Railken\Amethyst\Database\Seeds\ListenerInvoiceIssuedSeeder']);
+        $this->call('db:seed', ['--class' => 'Amethyst\Database\Seeds\ListenerInvoiceIssuedSeeder']);
     }
 }

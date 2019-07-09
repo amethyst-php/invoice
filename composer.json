@@ -1,16 +1,16 @@
 {
-    "name": "railken/amethyst-invoice",
+    "name": "amethyst/invoice",
     "keywords": ["laravel", "amethyst", "amethyst-invoice", "invoice"],
     "license": "MIT",
     "require": {
         "php": ">=7.1",
-        "railken/amethyst-common": "0.1.*",
-        "railken/amethyst-legal-entity": "0.1.*",
-        "railken/amethyst-taxonomy": "0.1.*",
-        "railken/amethyst-file-generator": "0.1.*",
-        "railken/amethyst-work": "0.1.*",
-        "railken/amethyst-listener": "0.1.*",
-        "railken/amethyst-tax": "0.1.*",
+        "amethyst/common": "0.1.*",
+        "amethyst/legal-entity": "0.1.*",
+        "amethyst/taxonomy": "0.1.*",
+        "amethyst/file-generator": "0.1.*",
+        "amethyst/work": "0.1.*",
+        "amethyst/listener": "0.1.*",
+        "amethyst/tax": "0.1.*",
         "league/iso3166": "^2.1",
         "mossadal/math-parser": "^1.3",
         "moneyphp/money": "^3.1"
@@ -21,19 +21,19 @@
     },
     "autoload": {
         "psr-4" : {
-            "Railken\\Amethyst\\Database\\Seeds\\": "database/seeds/",
-            "Railken\\Amethyst\\" : "src/"
+            "Amethyst\\Database\\Seeds\\": "database/seeds/",
+            "Amethyst\\" : "src/"
         }
     },
     "autoload-dev": {
         "psr-4": { 
-            "Railken\\Amethyst\\Tests\\": "tests/" 
+            "Amethyst\\Tests\\": "tests/" 
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Railken\\Amethyst\\Providers\\InvoiceServiceProvider"
+                "Amethyst\\Providers\\InvoiceServiceProvider"
             ]
         }
     }
