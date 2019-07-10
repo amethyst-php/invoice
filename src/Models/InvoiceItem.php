@@ -2,6 +2,7 @@
 
 namespace Amethyst\Models;
 
+use Amethyst\Common\ConfigurableModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,6 @@ use MathParser\Interpreting\Evaluator;
 use MathParser\StdMathParser;
 use Money\Currency;
 use Money\Money;
-use Amethyst\Common\ConfigurableModel;
 use Railken\Lem\Contracts\EntityContract;
 
 /**

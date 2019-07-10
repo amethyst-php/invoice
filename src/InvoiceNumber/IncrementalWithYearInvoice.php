@@ -2,9 +2,9 @@
 
 namespace Amethyst\InvoiceNumber;
 
-use Illuminate\Support\Facades\DB;
 use Amethyst\Contracts\InvoiceNumberContract;
 use Amethyst\Managers\InvoiceManager;
+use Illuminate\Support\Facades\DB;
 use Railken\Lem\Contracts\EntityContract;
 
 class IncrementalWithYearInvoice implements InvoiceNumberContract

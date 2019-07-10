@@ -2,13 +2,13 @@
 
 namespace Amethyst\Database\Seeds;
 
-use Illuminate\Database\Seeder;
 use Amethyst\DataBuilders\CommonDataBuilder;
 use Amethyst\Fakers\WorkFaker;
 use Amethyst\Managers\FileGeneratorManager;
 use Amethyst\Managers\InvoiceManager;
 use Amethyst\Managers\ListenerManager;
 use Amethyst\Managers\WorkManager;
+use Illuminate\Database\Seeder;
 use Railken\Bag;
 use Symfony\Component\Yaml\Yaml;
 

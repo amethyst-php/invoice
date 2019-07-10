@@ -2,10 +2,10 @@
 
 namespace Amethyst\Managers;
 
-use Illuminate\Support\Facades\Config;
 use Amethyst\Common\ConfigurableManager;
 use Amethyst\Events;
 use Amethyst\Models\Invoice;
+use Illuminate\Support\Facades\Config;
 use Railken\Lem\Manager;
 
 class InvoiceManager extends Manager

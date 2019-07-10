@@ -2,8 +2,8 @@
 
 namespace Amethyst\Events;
 
-use Illuminate\Queue\SerializesModels;
 use Amethyst\Models\Invoice;
+use Illuminate\Queue\SerializesModels;
 
 class InvoiceIssued
 {
