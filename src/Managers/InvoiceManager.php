@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Config;
 use Railken\Lem\Manager;
 
 /**
- * @method \Amethyst\Models\Invoice newEntity()
- * @method \Amethyst\Schemas\InvoiceSchema getSchema()
+ * @method \Amethyst\Models\Invoice                 newEntity()
+ * @method \Amethyst\Schemas\InvoiceSchema          getSchema()
  * @method \Amethyst\Repositories\InvoiceRepository getRepository()
- * @method \Amethyst\Serializers\InvoiceSerializer getSerializer()
- * @method \Amethyst\Validators\InvoiceValidator getValidator()
- * @method \Amethyst\Authorizers\InvoiceAuthorizer getAuthorizer()
+ * @method \Amethyst\Serializers\InvoiceSerializer  getSerializer()
+ * @method \Amethyst\Validators\InvoiceValidator    getValidator()
+ * @method \Amethyst\Authorizers\InvoiceAuthorizer  getAuthorizer()
  */
 class InvoiceManager extends Manager
 {
