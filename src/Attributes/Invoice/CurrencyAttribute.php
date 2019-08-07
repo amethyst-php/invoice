@@ -3,10 +3,11 @@
 namespace Amethyst\Attributes\Invoice;
 
 use Illuminate\Support\Collection;
-use Railken\Lem\Attributes\TextAttribute;
+use Railken\Lem\Attributes\EnumAttribute;
 use Railken\Lem\Contracts\EntityContract;
+use League\ISO3166\ISO3166;
 
-class CurrencyAttribute extends TextAttribute
+class CurrencyAttribute extends EnumAttribute
 {
     /**
      * Name attribute.
@@ -16,21 +17,29 @@ class CurrencyAttribute extends TextAttribute
     protected $name = 'currency';
 
     /**
-     * Is a value valid ?
+     * Create a new instance.
      *
-     * @param \Railken\Lem\Contracts\EntityContract $entity
-     * @param mixed                                 $value
-     *
-     * @return bool
+     * @param string $name
+     * @param array  $options
      */
-    public function valid(EntityContract $entity, $value)
+    public function __construct(string $name = null, array $options = [])
     {
-        try {
-            $country = (new \League\ISO3166\ISO3166())->alpha2($entity->country);
+        $options = [];
 
-            return Collection::make($country['currency'])->contains($value);
-        } catch (\Exception $e) {
-            return false;
+        foreach ((new ISO3166())->all() as $item) {
+            $options = array_merge($options, $item['currency']);
         }
+
+        parent::__construct($name, $options);
+    }
+
+    /**
+     * Get type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return 'Enum';
     }
 }

@@ -27,4 +27,14 @@ class LocaleAttribute extends EnumAttribute
 
         parent::__construct($name, $options);
     }
+
+    /**
+     * Get type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return 'Enum';
+    }
 }
