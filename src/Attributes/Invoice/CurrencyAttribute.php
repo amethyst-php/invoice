@@ -2,10 +2,8 @@
 
 namespace Amethyst\Attributes\Invoice;
 
-use Illuminate\Support\Collection;
-use Railken\Lem\Attributes\EnumAttribute;
-use Railken\Lem\Contracts\EntityContract;
 use League\ISO3166\ISO3166;
+use Railken\Lem\Attributes\EnumAttribute;
 
 class CurrencyAttribute extends EnumAttribute
 {
