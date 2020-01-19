@@ -2,7 +2,7 @@
 
 namespace Amethyst\Models;
 
-use Amethyst\Common\ConfigurableModel;
+use Amethyst\Core\ConfigurableModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;

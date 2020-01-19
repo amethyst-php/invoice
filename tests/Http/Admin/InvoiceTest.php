@@ -2,7 +2,7 @@
 
 namespace Amethyst\Tests\Http\Admin;
 
-use Amethyst\Api\Support\Testing\TestableBaseTrait;
+use Amethyst\Core\Support\Testing\TestableBaseTrait;
 use Amethyst\Fakers\InvoiceFaker;
 use Amethyst\Fakers\InvoiceItemFaker;
 use Amethyst\Managers\InvoiceItemManager;
