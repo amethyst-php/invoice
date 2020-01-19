@@ -1,6 +1,6 @@
 # amethyst-invoice
 
-[![Build Status](https://travis-ci.org/amethyst-php/invoice.svg?branch=master)](https://travis-ci.org/amethyst-php/invoice)
+[![Action Status](https://github.com/amethyst-php/invoice/workflows/test/badge.svg)](https://github.com/amethyst-php/invoice/actions)
 
 [Amethyst](https://github.com/amethyst-php/amethyst) package.
 
