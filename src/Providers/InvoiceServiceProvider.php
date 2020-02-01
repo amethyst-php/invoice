@@ -2,9 +2,9 @@
 
 namespace Amethyst\Providers;
 
-use Amethyst\Core\Support\Router;
-use Amethyst\Core\Providers\CommonServiceProvider;
 use Amethyst\Console\Commands\InvoiceInstallCommand;
+use Amethyst\Core\Providers\CommonServiceProvider;
+use Amethyst\Core\Support\Router;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 
