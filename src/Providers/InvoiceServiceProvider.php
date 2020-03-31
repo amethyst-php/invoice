@@ -16,8 +16,6 @@ class InvoiceServiceProvider extends CommonServiceProvider
     public function boot()
     {
         parent::boot();
-
-        app('amethyst')->pushMorphRelation('file', 'model', 'invoice');
     }
 
     /**
